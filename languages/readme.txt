@@ -1,0 +1,1 @@
+This folder is for place language translation .po and .mo files. The file name should be pluginName-locale.po and pluginName-locale.mo. For example: rundizable-wp-features-th.po, rundizable-wp-features-th.mo for Thai language.
