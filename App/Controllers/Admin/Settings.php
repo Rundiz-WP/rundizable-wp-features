@@ -130,10 +130,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
          */
         public function registerScripts()
         {
-            wp_enqueue_style('font-awesome5', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/css/fa-svg-with-js.css', [], '5.0.13');
-            wp_enqueue_style('rd-settings-tabs-css', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/css/rd-settings-tabs.css', [], RUNDIZABLEWPFEATURES_VERSION);
-            wp_enqueue_script('rd-settings-tabs-js', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/js/rd-settings-tabs.js', ['jquery'], RUNDIZABLEWPFEATURES_VERSION, true);
-            wp_enqueue_script('font-awesome5', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/js/fontawesome-all.min.js', [], '5.0.13', true);
+            // font awesome. choose css fonts instead of svg, see more at https://fontawesome.com/how-to-use/on-the-web/other-topics/performance
+            // to name font awesome handle as `plugin-name-prefix-font-awesome5` is to prevent conflict with other plugins that maybe use older version but same handle that cause some newer icons in this plugin disappears.
+            wp_enqueue_style('rundizable-wp-features-font-awesome5', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/fontawesome/css/all.min.css', [], '5.5.0');
+            wp_enqueue_style('rundizable-wp-features-rd-settings-tabs-css', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/css/rd-settings-tabs.css', [], RUNDIZABLEWPFEATURES_VERSION);
+            wp_enqueue_script('rundizable-wp-features-rd-settings-tabs-js', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/js/rd-settings-tabs.js', ['jquery'], RUNDIZABLEWPFEATURES_VERSION, true);
         }// registerScripts
 
 

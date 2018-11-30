@@ -2,7 +2,7 @@
 Contributors: okvee
 Tags: disable features, pages, media, front-end
 Requires at least: 4.0
-Tested up to: 4.9.6
+Tested up to: 4.9.8
 Stable tag: 0.2
 Requires PHP: 5.5
 License: MIT
