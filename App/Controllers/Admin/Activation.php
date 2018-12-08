@@ -73,11 +73,13 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
                 }
             }
             if (version_compare($phpversion, $phpversion_required, '<')) {
-                wp_die(sprintf(__('You are using PHP %s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %s', 'rundizable-wp-features'), $phpversion, $phpversion_required), __('Minimum requirement of PHP version does not meet.', 'rundizable-wp-features'));
+                /* translators: %1$s: Current PHP version, %2$s: Required PHP version. */
+                wp_die(sprintf(__('You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %2$s', 'rundizable-wp-features'), $phpversion, $phpversion_required), __('Minimum requirement of PHP version does not meet.', 'rundizable-wp-features'));
                 exit;
             }
             if (version_compare(get_bloginfo('version'), $wordpress_required_version, '<')) {
-                wp_die(sprintf(__('Your WordPress version does not meet the requirement. (%s < %s).', 'rundizable-wp-features'), get_bloginfo('version'), $wordpress_required_version));
+                /* translators: %1$s: Current WordPress version, %2$s: Required WordPress version. */
+                wp_die(sprintf(__('Your WordPress version does not meet the requirement. (%1$s < %2$s).', 'rundizable-wp-features'), get_bloginfo('version'), $wordpress_required_version));
                 exit;
             }
             unset($phpversion, $phpversion_required, $wordpress_required_version);

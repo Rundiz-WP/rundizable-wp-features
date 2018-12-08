@@ -2,8 +2,8 @@
 Contributors: okvee
 Tags: disable features, pages, media, front-end
 Requires at least: 4.0
-Tested up to: 4.9.8
-Stable tag: 0.2
+Tested up to: 5.0
+Stable tag: 0.2.1
 Requires PHP: 5.5
 License: MIT
 License URI: https://opensource.org/licenses/MIT
@@ -34,6 +34,15 @@ Yes, it is.
 1. Settings page.
 
 == Changelog ==
+
+= 0.2.1 =
+2018-12-08
+
+* Add translation template file (.POT).
+* Add translators help message.
+* Update to Font Awesome 5.5
+* Modify CSS/JS handle to prevent conflict with other plugins in case that use the same vendor but different version.
+
 = 0.2 =
 2018-06-22
 

@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Rundizable WP Features
- * Plugin URI: http://rundiz.com
+ * Plugin URI: https://rundiz.com/?p=319
  * Description: Disable WordPress features.
- * Version: 0.2
+ * Version: 0.2.1
  * Author: Vee Winch
- * Author URI: 
+ * Author URI: http://rundiz.com
  * License: MIT
  * License URI: https://opensource.org/licenses/MIT
  * Text Domain: rundizable-wp-features
@@ -22,7 +22,7 @@ if (!defined('RUNDIZABLEWPFEATURES_FILE')) {
 
 
 if (!defined('RUNDIZABLEWPFEATURES_VERSION')) {
-    define('RUNDIZABLEWPFEATURES_VERSION', '0.2');
+    define('RUNDIZABLEWPFEATURES_VERSION', '0.2.1');
 }
 
 
