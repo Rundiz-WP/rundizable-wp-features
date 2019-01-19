@@ -1,8 +1,8 @@
 === Rundizable WP Features ===
 Contributors: okvee
 Tags: disable features, pages, media, front-end
-Requires at least: 4.0
-Tested up to: 5.0
+Requires at least: 4.6.0
+Tested up to: 5.0.3
 Stable tag: 0.2.1
 Requires PHP: 5.5
 License: MIT
@@ -18,7 +18,7 @@ In case that you disable front-end it will be redirect all URL in the front-end 
 
 = System requirement =
 PHP 5.5 or higher
-WordPress 4.0 or higher
+WordPress 4.6.0 or higher
 
 == Installation ==
 1. Upload "rundizable-wp-features" folder to the "/wp-content/plugins/" directory.

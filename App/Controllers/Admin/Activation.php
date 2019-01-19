@@ -59,7 +59,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
         {
             // do something that will happens on activate plugin.
             // @todo [rd-settings-fw] In real project, you may need to verify PHP version and/or WordPress version before did activation.
-            $wordpress_required_version = '4.0';
+            $wordpress_required_version = '4.6.0';
             $phpversion_required = '5.5';
             if (function_exists('phpversion')) {
                 $phpversion = phpversion();
