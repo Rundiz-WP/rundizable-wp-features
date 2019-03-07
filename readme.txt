@@ -3,7 +3,7 @@ Contributors: okvee
 Tags: disable features, pages, media, front-end
 Requires at least: 4.6.0
 Tested up to: 5.1
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 Requires PHP: 5.5
 License: MIT
 License URI: https://opensource.org/licenses/MIT
@@ -34,6 +34,11 @@ Yes, it is.
 1. Settings page.
 
 == Changelog ==
+= 0.2.2 =
+2019-03-07
+
+* Add shortcut to settings page from plugins page.
+* Update tested up to data.
 
 = 0.2.1 =
 2018-12-08

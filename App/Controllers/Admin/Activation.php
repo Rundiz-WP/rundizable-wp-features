@@ -41,8 +41,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
             }
             
             if ($plugin == $plugin_file) {
-                //$link['settings'] = '<a href="'.  esc_url(get_admin_url(null, 'options-general.php?page=rundizable-wp-features-settings')).'">'.__('Settings').'</a>';
-                //$actions = array_merge($link, $actions);
+                $link['settings'] = '<a href="'.  esc_url(get_admin_url(null, 'options-general.php?page=rundizable-wp-features-settings')).'">'.__('Settings').'</a>';
+                $actions = array_merge($link, $actions);
                 //$actions['after_actions'] = '<a href="#" onclick="return false;">'.__('After Actions', 'rundizable-wp-features').'</a>';
             }
             
@@ -184,7 +184,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
             add_action('upgrader_process_complete', [$this, 'updatePlugin'], 10, 2);
 
             // add filter action links. this will be displayed in actions area of plugin page. for example: xxxbefore | Activate | Edit | Delete | xxxafter
-            //add_filter('plugin_action_links', [&$this, 'actionLinks'], 10, 5);
+            add_filter('plugin_action_links', [&$this, 'actionLinks'], 10, 5);
             // add filter to row meta. (in plugin page below description)
             add_filter('plugin_row_meta', [&$this, 'rowMeta'], 10, 2);
         }// registerHooks
