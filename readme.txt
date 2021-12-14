@@ -2,7 +2,7 @@
 Contributors: okvee
 Tags: disable features, pages, media, front-end
 Tested up to: 5.8.2
-Stable tag: 0.2.2
+Stable tag: 0.2.3
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Requires at least: 4.6.0
@@ -34,6 +34,12 @@ Yes, it is.
 1. Settings page.
 
 == Changelog ==
+= 0.2.3 =
+2021-12-14
+
+* Add options for disable pages, media on front-end.
+* Update tested up to data.
+
 = 0.2.2 =
 2019-03-07
 
