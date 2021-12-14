@@ -21,7 +21,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
 
 
         /**
-         * Disable media actions.
+         * Disable media actions (admin). Redirect the user to admin dashboard.
          * 
          * @param \WP_Screen $current_screen
          */
@@ -71,6 +71,22 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
 
 
         /**
+         * Disable media actions (front). Redirect the user to home page.
+         */
+        public function disableMediaFront()
+        {
+            if (
+                !defined('DOING_CRON') &&
+                is_attachment()
+            ) {
+                nocache_headers();
+                wp_safe_redirect(home_url(), 301);
+                exit();
+            }
+        }// disableMediaFront
+
+
+        /**
          * Disable /media endpoints in REST API.
          *
          * @param array $endpoints The original endpoints.
@@ -97,14 +113,16 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_media']) && $rundizable_wp_features_optname['disable_media'] == '0') {
-                return ;
+            if (isset($rundizable_wp_features_optname['disable_media']) && $rundizable_wp_features_optname['disable_media'] == '1') {
+                add_action('current_screen', [$this, 'disableMedia']);
+                add_action('admin_menu', [$this, 'removeMediaMenu']);
+                add_action('widgets_init', [$this, 'unregisterMediaWidgets']);
+                add_filter('rest_endpoints', [$this, 'disableMediaInRestApi']);
             }
 
-            add_action('current_screen', [$this, 'disableMedia']);
-            add_action('admin_menu', [$this, 'removeMediaMenu']);
-            add_action('widgets_init', [$this, 'unregisterMediaWidgets']);
-            add_filter('rest_endpoints', [$this, 'disableMediaInRestApi']);
+            if (isset($rundizable_wp_features_optname['disable_media_front']) && $rundizable_wp_features_optname['disable_media_front'] == '1') {
+                add_action('template_redirect', [$this, 'disableMediaFront']);
+            }
         }// registerHooks
 
 

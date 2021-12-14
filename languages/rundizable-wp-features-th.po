@@ -3,24 +3,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Rundizable WP Features 0.2.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-"
-"features\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-features\n"
+"POT-Creation-Date: 2021-12-14T15:57:33+07:00\n"
+"PO-Revision-Date: 2021-12-14 15:58+0700\n"
+"Last-Translator: Vee W.\n"
 "Language-Team: \n"
+"Language: th_TH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2018-12-08T15:58:51+07:00\n"
-"PO-Revision-Date: 2018-12-08 16:02+0700\n"
-"X-Generator: Poedit 2.2\n"
-"X-Domain: rundizable-wp-features\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: th_TH\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Domain: rundizable-wp-features\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #. Plugin Name of the plugin
-#: \App\Controllers\Admin\Settings.php:51
+#: App/Controllers/Admin/Settings.php:51
 msgid "Rundizable WP Features"
 msgstr ""
 
@@ -40,70 +39,95 @@ msgstr ""
 msgid "http://rundiz.com"
 msgstr ""
 
-#: \App\config\settings_rdawpf.php:12
+#: App/config/settings_rdawpf.php:12
 msgid "General"
 msgstr "ทั่วไป"
 
-#: \App\config\settings_rdawpf.php:19 \App\config\settings_rdawpf.php:35
-#: \App\config\settings_rdawpf.php:52
+#: App/config/settings_rdawpf.php:16
+msgid "Enable or disable pages for admin management, menu, widgets, REST API."
+msgstr "เปิดหรือปิดใช้งานหน้าสำหรับการจัดการของผู้ดูแล, เมนู, วิดเจ็ต, REST API."
+
+#: App/config/settings_rdawpf.php:20 App/config/settings_rdawpf.php:37
+#: App/config/settings_rdawpf.php:54 App/config/settings_rdawpf.php:71
+#: App/config/settings_rdawpf.php:88
 msgid "Disable"
 msgstr "ปิดใช้งาน"
 
-#: \App\config\settings_rdawpf.php:23 \App\config\settings_rdawpf.php:39
-#: \App\config\settings_rdawpf.php:56
+#: App/config/settings_rdawpf.php:24 App/config/settings_rdawpf.php:41
+#: App/config/settings_rdawpf.php:58 App/config/settings_rdawpf.php:75
+#: App/config/settings_rdawpf.php:92
 msgid "Enable"
 msgstr "เปิดใช้งาน"
 
-#: \App\config\settings_rdawpf.php:27
+#: App/config/settings_rdawpf.php:28
 msgid "Pages"
 msgstr "หน้า"
 
-#: \App\config\settings_rdawpf.php:43
+#: App/config/settings_rdawpf.php:33
+msgid "Enable or disable media for admin management, menu, widgets, REST API."
+msgstr "เปิดหรือปิดใช้งานสื่อสำหรับการจัดการของผู้ดูแล, เมนู, วิดเจ็ต, REST API."
+
+#: App/config/settings_rdawpf.php:45
 msgid "Media"
 msgstr "สื่อ"
 
-#: \App\config\settings_rdawpf.php:48
+#: App/config/settings_rdawpf.php:50
 msgid ""
-"If front-end is disabled, any URL in the front-end will be redirect to admin "
-"page."
+"If front-end is disabled, any URL in the front-end will be redirect to admin page."
 msgstr "ถ้าด้านหน้าถูกปิด, URL ใดๆในด้านหน้าจะถูกเปลี่ยนเส้นทางมายังหน้าผู้ดูแล."
 
-#: \App\config\settings_rdawpf.php:60
+#: App/config/settings_rdawpf.php:62
 msgid "Front-end"
 msgstr "ด้านหน้า"
 
-#. translators: %1$s: Current PHP version, %2$s: Required PHP version.
-#: \App\Controllers\Admin\Activation.php:77
+#: App/config/settings_rdawpf.php:67
 msgid ""
-"You are using PHP %1$s which does not meet minimum requirement. Please "
-"consider upgrade PHP version or contact plugin author for this help."
-"<br><br>Minimum requirement:<br>PHP %2$s"
+"Enable or disable pages for front-end. If front-end is disabled then this function "
+"is also disabled."
+msgstr "เปิดหรือปิดใช้งานหน้าสำหรับด้านหน้า. ถ้าหากด้านหน้าถูกปิดใช้งาน ฟังก์ชันนี้ก็จะถูกปิดใช้งานด้วย."
+
+#: App/config/settings_rdawpf.php:79
+msgid "Pages (front)"
+msgstr "หน้า (ด้านหน้า)"
+
+#: App/config/settings_rdawpf.php:84
+msgid ""
+"Enable or disable media for front-end. If front-end is disabled then this function "
+"is also disabled."
+msgstr "เปิดหรือปิดใช้งานสื่อสำหรับด้านหน้า. ถ้าหากด้านหน้าถูกปิดใช้งาน ฟังก์ชันนี้ก็จะถูกปิดใช้งานด้วย."
+
+#: App/config/settings_rdawpf.php:96
+msgid "Media (front)"
+msgstr "สื่อ (ด้านหน้า)"
+
+#. translators: %1$s: Current PHP version, %2$s: Required PHP version.
+#: App/Controllers/Admin/Activation.php:77
+msgid ""
+"You are using PHP %1$s which does not meet minimum requirement. Please consider "
+"upgrade PHP version or contact plugin author for this help.<br><br>Minimum "
+"requirement:<br>PHP %2$s"
 msgstr ""
 "คุณกำลังใช้ PHP %1$s ซึ่งไม่ตรงความต้องการขั้นต่ำ. โปรดอัปเกรดรุ่น PHP "
 "หรือติดต่อผู้เขียนปลั๊กอินเพื่อขอความช่วยเหลือ<br><br>ความต้องการขั้นต่ำ:<br>PHP %2$s"
 
 #. translators: %1$s: Current PHP version, %2$s: Required PHP version.
-#: \App\Controllers\Admin\Activation.php:77
+#: App/Controllers/Admin/Activation.php:77
 msgid "Minimum requirement of PHP version does not meet."
 msgstr "รุ่น PHP ไม่ตรงความต้องการขั้นต่ำ."
 
 #. translators: %1$s: Current WordPress version, %2$s: Required WordPress version.
-#: \App\Controllers\Admin\Activation.php:82
+#: App/Controllers/Admin/Activation.php:82
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
 msgstr "รุ่นของเวิร์ดเพราไม่ตรงความต้องการขั้นต่ำ. (%1$s < %2$s)."
 
-#: \App\Controllers\Admin\Activation.php:210
-msgid "Donate"
-msgstr ""
-
-#: \App\Libraries\RundizSettings.php:658
+#: App/Libraries/RundizSettings.php:658
 msgid "Upload"
 msgstr "อัปโหลด"
 
-#: \App\Libraries\RundizSettings.php:659
+#: App/Libraries/RundizSettings.php:659
 msgid "Remove"
 msgstr "เอาออก"
 
-#: \App\Views\admin\settings_v.php:2
+#: App/Views/admin/settings_v.php:2
 msgid "Rundizable WP Features settings"
 msgstr "ตั้งค่า Rundizable WP Features"

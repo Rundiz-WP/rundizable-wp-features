@@ -48,7 +48,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
                 return ;
             }
 
-            add_action('init', [$this, 'detectFrontEnd']);
+            add_action('template_redirect', [$this, 'detectFrontEnd']);
             add_action('admin_menu', [$this, 'removeAppearanceMenu']);
             add_action('admin_menu', [$this, 'removeFrontRelatedMenu']);
         }// registerHooks

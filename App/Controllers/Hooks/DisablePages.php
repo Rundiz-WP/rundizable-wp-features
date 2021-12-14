@@ -21,7 +21,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
 
 
         /**
-         * Disable pages actions. Redirect the user to admin dashboard.
+         * Disable pages actions (admin). Redirect the user to admin dashboard.
          * 
          * @param \WP_Screen $current_screen
          */
@@ -46,6 +46,22 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
                 exit();
             }
         }// disablePages
+
+
+        /**
+         * Disable pages actions (front). Redirect the user to home page.
+         */
+        public function disablePagesFront()
+        {
+            if (
+                !defined('DOING_CRON') &&
+                is_page()
+            ) {
+                nocache_headers();
+                wp_safe_redirect(home_url(), 301);
+                exit();
+            }
+        }// disablePagesFront
 
 
         /**
@@ -75,15 +91,17 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_pages']) && $rundizable_wp_features_optname['disable_pages'] == '0') {
-                return ;
+            if (isset($rundizable_wp_features_optname['disable_pages']) && $rundizable_wp_features_optname['disable_pages'] == '1') {
+                add_action('current_screen', [$this, 'disablePages']);
+                add_action('admin_menu', [$this, 'removePagesMenu']);
+                add_action('widgets_init', [$this, 'unregisterPagesWidgets']);
+                add_action('admin_init', [$this, 'updateReadSettings']);
+                add_filter('rest_endpoints', [$this, 'disablePagesInRestApi']);
             }
 
-            add_action('current_screen', [$this, 'disablePages']);
-            add_action('admin_menu', [$this, 'removePagesMenu']);
-            add_action('widgets_init', [$this, 'unregisterPagesWidgets']);
-            add_action('admin_init', [$this, 'updateReadSettings']);
-            add_filter('rest_endpoints', [$this, 'disablePagesInRestApi']);
+            if (isset($rundizable_wp_features_optname['disable_pages_front']) && $rundizable_wp_features_optname['disable_pages_front'] == '1') {
+                add_action('template_redirect', [$this, 'disablePagesFront']);
+            }
         }// registerHooks
 
 

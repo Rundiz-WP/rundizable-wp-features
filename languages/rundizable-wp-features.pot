@@ -1,21 +1,21 @@
-# Copyright (C) 2018 Vee Winch
-# This file is distributed under the same license as the Rundizable WP Features plugin.
+# Copyright (C) 2021 Vee Winch
+# This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundizable WP Features 0.2.1\n"
+"Project-Id-Version: Rundizable WP Features 0.2.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-features\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2018-12-08T15:58:51+07:00\n"
-"PO-Revision-Date: 2018-12-08T15:58:51+07:00\n"
-"X-Generator: WP-CLI 2.0.1\n"
+"POT-Creation-Date: 2021-12-14T15:57:33+07:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: rundizable-wp-features\n"
 
 #. Plugin Name of the plugin
-#: \App\Controllers\Admin\Settings.php:51
+#: App/Controllers/Admin/Settings.php:51
 msgid "Rundizable WP Features"
 msgstr ""
 
@@ -35,65 +35,89 @@ msgstr ""
 msgid "http://rundiz.com"
 msgstr ""
 
-#: \App\config\settings_rdawpf.php:12
+#: App/config/settings_rdawpf.php:12
 msgid "General"
 msgstr ""
 
-#: \App\config\settings_rdawpf.php:19
-#: \App\config\settings_rdawpf.php:35
-#: \App\config\settings_rdawpf.php:52
+#: App/config/settings_rdawpf.php:16
+msgid "Enable or disable pages for admin management, menu, widgets, REST API."
+msgstr ""
+
+#: App/config/settings_rdawpf.php:20
+#: App/config/settings_rdawpf.php:37
+#: App/config/settings_rdawpf.php:54
+#: App/config/settings_rdawpf.php:71
+#: App/config/settings_rdawpf.php:88
 msgid "Disable"
 msgstr ""
 
-#: \App\config\settings_rdawpf.php:23
-#: \App\config\settings_rdawpf.php:39
-#: \App\config\settings_rdawpf.php:56
+#: App/config/settings_rdawpf.php:24
+#: App/config/settings_rdawpf.php:41
+#: App/config/settings_rdawpf.php:58
+#: App/config/settings_rdawpf.php:75
+#: App/config/settings_rdawpf.php:92
 msgid "Enable"
 msgstr ""
 
-#: \App\config\settings_rdawpf.php:27
+#: App/config/settings_rdawpf.php:28
 msgid "Pages"
 msgstr ""
 
-#: \App\config\settings_rdawpf.php:43
+#: App/config/settings_rdawpf.php:33
+msgid "Enable or disable media for admin management, menu, widgets, REST API."
+msgstr ""
+
+#: App/config/settings_rdawpf.php:45
 msgid "Media"
 msgstr ""
 
-#: \App\config\settings_rdawpf.php:48
+#: App/config/settings_rdawpf.php:50
 msgid "If front-end is disabled, any URL in the front-end will be redirect to admin page."
 msgstr ""
 
-#: \App\config\settings_rdawpf.php:60
+#: App/config/settings_rdawpf.php:62
 msgid "Front-end"
 msgstr ""
 
+#: App/config/settings_rdawpf.php:67
+msgid "Enable or disable pages for front-end. If front-end is disabled then this function is also disabled."
+msgstr ""
+
+#: App/config/settings_rdawpf.php:79
+msgid "Pages (front)"
+msgstr ""
+
+#: App/config/settings_rdawpf.php:84
+msgid "Enable or disable media for front-end. If front-end is disabled then this function is also disabled."
+msgstr ""
+
+#: App/config/settings_rdawpf.php:96
+msgid "Media (front)"
+msgstr ""
+
 #. translators: %1$s: Current PHP version, %2$s: Required PHP version.
-#: \App\Controllers\Admin\Activation.php:77
+#: App/Controllers/Admin/Activation.php:77
 msgid "You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %2$s"
 msgstr ""
 
 #. translators: %1$s: Current PHP version, %2$s: Required PHP version.
-#: \App\Controllers\Admin\Activation.php:77
+#: App/Controllers/Admin/Activation.php:77
 msgid "Minimum requirement of PHP version does not meet."
 msgstr ""
 
 #. translators: %1$s: Current WordPress version, %2$s: Required WordPress version.
-#: \App\Controllers\Admin\Activation.php:82
+#: App/Controllers/Admin/Activation.php:82
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
 msgstr ""
 
-#: \App\Controllers\Admin\Activation.php:210
-msgid "Donate"
-msgstr ""
-
-#: \App\Libraries\RundizSettings.php:658
+#: App/Libraries/RundizSettings.php:658
 msgid "Upload"
 msgstr ""
 
-#: \App\Libraries\RundizSettings.php:659
+#: App/Libraries/RundizSettings.php:659
 msgid "Remove"
 msgstr ""
 
-#: \App\Views\admin\settings_v.php:2
+#: App/Views/admin/settings_v.php:2
 msgid "Rundizable WP Features settings"
 msgstr ""
