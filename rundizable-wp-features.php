@@ -4,6 +4,8 @@
  * Plugin URI: https://rundiz.com/?p=319
  * Description: Disable WordPress features.
  * Version: 0.2.2
+ * Requires at least: 4.6.0
+ * Requires PHP: 5.5
  * Author: Vee Winch
  * Author URI: http://rundiz.com
  * License: MIT
@@ -22,7 +24,11 @@ if (!defined('RUNDIZABLEWPFEATURES_FILE')) {
 
 
 if (!defined('RUNDIZABLEWPFEATURES_VERSION')) {
-    define('RUNDIZABLEWPFEATURES_VERSION', '0.2.1');
+    $pluginData = (function_exists('get_file_data') ? get_file_data(__FILE__, ['Version' => 'Version']) : null);
+    $pluginVersion = (isset($pluginData['Version']) ? $pluginData['Version'] : date('Ym'));
+    unset($pluginData);
+    define('RUNDIZABLEWPFEATURES_VERSION', $pluginVersion);
+    unset($pluginVersion);
 }
 
 

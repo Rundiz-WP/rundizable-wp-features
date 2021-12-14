@@ -1,12 +1,12 @@
 === Rundizable WP Features ===
 Contributors: okvee
 Tags: disable features, pages, media, front-end
-Requires at least: 4.6.0
-Tested up to: 5.1
+Tested up to: 5.8.2
 Stable tag: 0.2.2
-Requires PHP: 5.5
 License: MIT
 License URI: https://opensource.org/licenses/MIT
+Requires at least: 4.6.0
+Requires PHP: 5.5
 
 Disable WordPress features such as pages, media, front-end.
 
