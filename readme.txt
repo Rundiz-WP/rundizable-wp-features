@@ -2,7 +2,7 @@
 Contributors: okvee
 Tags: disable features, pages, media, front-end
 Tested up to: 5.8.2
-Stable tag: 0.2.3
+Stable tag: 0.2.4
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Requires at least: 4.6.0
@@ -34,6 +34,11 @@ Yes, it is.
 1. Settings page.
 
 == Changelog ==
+= 0.2.4 =
+2022-01-14
+
+* Fix array merge error.
+
 = 0.2.3 =
 2021-12-14
 
