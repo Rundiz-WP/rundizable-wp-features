@@ -208,7 +208,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
             
             if ($plugin === $file) {
                 //$new_link[] = '<a href="" target="donate-rdawpf">' . __('Donate', 'rundizable-wp-features') . '</a>';
-                $links = array_merge($links, $new_link);
+                //$links = array_merge($links, $new_link);
                 unset($new_link);
             }
             
