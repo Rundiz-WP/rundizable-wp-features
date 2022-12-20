@@ -1,8 +1,8 @@
 === Rundizable WP Features ===
 Contributors: okvee
 Tags: disable features, pages, media, front-end
-Tested up to: 5.8.2
-Stable tag: 0.2.4
+Tested up to: 6.1
+Stable tag: 0.2.5
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Requires at least: 4.6.0
@@ -34,6 +34,11 @@ Yes, it is.
 1. Settings page.
 
 == Changelog ==
+= 0.2.5 =
+2022-12-20
+
+* Fix "PHP Deprecated: Creation of dynamic property" on PHP 8.2.
+
 = 0.2.4 =
 2022-01-14
 
