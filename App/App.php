@@ -16,6 +16,12 @@ if (!class_exists('\\RundizableWpFeatures\\App\\App')) {
 
 
         /**
+         * @var \RundizableWpFeatures\App\Libraries\Loader
+         */
+        public $Loader;
+
+
+        /**
          * load text domain. (language files)
          */
         public function loadLanguage()
