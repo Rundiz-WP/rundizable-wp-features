@@ -1,7 +1,7 @@
 === Rundizable WP Features ===
 Contributors: okvee
 Tags: disable features, pages, media, front-end
-Tested up to: 6.1
+Tested up to: 6.6
 Stable tag: 0.2.5
 License: MIT
 License URI: https://opensource.org/licenses/MIT
