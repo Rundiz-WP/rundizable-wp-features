@@ -35,7 +35,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\App')) {
          */
         public function run()
         {
-            add_action('plugins_loaded', function() {
+            add_action('init', function() {
                 // @link https://codex.wordpress.org/Function_Reference/load_plugin_textdomain Reference.
                 // load language of this plugin.
                 $this->loadLanguage();

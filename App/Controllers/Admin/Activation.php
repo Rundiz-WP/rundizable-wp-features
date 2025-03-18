@@ -17,12 +17,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
 
 
         /**
-         * controller constructor
+         * @var bool
          */
-        public function __construct() {
-            // setup all options from setting config file.
-            $this->setupAllOptions();
-        }// __construct
+        private $alreadySetupAllOptions = false;
 
 
         /**
@@ -120,6 +117,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
          */
         private function activationAddUpdateOption(array $current_options = [])
         {
+            if (false === $this->alreadySetupAllOptions) {
+                $this->setupAllOptions();
+                $this->alreadySetupAllOptions = true;
+            }
+
             // check current option exists or not.
             $current_options = get_option($this->main_option_name);
 

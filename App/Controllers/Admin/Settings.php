@@ -17,15 +17,6 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
 
 
         /**
-         * controller constructor
-         */
-        public function __construct() {
-            // setup all options from setting config file.
-            $this->setupAllOptions();
-        }// __construct
-
-
-        /**
          * an example of how to access settings variable and its values.
          * 
          * @global array $rundizable_wp_features_optname

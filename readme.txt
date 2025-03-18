@@ -2,7 +2,7 @@
 Contributors: okvee
 Tags: disable features, pages, media, front-end
 Tested up to: 6.8
-Stable tag: 0.2.5
+Stable tag: 0.2.6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Requires at least: 4.6.0
@@ -34,6 +34,12 @@ Yes, it is.
 1. Settings page.
 
 == Changelog ==
+= 0.2.6 =
+2025-03-18
+
+* Update load text domain to be inside `init` hook.
+* Fix "Function _load_textdomain_just_in_time was called incorrectly".
+
 = 0.2.5 =
 2022-12-20
 
