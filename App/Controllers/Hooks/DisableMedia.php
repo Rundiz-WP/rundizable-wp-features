@@ -6,6 +6,7 @@
 
 namespace RundizableWpFeatures\App\Controllers\Hooks;
 
+
 if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia')) {
     class DisableMedia implements \RundizableWpFeatures\App\Controllers\ControllerInterface
     {
@@ -25,7 +26,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
          * 
          * @param \WP_Screen $current_screen
          */
-        public function disableMedia($current_screen)
+        public function disableMedia(\WP_Screen $current_screen)
         {
             if (
                 is_object($current_screen) &&
@@ -55,11 +56,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
                     (
                         // in ajax upload
                         property_exists($current_screen, 'id') &&
-                        $current_screen->id === 'async-upload'
-                    ) ||
-                    (
-                        // in settings > media
-                        property_exists($current_screen, 'id') &&
+                        $current_screen->id === 'async-upload' ||
                         $current_screen->id === 'options-media'
                     )
                 )
@@ -96,7 +93,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
         {
             if (is_array($endpoints)) {
                 foreach ($endpoints as $key => $value) {
-                    if (is_scalar($key) && strpos($key, '/media') !== false) {
+                    if (is_scalar($key) && preg_match('/^\/wp\/v2\/media/', $key)) {
                         unset($endpoints[$key]);
                     }
                 }// endforeach;
@@ -114,16 +111,39 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_media']) && $rundizable_wp_features_optname['disable_media'] == '1') {
+                // admin bar
+                add_action('wp_before_admin_bar_render', [$this, 'removeFromAdminBar']);
+                // disable its functional
                 add_action('current_screen', [$this, 'disableMedia']);
                 add_action('admin_menu', [$this, 'removeMediaMenu']);
+                // widgets and block
                 add_action('widgets_init', [$this, 'unregisterMediaWidgets']);
+                // REST API
                 add_filter('rest_endpoints', [$this, 'disableMediaInRestApi']);
             }
-
-            if (isset($rundizable_wp_features_optname['disable_media_front']) && $rundizable_wp_features_optname['disable_media_front'] == '1') {
-                add_action('template_redirect', [$this, 'disableMediaFront']);
-            }
         }// registerHooks
+
+
+        /**
+         * Remove media from admin bar.  
+         * Admin bar is on the top of admin page where it contains WordPress logo, user profile icon.
+         * 
+         * @since 0.2.7
+         * @global \WP_Admin_Bar $wp_admin_bar
+         */
+        public function removeFromAdminBar()
+        {
+            /* @var $wp_admin_bar \WP_Admin_Bar */
+            global $wp_admin_bar;
+
+            $menusToRemove = [
+                'new-media',
+            ];
+
+            foreach ($menusToRemove as $item) {
+                $wp_admin_bar->remove_menu($item);
+            }
+        }// removeFromAdminBar
 
 
         /**

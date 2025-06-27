@@ -21,21 +21,23 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
 
 
         /**
-         * Detect front-end and redirect to admin page.
+         * Detect front-end and redirect to admin page. The feed URLs will also be redirected.
+         * 
+         * @since 0.2.7 Renamed from `detectFrontEnd()`.
          */
-        public function detectFrontEnd()
+        public function redirectFrontEnd()
         {
             if (
                 !defined('DOING_CRON') &&
                 (
-                    !is_admin() || is_home() || is_front_page() || is_404()
+                    !is_admin() || is_home() || is_front_page() || is_feed() || is_404()
                 )
             ) {
                 nocache_headers();
                 wp_safe_redirect(admin_url(), 301);
                 exit();
             }
-        }// detectFrontEnd
+        }// redirectFrontEnd
 
 
         /**
@@ -48,9 +50,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
                 return ;
             }
 
-            add_action('template_redirect', [$this, 'detectFrontEnd']);
+            add_action('template_redirect', [$this, 'redirectFrontEnd']);
             add_action('admin_menu', [$this, 'removeAppearanceMenu']);
-            add_action('admin_menu', [$this, 'removeFrontRelatedMenu']);
+            add_action('admin_menu', [$this, 'removeFrontRelatedMenus']);
         }// registerHooks
 
 
@@ -78,12 +80,14 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
 
         /**
          * Remove front-end related menus.
+         * 
+         * @since 0.2.7 Rename from `removeFrontRelatedMenu()`.
          */
-        public function removeFrontRelatedMenu()
+        public function removeFrontRelatedMenus()
         {
             remove_submenu_page('options-general.php', 'options-permalink.php');
             remove_submenu_page('options-general.php', 'privacy.php');
-        }// removeFrontRelatedMenu
+        }// removeFrontRelatedMenus
 
 
     }
