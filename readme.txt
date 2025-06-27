@@ -42,6 +42,7 @@ Yes, it is.
 * Hide widget blocks.
 * Add disable posts, comments, XML-RPC, author page sections.
 * Update to disable feed when disable front-end.
+* Add disable admin greeting section.
 
 = 0.2.6 =
 2025-03-18

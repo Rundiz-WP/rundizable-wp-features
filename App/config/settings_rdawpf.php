@@ -13,7 +13,6 @@ return [
     'tab_style' => 'horizontal',
     'setting_tabs' => [
         [
-            'icon' => 'fas fa-cogs',
             'title' => __('General', 'rundizable-wp-features'),
             'fields' => [
                 [
@@ -126,5 +125,18 @@ return [
                 ],// author page
             ],
         ],// end 1st tab
+        [
+            'title' => __('Admin pages', 'rundizable-wp-features'),
+            'fields' => [
+                [
+                    'default' => '0',
+                    'description' => __('Enable or disable admin greeting next to the username.', 'rundizable-wp-features'),
+                    'id' => 'disable_admin_greeting',
+                    'options' => $commonSelectOptions,
+                    'title' => __('Admin greeting', 'rundizable-wp-features'),
+                    'type' => 'select',
+                ],// howdy, greeting
+            ],
+        ],// end 2nd tab
     ],
 ];
