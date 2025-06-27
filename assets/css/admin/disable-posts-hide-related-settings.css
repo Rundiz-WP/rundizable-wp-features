@@ -1,0 +1,7 @@
+
+
+.options-reading-php .form-table tr:nth-child(2),
+.options-reading-php .form-table tr:nth-child(3),
+.options-reading-php .form-table tr:nth-child(4) {
+    display: none;
+}

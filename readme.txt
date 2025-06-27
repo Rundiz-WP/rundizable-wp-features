@@ -34,6 +34,15 @@ Yes, it is.
 1. Settings page.
 
 == Changelog ==
+= x.x.x =
+2025-xx-xx
+
+* Hide meta boxes of categories, posts, pages from menu management page.
+* Remove menu items from admin top bar.
+* Hide widget blocks.
+* Add disable posts, comments, XML-RPC sections.
+* Update to disable feed when disable front-end.
+
 = 0.2.6 =
 2025-03-18
 
