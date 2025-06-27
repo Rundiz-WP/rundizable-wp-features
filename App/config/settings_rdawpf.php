@@ -8,6 +8,7 @@ $commonSelectOptions = [
     '0' => __('Enable', 'rundizable-wp-features'),
     '1' => __('Disable', 'rundizable-wp-features'),
 ];
+
 if (
     (defined('DISALLOW_FILE_EDIT') || defined('DISALLOW_FILE_MODS')) &&
     !defined('RUNDIZABLEWPFEATURES_CUSTOM_DISALLOW_FILE_EDIT')
@@ -157,7 +158,7 @@ return [
                     'type' => 'select',
                 ],// howdy, greeting
                 [
-                    'default' => (defined('DISALLOW_FILE_EDIT') && true === DISALLOW_FILE_EDIT ? '1' : '0'),
+                    'default' => $disableFileEditorDefault,
                     'description' => __('Enable or disable plugin and theme file editor.', 'rundizable-wp-features') .
                         (isset($disableFileEditorAdditionalDesc) ? $disableFileEditorAdditionalDesc : ''),
                     'id' => 'disable_plugintheme_file_editor',
