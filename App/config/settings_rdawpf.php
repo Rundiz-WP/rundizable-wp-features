@@ -80,7 +80,7 @@ return [
                     'default' => '0',
                     'description' => sprintf(
                         /* translators: %1$s The Front-end setting name. */
-                        __('Enable or disable posts for front-end, feed. If %1$s is disabled then this function is also disabled.', 'rundizable-wp-features'),
+                        __('Enable or disable posts for front-end, feed. Disabled posts will be redirect to home page. If %1$s is disabled then this function is also disabled.', 'rundizable-wp-features'),
                         '<strong>' . __('Front-end', 'rundizable-wp-features') . '</strong>',
                     ),
                     'id' => 'disable_posts_front',
@@ -92,7 +92,7 @@ return [
                     'default' => '0',
                     'description' => sprintf(
                         /* translators: %1$s The Front-end setting name. */
-                        __('Enable or disable media for front-end. If %1$s is disabled then this function is also disabled.', 'rundizable-wp-features'),
+                        __('Enable or disable media for front-end. Disabled media will be redirect to home page. If %1$s is disabled then this function is also disabled.', 'rundizable-wp-features'),
                         '<strong>' . __('Front-end', 'rundizable-wp-features') . '</strong>',
                     ),
                     'id' => 'disable_media_front',
@@ -104,7 +104,7 @@ return [
                     'default' => '0',
                     'description' => sprintf(
                         /* translators: %1$s The Front-end setting name. */
-                        __('Enable or disable pages for front-end. If %1$s is disabled then this function is also disabled.', 'rundizable-wp-features'),
+                        __('Enable or disable pages for front-end. Disabled pages will be redirect to home page. If %1$s is disabled then this function is also disabled.', 'rundizable-wp-features'),
                         '<strong>' . __('Front-end', 'rundizable-wp-features') . '</strong>',
                     ),
                     'id' => 'disable_pages_front',
@@ -112,6 +112,18 @@ return [
                     'title' => __('Pages (front)', 'rundizable-wp-features'),
                     'type' => 'select',
                 ],// pages (front)
+                [
+                    'default' => '0',
+                    'description' => sprintf(
+                        /* translators: %1$s The Front-end setting name. */
+                        __('Enable or disable author page for front-end. Disabled author will be redirect to home page. If %1$s is disabled then this function is also disabled.', 'rundizable-wp-features'),
+                        '<strong>' . __('Front-end', 'rundizable-wp-features') . '</strong>',
+                    ),
+                    'id' => 'disable_authorpage_front',
+                    'options' => $commonSelectOptions,
+                    'title' => __('Author page (front)', 'rundizable-wp-features'),
+                    'type' => 'select',
+                ],// author page
             ],
         ],// end 1st tab
     ],
