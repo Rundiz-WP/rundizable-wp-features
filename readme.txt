@@ -43,6 +43,7 @@ Yes, it is.
 * Add disable posts, comments, XML-RPC, author page sections.
 * Update to disable feed when disable front-end.
 * Add disable admin greeting section.
+* Add disable plugin and theme file edit section.
 
 = 0.2.6 =
 2025-03-18

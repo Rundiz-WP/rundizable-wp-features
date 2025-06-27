@@ -8,6 +8,26 @@ $commonSelectOptions = [
     '0' => __('Enable', 'rundizable-wp-features'),
     '1' => __('Disable', 'rundizable-wp-features'),
 ];
+if (
+    (defined('DISALLOW_FILE_EDIT') || defined('DISALLOW_FILE_MODS')) &&
+    !defined('RUNDIZABLEWPFEATURES_CUSTOM_DISALLOW_FILE_EDIT')
+) {
+    $disableFileEditorAdditionalDesc = ' ' . __('This setting is already defined in wp-config.php file.', 'rundizable-wp-features');
+    if (
+        (defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT === true) ||
+        (defined('DISALLOW_FILE_MODS') && DISALLOW_FILE_MODS === true)
+    ) {
+        $disableFileEditorDefault = '1';
+    } else {
+        $disableFileEditorDefault = '0';
+    }
+    $disableFileEditorInputAttributes = [
+        'disabled' => 'disabled',
+    ];
+} else {
+    $disableFileEditorDefault = '0';
+    $disableFileEditorInputAttributes = [];
+}
 
 return [
     'tab_style' => 'horizontal',
@@ -136,6 +156,16 @@ return [
                     'title' => __('Admin greeting', 'rundizable-wp-features'),
                     'type' => 'select',
                 ],// howdy, greeting
+                [
+                    'default' => (defined('DISALLOW_FILE_EDIT') && true === DISALLOW_FILE_EDIT ? '1' : '0'),
+                    'description' => __('Enable or disable plugin and theme file editor.', 'rundizable-wp-features') .
+                        (isset($disableFileEditorAdditionalDesc) ? $disableFileEditorAdditionalDesc : ''),
+                    'id' => 'disable_plugintheme_file_editor',
+                    'input_attributes' => $disableFileEditorInputAttributes,
+                    'options' => $commonSelectOptions,
+                    'title' => __('Disable plugin and theme file editor', 'rundizable-wp-features'),
+                    'type' => 'select',
+                ],// plugin and theme file editor
             ],
         ],// end 2nd tab
     ],
