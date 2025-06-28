@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rundizable WP Features 0.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-features\n"
-"POT-Creation-Date: 2021-12-14T15:57:33+07:00\n"
-"PO-Revision-Date: 2021-12-14 15:58+0700\n"
+"POT-Creation-Date: 2025-06-29T01:23:46+07:00\n"
+"PO-Revision-Date: 2025-06-29 01:24+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -13,110 +13,216 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
 "X-Domain: rundizable-wp-features\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #. Plugin Name of the plugin
-#: App/Controllers/Admin/Settings.php:51
+#: rundizable-wp-features.php App/Controllers/Admin/Settings.php:42
 msgid "Rundizable WP Features"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: rundizable-wp-features.php
 msgid "https://rundiz.com/?p=319"
 msgstr ""
 
 #. Description of the plugin
+#: rundizable-wp-features.php
 msgid "Disable WordPress features."
 msgstr "ปิดความสามารถของเวิร์ดเพรส."
 
 #. Author of the plugin
+#: rundizable-wp-features.php
 msgid "Vee Winch"
 msgstr ""
 
 #. Author URI of the plugin
+#: rundizable-wp-features.php
 msgid "http://rundiz.com"
 msgstr ""
 
-#: App/config/settings_rdawpf.php:12
-msgid "General"
-msgstr "ทั่วไป"
-
-#: App/config/settings_rdawpf.php:16
-msgid "Enable or disable pages for admin management, menu, widgets, REST API."
-msgstr "เปิดหรือปิดใช้งานหน้าสำหรับการจัดการของผู้ดูแล, เมนู, วิดเจ็ต, REST API."
-
-#: App/config/settings_rdawpf.php:20 App/config/settings_rdawpf.php:37
-#: App/config/settings_rdawpf.php:54 App/config/settings_rdawpf.php:71
-#: App/config/settings_rdawpf.php:88
-msgid "Disable"
-msgstr "ปิดใช้งาน"
-
-#: App/config/settings_rdawpf.php:24 App/config/settings_rdawpf.php:41
-#: App/config/settings_rdawpf.php:58 App/config/settings_rdawpf.php:75
-#: App/config/settings_rdawpf.php:92
+#: App/config/settings_rdawpf.php:8
 msgid "Enable"
 msgstr "เปิดใช้งาน"
 
-#: App/config/settings_rdawpf.php:28
-msgid "Pages"
-msgstr "หน้า"
+#: App/config/settings_rdawpf.php:9
+msgid "Disable"
+msgstr "ปิดใช้งาน"
 
-#: App/config/settings_rdawpf.php:33
-msgid "Enable or disable media for admin management, menu, widgets, REST API."
-msgstr "เปิดหรือปิดใช้งานสื่อสำหรับการจัดการของผู้ดูแล, เมนู, วิดเจ็ต, REST API."
+#. translators: %1$s wp-config.php file
+#: App/config/settings_rdawpf.php:18
+msgid "This setting is already defined in %1$s file."
+msgstr "การตั้งค่านี้ถูกกำหนดไว้แล้วในไฟล์ %1$s."
+
+#: App/config/settings_rdawpf.php:41
+msgid "General"
+msgstr "ทั่วไป"
 
 #: App/config/settings_rdawpf.php:45
-msgid "Media"
-msgstr "สื่อ"
+msgid "Enable or disable posts for admin, menus management, widgets, dashboard widgets, REST API"
+msgstr "เปิดหรือปิดใช้งานโพสต์สำหรับการจัดการของผู้ดูแล, เมนู, วิดเจ็ต, วิดเจ็ตสำหรับแดชบอร์ด, REST API."
+
+#: App/config/settings_rdawpf.php:46
+msgid ""
+"This will remove all block about posts such as archives, latest posts, categories, tags from widgets."
+msgstr "การตั้งค่านี้จะเอาบล็อคที่เกี่ยวกับโพสต์ เช่น กรุ, โพสต์ล่าสุด, หมวดหมู่, แท็ก ออกจากวิดเจ็ต."
+
+#: App/config/settings_rdawpf.php:47 App/config/settings_rdawpf.php:57 App/config/settings_rdawpf.php:67
+#: App/config/settings_rdawpf.php:77
+msgid "Exising blocks in widget areas will not be removed."
+msgstr "บล็อคต่างๆที่มีอยู่ในบริเวณวิดเจ็ตจะไม่ถูกเอาออก."
 
 #: App/config/settings_rdawpf.php:50
-msgid ""
-"If front-end is disabled, any URL in the front-end will be redirect to admin page."
-msgstr "ถ้าด้านหน้าถูกปิด, URL ใดๆในด้านหน้าจะถูกเปลี่ยนเส้นทางมายังหน้าผู้ดูแล."
+msgid "Posts"
+msgstr "โพสต์"
 
-#: App/config/settings_rdawpf.php:62
+#: App/config/settings_rdawpf.php:55
+msgid "Enable or disable media for admin, widgets, REST API."
+msgstr "เปิดหรือปิดใช้งานสื่อสำหรับการจัดการของผู้ดูแล, วิดเจ็ต, REST API."
+
+#: App/config/settings_rdawpf.php:56
+msgid ""
+"This will leave block editor untouch but image block will only work with URL. Existing media files "
+"will be able to select in the block."
+msgstr ""
+"การตั้งค่านี้จะไม่ไปแตะต้องเครื่องมือแก้ไขบล็อค แต่ว่าบล็อคภาพจะใช้งานได้เพียงแค่กับ URL. "
+"ไฟล์สื่อใดๆที่มีอยู่จะสามารถเลือกได้จากในบล็อค."
+
+#: App/config/settings_rdawpf.php:65
+msgid "Enable or disable comments on both admin and front-end (including feed), widgets, REST API."
+msgstr "เปิดหรือปิดใช้งานความเห็นทั้งบนฝั่งผู้ดูแล และด้านหน้า (รวมถึงฟีด), วิดเจ็ต, REST API."
+
+#: App/config/settings_rdawpf.php:66
+msgid "This will remove all block about comments from widgets."
+msgstr "การตั้งค่านี้จะเอาบล็อคเกี่ยวกับความเห็นทั้งหมดออกจากวิดเจ็ต."
+
+#: App/config/settings_rdawpf.php:75
+msgid "Enable or disable pages for admin, menus management, block editor, widgets, REST API."
+msgstr "เปิดหรือปิดใช้งานหน้าสำหรับการจัดการของผู้ดูแล, เมนู, เครื่องมือแก้ไขบล็อค, วิดเจ็ต, REST API."
+
+#: App/config/settings_rdawpf.php:76
+msgid "This will remove all block about pages from widgets."
+msgstr "การตั้งค่านี้จะเอาบล็อคที่เกี่ยวกับหน้าทั้งหมดออกจากวิดเจ็ต."
+
+#: App/config/settings_rdawpf.php:85
+msgid "Disable XML-RPC entirely."
+msgstr "ปิดใช้งาน XML-RPC ทั้งหมด."
+
+#: App/config/settings_rdawpf.php:88
+msgid "XML-RPC"
+msgstr ""
+
+#: App/config/settings_rdawpf.php:97
+msgid "If disabled, any URL in the front-end will be redirect to admin page. Feed will also disabled."
+msgstr "ถ้าปิดใช้งาน, URL ใดๆในด้านหน้าจะถูกเปลี่ยนเส้นทางมายังหน้าผู้ดูแล. ฟีดก็ถูกปิดใช้งานเช่นกัน."
+
+#: App/config/settings_rdawpf.php:100 App/config/settings_rdawpf.php:108
+#: App/config/settings_rdawpf.php:120 App/config/settings_rdawpf.php:132
+#: App/config/settings_rdawpf.php:144
 msgid "Front-end"
 msgstr "ด้านหน้า"
 
-#: App/config/settings_rdawpf.php:67
+#. translators: %1$s The Front-end setting name.
+#: App/config/settings_rdawpf.php:107
 msgid ""
-"Enable or disable pages for front-end. If front-end is disabled then this function "
-"is also disabled."
-msgstr "เปิดหรือปิดใช้งานหน้าสำหรับด้านหน้า. ถ้าหากด้านหน้าถูกปิดใช้งาน ฟังก์ชันนี้ก็จะถูกปิดใช้งานด้วย."
+"Enable or disable posts for front-end, feed. Disabled posts will be redirect to home page. If %1$s is "
+"disabled then this function is also disabled."
+msgstr ""
+"เปิดหรือปิดใช้งานโพสต์สำหรับด้านหน้า. ถ้าปิดใช้งานโพสต์จะเปลี่ยนเส้นทางไปยังหน้าแรก. ถ้าหาก %1$s ถูกปิดใช้งาน "
+"ฟังก์ชันนี้ก็จะถูกปิดใช้งานด้วย."
 
-#: App/config/settings_rdawpf.php:79
-msgid "Pages (front)"
-msgstr "หน้า (ด้านหน้า)"
+#: App/config/settings_rdawpf.php:112
+msgid "Posts (front)"
+msgstr "โพสต์ (ด้านหน้า)"
 
-#: App/config/settings_rdawpf.php:84
+#. translators: %1$s The Front-end setting name.
+#: App/config/settings_rdawpf.php:119
 msgid ""
-"Enable or disable media for front-end. If front-end is disabled then this function "
-"is also disabled."
-msgstr "เปิดหรือปิดใช้งานสื่อสำหรับด้านหน้า. ถ้าหากด้านหน้าถูกปิดใช้งาน ฟังก์ชันนี้ก็จะถูกปิดใช้งานด้วย."
+"Enable or disable media for front-end. Disabled media will be redirect to home page. If %1$s is "
+"disabled then this function is also disabled."
+msgstr ""
+"เปิดหรือปิดใช้งานสื่อสำหรับด้านหน้า. ถ้าปิดใช้งานสื่อจะเปลี่ยนเส้นทางไปยังหน้าแรก. ถ้าหาก %1$s ถูกปิดใช้งาน "
+"ฟังก์ชันนี้ก็จะถูกปิดใช้งานด้วย."
 
-#: App/config/settings_rdawpf.php:96
+#: App/config/settings_rdawpf.php:124
 msgid "Media (front)"
 msgstr "สื่อ (ด้านหน้า)"
 
-#. translators: %1$s: Current PHP version, %2$s: Required PHP version.
-#: App/Controllers/Admin/Activation.php:77
+#. translators: %1$s The Front-end setting name.
+#: App/config/settings_rdawpf.php:131
 msgid ""
-"You are using PHP %1$s which does not meet minimum requirement. Please consider "
-"upgrade PHP version or contact plugin author for this help.<br><br>Minimum "
-"requirement:<br>PHP %2$s"
+"Enable or disable pages for front-end. Disabled pages will be redirect to home page. If %1$s is "
+"disabled then this function is also disabled."
+msgstr ""
+"เปิดหรือปิดใช้งานหน้าสำหรับด้านหน้า. ถ้าหน้าถูกปิดใช้งานจะเปลี่ยนเส้นทางไปยังหน้าแรก. ถ้าหาก %1$s ถูกปิดใช้งาน "
+"ฟังก์ชันนี้ก็จะถูกปิดใช้งานด้วย."
+
+#: App/config/settings_rdawpf.php:136
+msgid "Pages (front)"
+msgstr "หน้า (ด้านหน้า)"
+
+#. translators: %1$s The Front-end setting name.
+#: App/config/settings_rdawpf.php:143
+msgid ""
+"Enable or disable author page for front-end. Disabled author will be redirect to home page. If %1$s "
+"is disabled then this function is also disabled."
+msgstr ""
+"เปิดหรือปิดใช้งานหน้าผู้เขียนสำหรับด้านหน้า. หน้าผู้เขียนที่ถูกปิดใช้งานจะเปลี่ยนเส้นทางไปยังหน้าแรก. ถ้าหาก %1$s ถูกปิดใช้งาน "
+"ฟังก์ชันนี้ก็จะถูกปิดใช้งานด้วย."
+
+#: App/config/settings_rdawpf.php:148
+msgid "Author page (front)"
+msgstr "หน้าผู้เขียน (ด้านหน้า)"
+
+#: App/config/settings_rdawpf.php:154
+msgid "Admin pages"
+msgstr "หน้าต่างๆของผู้ดูแล"
+
+#: App/config/settings_rdawpf.php:158
+msgid "Enable or disable admin greeting next to the username."
+msgstr "เปิดหรือปิดใช้งานคำทักทายผู้ดูแลที่อยู่ข้างชื่อผู้ใช้."
+
+#: App/config/settings_rdawpf.php:161
+msgid "Admin greeting"
+msgstr "คำทักทายผู้ดูแล"
+
+#: App/config/settings_rdawpf.php:166
+msgid "Enable or disable plugin and theme file editor."
+msgstr "เปิดหรือปิดใช้งานแก้ไขไฟล์ปลั๊กอินและธีม"
+
+#: App/config/settings_rdawpf.php:171
+msgid "Disable plugin and theme file editor"
+msgstr "ปิดใช้งานแก้ไขไฟล์ปลั๊กอินและธีม"
+
+#: App/config/settings_rdawpf.php:177
+msgid "Users"
+msgstr "ผู้ใช้"
+
+#. translators: %1$s User profile field, %2$s Users > Profile
+#: App/config/settings_rdawpf.php:183 App/config/settings_rdawpf.php:196
+#: App/config/settings_rdawpf.php:209
+msgctxt "user_profile"
+msgid "Enable or disable %1$s in %2$s page."
+msgstr "เปิดหรือปิดใช้งาน %1$s ในหน้า %2$s."
+
+#. translators: %1$s: Current PHP version, %2$s: Required PHP version.
+#: App/Controllers/Admin/Activation.php:74
+msgid ""
+"You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version "
+"or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %2$s"
 msgstr ""
 "คุณกำลังใช้ PHP %1$s ซึ่งไม่ตรงความต้องการขั้นต่ำ. โปรดอัปเกรดรุ่น PHP "
 "หรือติดต่อผู้เขียนปลั๊กอินเพื่อขอความช่วยเหลือ<br><br>ความต้องการขั้นต่ำ:<br>PHP %2$s"
 
 #. translators: %1$s: Current PHP version, %2$s: Required PHP version.
-#: App/Controllers/Admin/Activation.php:77
+#: App/Controllers/Admin/Activation.php:74
 msgid "Minimum requirement of PHP version does not meet."
 msgstr "รุ่น PHP ไม่ตรงความต้องการขั้นต่ำ."
 
 #. translators: %1$s: Current WordPress version, %2$s: Required WordPress version.
-#: App/Controllers/Admin/Activation.php:82
+#: App/Controllers/Admin/Activation.php:79
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
 msgstr "รุ่นของเวิร์ดเพราไม่ตรงความต้องการขั้นต่ำ. (%1$s < %2$s)."
 

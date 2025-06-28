@@ -13,7 +13,11 @@ if (
     (defined('DISALLOW_FILE_EDIT') || defined('DISALLOW_FILE_MODS')) &&
     !defined('RUNDIZABLEWPFEATURES_CUSTOM_DISALLOW_FILE_EDIT')
 ) {
-    $disableFileEditorAdditionalDesc = ' ' . __('This setting is already defined in wp-config.php file.', 'rundizable-wp-features');
+    $disableFileEditorAdditionalDesc = ' ' . sprintf(
+        /* translators: %1$s wp-config.php file */
+        __('This setting is already defined in %1$s file.', 'rundizable-wp-features'),
+        'wp-config.php'
+    );
     if (
         (defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT === true) ||
         (defined('DISALLOW_FILE_MODS') && DISALLOW_FILE_MODS === true)
@@ -53,7 +57,7 @@ return [
                         __('Exising blocks in widget areas will not be removed.', 'rundizable-wp-features'),
                     'id' => 'disable_media',
                     'options' => $commonSelectOptions,
-                    'title' => __('Media', 'rundizable-wp-features'),
+                    'title' => __('Media'),
                     'type' => 'select',
                 ],// media
                 [
@@ -63,7 +67,7 @@ return [
                         __('Exising blocks in widget areas will not be removed.', 'rundizable-wp-features'),
                     'id' => 'disable_comments',
                     'options' => $commonSelectOptions,
-                    'title' => __('Comments', 'rundizable-wp-features'),
+                    'title' => __('Comments'),
                     'type' => 'select',
                 ],// comments
                 [
@@ -73,7 +77,7 @@ return [
                         __('Exising blocks in widget areas will not be removed.', 'rundizable-wp-features'),
                     'id' => 'disable_pages',
                     'options' => $commonSelectOptions,
-                    'title' => __('Pages', 'rundizable-wp-features'),
+                    'title' => __('Pages'),
                     'type' => 'select',
                 ],// pages
                 [
@@ -175,8 +179,8 @@ return [
                 [
                     'default' => '0',
                     'description' => sprintf(
-                        /* translators: %1$s Admin Color Scheme, %2$s Users > Profile */
-                        __('Enable or disable %1$s in %2$s page.', 'rundizable-wp-features'),
+                        /* translators: %1$s User profile field, %2$s Users > Profile */
+                        _x('Enable or disable %1$s in %2$s page.', 'user_profile', 'rundizable-wp-features'),
                         '<strong>' . __('Admin Color Scheme') . '</strong>',
                         '<strong>' . __('Users') . '&gt;' . __('Profile') . '</strong>'
                     ),
@@ -188,8 +192,8 @@ return [
                 [
                     'default' => '0',
                     'description' => sprintf(
-                        /* translators: %1$s Website, %2$s Users > Profile */
-                        __('Enable or disable %1$s in %2$s page.', 'rundizable-wp-features'),
+                        /* translators: %1$s User profile field, %2$s Users > Profile */
+                        _x('Enable or disable %1$s in %2$s page.', 'user_profile', 'rundizable-wp-features'),
                         '<strong>' . __('Website') . '</strong>',
                         '<strong>' . __('Users') . '&gt;' . __('Profile') . '</strong>'
                     ),
@@ -201,8 +205,8 @@ return [
                 [
                     'default' => '0',
                     'description' => sprintf(
-                        /* translators: %1$s Biographical Info, %2$s Users > Profile */
-                        __('Enable or disable %1$s in %2$s page.', 'rundizable-wp-features'),
+                        /* translators: %1$s User profile field, %2$s Users > Profile */
+                        _x('Enable or disable %1$s in %2$s page.', 'user_profile', 'rundizable-wp-features'),
                         '<strong>' . __('Biographical Info') . '</strong>',
                         '<strong>' . __('Users') . '&gt;' . __('Profile') . '</strong>'
                     ),
