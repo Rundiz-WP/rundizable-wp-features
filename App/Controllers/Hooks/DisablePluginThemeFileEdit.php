@@ -51,8 +51,5 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePlugi
         }// registerHooks
 
 
-// __construct
-
-
     }// DisablePluginThemeFileEdit
 }// endif;

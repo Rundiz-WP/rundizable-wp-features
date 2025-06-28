@@ -1,6 +1,7 @@
 
 
 
+/* hide settings on Settings > Discusstion page where first table form is everything about comments. */
 .options-discussion-php .form-table:first-of-type {
     display: none;
 }

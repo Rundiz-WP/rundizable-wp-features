@@ -1,7 +1,7 @@
 === Rundizable WP Features ===
 Contributors: okvee
 Tags: disable features, pages, media, front-end
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 0.2.6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
@@ -44,6 +44,7 @@ Yes, it is.
 * Update to disable feed when disable front-end.
 * Add disable admin greeting section.
 * Add disable plugin and theme file edit section.
+* Add disable settings in user profile page such as Admin Color Scheme, Biographical Info, Website fields.
 
 = 0.2.6 =
 2025-03-18

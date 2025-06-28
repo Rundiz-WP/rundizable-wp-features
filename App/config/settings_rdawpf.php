@@ -169,5 +169,49 @@ return [
                 ],// plugin and theme file editor
             ],
         ],// end 2nd tab
+        [
+            'title' => __('Users', 'rundizable-wp-features'),
+            'fields' => [
+                [
+                    'default' => '0',
+                    'description' => sprintf(
+                        /* translators: %1$s Admin Color Scheme, %2$s Users > Profile */
+                        __('Enable or disable %1$s in %2$s page.', 'rundizable-wp-features'),
+                        '<strong>' . __('Admin Color Scheme') . '</strong>',
+                        '<strong>' . __('Users') . '&gt;' . __('Profile') . '</strong>'
+                    ),
+                    'id' => 'disable_users_profile_admin_color_scheme',
+                    'options' => $commonSelectOptions,
+                    'title' => __('Admin Color Scheme'),
+                    'type' => 'select',
+                ],// users > profile > admin color scheme
+                [
+                    'default' => '0',
+                    'description' => sprintf(
+                        /* translators: %1$s Website, %2$s Users > Profile */
+                        __('Enable or disable %1$s in %2$s page.', 'rundizable-wp-features'),
+                        '<strong>' . __('Website') . '</strong>',
+                        '<strong>' . __('Users') . '&gt;' . __('Profile') . '</strong>'
+                    ),
+                    'id' => 'disable_users_profile_website',
+                    'options' => $commonSelectOptions,
+                    'title' => __('Website'),
+                    'type' => 'select',
+                ],// users > profile > website
+                [
+                    'default' => '0',
+                    'description' => sprintf(
+                        /* translators: %1$s Biographical Info, %2$s Users > Profile */
+                        __('Enable or disable %1$s in %2$s page.', 'rundizable-wp-features'),
+                        '<strong>' . __('Biographical Info') . '</strong>',
+                        '<strong>' . __('Users') . '&gt;' . __('Profile') . '</strong>'
+                    ),
+                    'id' => 'disable_users_profile_biographical_info',
+                    'options' => $commonSelectOptions,
+                    'title' => __('Biographical Info'),
+                    'type' => 'select',
+                ],// users > profile > biographical info
+            ],
+        ],// end 3rd tab
     ],
 ];

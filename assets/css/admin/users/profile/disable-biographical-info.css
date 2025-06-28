@@ -1,0 +1,5 @@
+
+/* Hide Biographical Info */
+.user-description-wrap {
+    display: none !important;
+}
