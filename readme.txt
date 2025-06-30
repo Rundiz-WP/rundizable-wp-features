@@ -31,7 +31,9 @@ This plugin can:
 Yes, it is.
 
 == Screenshots ==
-1. Settings page.
+1. Settings page, general tab.
+2. Settings page, admin pages tab.
+3. Settings page, users tab.
 
 == Changelog ==
 = 1.0.0 =
