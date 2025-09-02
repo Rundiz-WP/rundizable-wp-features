@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rundizable WP Features 0.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-features\n"
-"POT-Creation-Date: 2025-06-29T01:23:46+07:00\n"
-"PO-Revision-Date: 2025-06-29 01:24+0700\n"
+"POT-Creation-Date: 2025-09-02T14:45:49+07:00\n"
+"PO-Revision-Date: 2025-09-02 14:46+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 "X-Domain: rundizable-wp-features\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -40,7 +40,7 @@ msgstr ""
 
 #. Author URI of the plugin
 #: rundizable-wp-features.php
-msgid "http://rundiz.com"
+msgid "https://rundiz.com"
 msgstr ""
 
 #: App/config/settings_rdawpf.php:8
@@ -53,6 +53,7 @@ msgstr "ปิดใช้งาน"
 
 #. translators: %1$s wp-config.php file
 #: App/config/settings_rdawpf.php:18
+#, php-format
 msgid "This setting is already defined in %1$s file."
 msgstr "การตั้งค่านี้ถูกกำหนดไว้แล้วในไฟล์ %1$s."
 
@@ -126,6 +127,7 @@ msgstr "ด้านหน้า"
 
 #. translators: %1$s The Front-end setting name.
 #: App/config/settings_rdawpf.php:107
+#, php-format
 msgid ""
 "Enable or disable posts for front-end, feed. Disabled posts will be redirect to home page. If %1$s is "
 "disabled then this function is also disabled."
@@ -139,6 +141,7 @@ msgstr "โพสต์ (ด้านหน้า)"
 
 #. translators: %1$s The Front-end setting name.
 #: App/config/settings_rdawpf.php:119
+#, php-format
 msgid ""
 "Enable or disable media for front-end. Disabled media will be redirect to home page. If %1$s is "
 "disabled then this function is also disabled."
@@ -152,6 +155,7 @@ msgstr "สื่อ (ด้านหน้า)"
 
 #. translators: %1$s The Front-end setting name.
 #: App/config/settings_rdawpf.php:131
+#, php-format
 msgid ""
 "Enable or disable pages for front-end. Disabled pages will be redirect to home page. If %1$s is "
 "disabled then this function is also disabled."
@@ -165,6 +169,7 @@ msgstr "หน้า (ด้านหน้า)"
 
 #. translators: %1$s The Front-end setting name.
 #: App/config/settings_rdawpf.php:143
+#, php-format
 msgid ""
 "Enable or disable author page for front-end. Disabled author will be redirect to home page. If %1$s "
 "is disabled then this function is also disabled."
@@ -203,12 +208,14 @@ msgstr "ผู้ใช้"
 #. translators: %1$s User profile field, %2$s Users > Profile
 #: App/config/settings_rdawpf.php:183 App/config/settings_rdawpf.php:196
 #: App/config/settings_rdawpf.php:209
+#, php-format
 msgctxt "user_profile"
 msgid "Enable or disable %1$s in %2$s page."
 msgstr "เปิดหรือปิดใช้งาน %1$s ในหน้า %2$s."
 
 #. translators: %1$s: Current PHP version, %2$s: Required PHP version.
 #: App/Controllers/Admin/Activation.php:74
+#, php-format
 msgid ""
 "You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version "
 "or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %2$s"
@@ -223,8 +230,13 @@ msgstr "รุ่น PHP ไม่ตรงความต้องการข�
 
 #. translators: %1$s: Current WordPress version, %2$s: Required WordPress version.
 #: App/Controllers/Admin/Activation.php:79
+#, php-format
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
 msgstr "รุ่นของเวิร์ดเพราไม่ตรงความต้องการขั้นต่ำ. (%1$s < %2$s)."
+
+#: App/Controllers/Admin/Activation.php:214
+msgid "Donate"
+msgstr "บริจาค"
 
 #: App/Libraries/RundizSettings.php:658
 msgid "Upload"

@@ -7,7 +7,7 @@
  * Requires at least: 4.6.0
  * Requires PHP: 5.5
  * Author: Vee Winch
- * Author URI: http://rundiz.com
+ * Author URI: https://rundiz.com
  * License: MIT
  * License URI: https://opensource.org/licenses/MIT
  * Text Domain: rundizable-wp-features
