@@ -3,7 +3,7 @@
  * Plugin Name: Rundizable WP Features
  * Plugin URI: https://rundiz.com/?p=319
  * Description: Disable WordPress features.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Requires at least: 4.6.0
  * Requires PHP: 5.5
  * Author: Vee Winch

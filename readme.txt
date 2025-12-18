@@ -2,7 +2,7 @@
 Contributors: okvee
 Tags: disable features, pages, media, front-end
 Tested up to: 7.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Requires at least: 4.6.0
@@ -38,6 +38,11 @@ Yes, it is.
 3. Settings page, users tab.
 
 == Changelog ==
+= 1.0.1 =
+2025-12-18
+
+* Minor update.
+
 = 1.0.0 =
 2025-06-29
 
