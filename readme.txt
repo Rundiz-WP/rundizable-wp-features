@@ -1,7 +1,7 @@
 === Rundizable WP Features ===
 Contributors: okvee
 Tags: disable features, pages, media, front-end
-Tested up to: 6.9
+Tested up to: 7.0
 Stable tag: 1.0.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
@@ -20,6 +20,8 @@ This plugin can:
 * Disable posts, media, pages, author page for front-end only.
 * Disable parts of admin pages such as greeting message, plugin file editor, theme file editor.
 * Disable user profile fields in add new user, edit user, edit profile pages. The fields can be disabled such as Admin Color Scheme, Website, Biographical Info.
+
+Tested up to PHP 8.5.
 
 == Installation ==
 1. Upload "rundizable-wp-features" folder to the "/wp-content/plugins/" directory or use add plugin from WordPress plugin management page on your website.
