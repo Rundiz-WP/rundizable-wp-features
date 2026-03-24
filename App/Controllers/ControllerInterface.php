@@ -9,6 +9,7 @@
 
 namespace RundizableWpFeatures\App\Controllers;
 
+
 if (!interface_exists('\\RundizableWpFeatures\\App\\Controllers\\ControllerInterface')) {
     /**
      * The controller interface that have required methods to register hooks, and more.<br>
@@ -24,5 +25,5 @@ if (!interface_exists('\\RundizableWpFeatures\\App\\Controllers\\ControllerInter
         public function registerHooks();
 
 
-    }
+    }// ControllerInterface
 }

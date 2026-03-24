@@ -17,6 +17,11 @@
  */
 
 
+if (!defined('ABSPATH')) {
+    exit();
+}
+
+
 // define this plugin main file path.
 if (!defined('RUNDIZABLEWPFEATURES_FILE')) {
     define('RUNDIZABLEWPFEATURES_FILE', __FILE__);
@@ -24,19 +29,19 @@ if (!defined('RUNDIZABLEWPFEATURES_FILE')) {
 
 
 if (!defined('RUNDIZABLEWPFEATURES_VERSION')) {
-    $pluginData = (function_exists('get_file_data') ? get_file_data(__FILE__, ['Version' => 'Version']) : null);
-    $pluginVersion = (isset($pluginData['Version']) ? $pluginData['Version'] : date('Ym'));
-    unset($pluginData);
-    define('RUNDIZABLEWPFEATURES_VERSION', $pluginVersion);
-    unset($pluginVersion);
+    $rundizable_wp_features_pluginData = (function_exists('get_file_data') ? get_file_data(__FILE__, ['Version' => 'Version']) : null);
+    $rundizable_wp_features_pluginVersion = (isset($rundizable_wp_features_pluginData['Version']) ? $rundizable_wp_features_pluginData['Version'] : date('Ym'));// phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
+    unset($rundizable_wp_features_pluginData);
+    define('RUNDIZABLEWPFEATURES_VERSION', $rundizable_wp_features_pluginVersion);
+    unset($rundizable_wp_features_pluginVersion);
 }
 
 
 // include this plugin's autoload.
-require __DIR__.'/autoload.php';
+require __DIR__ . '/autoload.php';
 
 
 // initialize plugin app main class.
-$this_plugin_app = new \RundizableWpFeatures\App\App();
-$this_plugin_app->run();
-unset($this_plugin_app);
+$rundizable_wp_features_App = new \RundizableWpFeatures\App\App();
+$rundizable_wp_features_App->run();
+unset($rundizable_wp_features_App);

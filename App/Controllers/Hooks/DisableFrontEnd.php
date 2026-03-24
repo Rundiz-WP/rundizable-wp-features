@@ -1,12 +1,17 @@
 <?php
 /**
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
 namespace RundizableWpFeatures\App\Controllers\Hooks;
 
+
 if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFrontEnd')) {
+    /**
+     * Disable front end class.
+     */
     class DisableFrontEnd implements \RundizableWpFeatures\App\Controllers\ControllerInterface
     {
 
@@ -14,6 +19,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -46,8 +54,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_frontend']) && $rundizable_wp_features_optname['disable_frontend'] == '0') {
-                return ;
+            if (isset($rundizable_wp_features_optname['disable_frontend']) && strval($rundizable_wp_features_optname['disable_frontend']) === '0') {
+                return;
             }
 
             add_action('template_redirect', [$this, 'redirectFrontEnd']);
@@ -90,5 +98,5 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
         }// removeFrontRelatedMenus
 
 
-    }
+    }// DisableFrontEnd
 }

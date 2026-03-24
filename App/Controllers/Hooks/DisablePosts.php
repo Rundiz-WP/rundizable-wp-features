@@ -2,6 +2,7 @@
 /**
  * @since 0.2.7
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -21,6 +22,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -30,24 +34,24 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
         /**
          * Disable posts actions (admin). Redirect the user to admin dashboard.
          * 
-         * @param \WP_Screen $current_screen
+         * @param \WP_Screen $current_screen Current screen object.
          */
         public function disablePosts(\WP_Screen $current_screen)
         {
             if (
                 property_exists($current_screen, 'post_type') &&
-                $current_screen->post_type === 'post' &&
+                'post' === $current_screen->post_type &&
                 (
                     (
                         property_exists($current_screen, 'id') &&
                         (
-                            $current_screen->id === 'edit-post' ||
-                            $current_screen->id === 'edit-post_tag'
+                            'edit-post' === $current_screen->id ||
+                            'edit-post_tag' === $current_screen->id
                         )
                     ) ||
                     (
                         property_exists($current_screen, 'action') &&
-                        $current_screen->action === 'add'
+                        'add' === $current_screen->action
                     )
                 )
             ) {
@@ -58,7 +62,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
             if (
                 property_exists($current_screen, 'id') &&
                 (
-                    $current_screen->id === 'options-writing'// Settings > Writing
+                    'options-writing' === $current_screen->id// Settings > Writing
                 )
             ) {
                 wp_safe_redirect(admin_url());
@@ -76,7 +80,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
         public function disablePostsFeed($is_comment_feed, $feed)
         {
             if (false === $is_comment_feed) {
-                wp_die(__('Feed is unavailable.', 'rundizable-wp-feature'), 404);
+                wp_die(esc_html__('Feed is unavailable.', 'rundizable-wp-features'), 404);
             }
         }// disablePostsFeed
 
@@ -128,7 +132,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
         /**
          * Enqueue script or style to hide related settings.
          * 
-         * @param string $hook_suffix
+         * @param string $hook_suffix Hook suffix.
          */
         public function enqueScriptToHideRelatedSettings($hook_suffix)
         {
@@ -166,7 +170,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_posts']) && $rundizable_wp_features_optname['disable_posts'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_posts']) && strval($rundizable_wp_features_optname['disable_posts']) === '1') {
                 // admin bar
                 add_action('wp_before_admin_bar_render', [$this, 'removeFromAdminBar']);
                 // dashboard widgets
@@ -187,7 +191,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
                 add_filter('rest_endpoints', [$this, 'disablePostsInRestApi']);
             }
 
-            if (isset($rundizable_wp_features_optname['disable_posts_front']) && $rundizable_wp_features_optname['disable_posts_front'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_posts_front']) && strval($rundizable_wp_features_optname['disable_posts_front']) === '1') {
                 add_action('template_redirect', [$this, 'disablePostsFront']);
                 add_filter('the_posts', [$this, 'removePostsResult'], 10, 2);
                 add_filter('get_categories_taxonomy', [$this, 'removeCategoriesResult'], 10, 2);
@@ -216,7 +220,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
                 return $taxonomy;
             }
 
-            if ($taxonomy === 'category') {
+            if ('category' === $taxonomy) {
                 return '';
             }
 
@@ -237,7 +241,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
          * Remove posts from admin bar.  
          * Admin bar is on the top of admin page where it contains WordPress logo, user profile icon.
          * 
-         * @global \WP_Admin_Bar $wp_admin_bar
+         * @global \WP_Admin_Bar $wp_admin_bar Admin bar object.
          */
         public function removeFromAdminBar()
         {
@@ -257,7 +261,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
         /**
          * Remove posts column from Admin > Users page.
          * 
-         * @param array $columns
+         * @link https://developer.wordpress.org/reference/hooks/manage_users_custom_column/ Reference.
+         * @param array $columns Custom column output. Default empty.
          * @return array
          */
         public function removePostsColumnOnUsersPage(array $columns)
@@ -281,8 +286,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
         /**
          * Remove posts result.
          * 
-         * @param WP_Post[] $posts Array of post objects.
-         * @param WP_Query $query The WP_Query instance (passed by reference).
+         * @param \WP_Post[] $posts Array of post objects.
+         * @param \WP_Query $query The WP_Query instance (passed by reference).
          */
         public function removePostsResult($posts, \WP_Query $query)
         {
@@ -292,7 +297,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
 
             if (is_iterable($posts) && !empty($posts)) {
                 foreach ($posts as $post) {
-                    if ($post->post_type === 'post') {
+                    if ('post' === $post->post_type) {
                         return [];
                     }
                     break;
@@ -307,14 +312,15 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
         /**
          * Remove tags result.
          * 
-         * @param string|array $return
-         * @param array $args
+         * @link https://developer.wordpress.org/reference/hooks/wp_tag_cloud/ Reference.
+         * @param string|array $return Tag cloud as a string or an array, depending on `'format'` argument.
+         * @param array $args An array of tag cloud arguments. See `wp_tag_cloud()` for information on accepted arguments.
          * @return mixed
          */
-        public function removeTagsResult($return, array $args)
+        public function removeTagsResult($return, array $args)// phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.returnFound
         {
             if (is_admin()) {
-                return $tags;
+                return $return;
             }
 
             if ('array' === $args['format']) {
@@ -333,7 +339,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
          * 
          * @link https://github.com/WordPress/gutenberg/issues/33730#issuecomment-1847253809 Code copied from here.
          * @param bool|array $allowed_block_types Array of block type slugs, or boolean to enable/disable all. Default `true` (all registered block types supported).
-         * @param WP_Block_Editor_Context $block_editor_context The current block editor context.
+         * @param \WP_Block_Editor_Context $block_editor_context The current block editor context.
          * @return bool|array
          */
         public function unregisterPostsBlocks($allowed_block_types, \WP_Block_Editor_Context $block_editor_context)
@@ -342,7 +348,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
                 return $allowed_block_types;
             }
 
-            if ($block_editor_context->name !== 'core/edit-widgets') {
+            if ('core/edit-widgets' !== $block_editor_context->name) {
                 return $allowed_block_types;
             }
 

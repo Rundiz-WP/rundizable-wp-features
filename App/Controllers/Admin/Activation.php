@@ -8,7 +8,11 @@
 
 namespace RundizableWpFeatures\App\Controllers\Admin;
 
+
 if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')) {
+    /**
+     * Activation class.
+     */
     class Activation implements \RundizableWpFeatures\App\Controllers\ControllerInterface
     {
 
@@ -23,7 +27,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
 
 
         /**
-         * add links to plugin actions area
+         * Add links to plugin actions area.
          * 
          * @param array $actions current plugin actions. (including deactivate, edit).
          * @param string $plugin_file the plugin file for checking.
@@ -37,8 +41,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
                 $plugin = plugin_basename(RUNDIZABLEWPFEATURES_FILE);
             }
             
-            if ($plugin == $plugin_file) {
-                $link['settings'] = '<a href="'.  esc_url(get_admin_url(null, 'options-general.php?page=rundizable-wp-features-settings')).'">'.__('Settings').'</a>';
+            if ($plugin === $plugin_file) {
+                $link['settings'] = '<a href="' . esc_url(get_admin_url(null, 'options-general.php?page=rundizable-wp-features-settings')) . '">' . esc_html__('Settings', 'rundizable-wp-features') . '</a>';
                 $actions = array_merge($link, $actions);
                 //$actions['after_actions'] = '<a href="#" onclick="return false;">'.__('After Actions', 'rundizable-wp-features').'</a>';
             }
@@ -48,7 +52,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
 
 
         /**
-         * activate the plugin by admin on wp plugin page.
+         * Activate the plugin by admin on wp plugin page.
          * 
          * @global \wpdb $wpdb WordPress db class.
          */
@@ -61,7 +65,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
             if (function_exists('phpversion')) {
                 $phpversion = phpversion();
             }
-            if (!isset($phpversion) || (isset($phpversion) && $phpversion === false)) {
+            if (!isset($phpversion) || (isset($phpversion) && false === $phpversion)) {
                 if (defined('PHP_VERSION')) {
                     $phpversion = PHP_VERSION;
                 } else {
@@ -70,13 +74,29 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
                 }
             }
             if (version_compare($phpversion, $phpversion_required, '<')) {
-                /* translators: %1$s: Current PHP version, %2$s: Required PHP version. */
-                wp_die(sprintf(__('You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %2$s', 'rundizable-wp-features'), $phpversion, $phpversion_required), __('Minimum requirement of PHP version does not meet.', 'rundizable-wp-features'));
+                wp_die(
+                    wp_kses_post(
+                        sprintf(
+                            /* translators: %1$s: Current PHP version, %2$s: Required PHP version. */
+                            __('You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %2$s', 'rundizable-wp-features'),
+                            $phpversion, 
+                            $phpversion_required
+                        )
+                    ), 
+                    esc_html__('Minimum requirement of PHP version does not meet.', 'rundizable-wp-features')
+                );
                 exit;
             }
             if (version_compare(get_bloginfo('version'), $wordpress_required_version, '<')) {
-                /* translators: %1$s: Current WordPress version, %2$s: Required WordPress version. */
-                wp_die(sprintf(__('Your WordPress version does not meet the requirement. (%1$s < %2$s).', 'rundizable-wp-features'), get_bloginfo('version'), $wordpress_required_version));
+                wp_die(
+                    esc_html(
+                        sprintf(
+                            /* translators: %1$s: Current WordPress version, %2$s: Required WordPress version. */
+                            __('Your WordPress version does not meet the requirement. (%1$s < %2$s).', 'rundizable-wp-features'), get_bloginfo('version'), 
+                            $wordpress_required_version
+                        )
+                    )
+                );
                 exit;
             }
             unset($phpversion, $phpversion_required, $wordpress_required_version);
@@ -91,7 +111,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
             // add option to site or multisite -----------------------------
             if (is_multisite()) {
                 // this site is multisite. activate on all site.
-                $blog_ids = $wpdb->get_col('SELECT blog_id FROM '.$wpdb->blogs);
+                $blog_ids = $wpdb->get_col('SELECT blog_id FROM ' . $wpdb->blogs); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 $original_blog_id = get_current_blog_id();
                 if ($blog_ids) {
                     foreach ($blog_ids as $blog_id) {
@@ -111,7 +131,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
 
 
         /**
-         * check for option on current site and add if not exists, or update if option is older.
+         * Check for option on current site and add if not exists, or update if option is older.
          * 
          * @param array $current_options current options values for check and use in case of update options.
          */
@@ -125,7 +145,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
             // check current option exists or not.
             $current_options = get_option($this->main_option_name);
 
-            if ($current_options === false) {
+            if (false === $current_options) {
                 // current option is not exists, add it.
                 $sub_options = [];
                 
@@ -136,13 +156,6 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
                 $sub_options = maybe_serialize($sub_options);
                 add_option($this->main_option_name, $sub_options);
                 unset($sub_options);
-            } elseif (isset($some_of_your_update_options_conditions) && $some_of_your_update_options_conditions === true) {
-                // use update if some condition is met. such as older options.
-                // @todo [rd-settings-fw] In real project, change update options on activate to use "your condition" at "elseif" above.
-                $sub_options = $current_options;
-                $sub_options = maybe_serialize($sub_options);
-                update_option($this->main_option_name, $sub_options);
-                unset($sub_options);
             }
 
             unset($current_options);
@@ -150,7 +163,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
 
 
         /**
-         * deactivate the plugin hook.
+         * Deactivate the plugin hook.
          */
         public function deactivation()
         {
@@ -159,13 +172,13 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
 
 
         /**
-         * get main_option_name from trait which is non-static from any static method.
+         * Get main_option_name from trait which is non-static from any static method.
          * 
          * @return string
          */
         private static function getMainOptionName()
         {
-            $class = new self;
+            $class = new self();
             return $class->main_option_name;
         }// getMainOptionName
 
@@ -193,7 +206,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
 
 
         /**
-         * add links to row meta that is in plugin page under plugin description.
+         * Add links to row meta that is in plugin page under plugin description.
          * 
          * @staticvar string $plugin the plugin file name.
          * @param array $links current meta links
@@ -221,7 +234,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
 
 
         /**
-         * delete the plugin.
+         * Delete the plugin.
          * 
          * @global \wpdb $wpdb
          */
@@ -234,7 +247,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
             // delete options.
             if (is_multisite()) {
                 // this is multi site, delete options in all sites.
-                $blog_ids = $wpdb->get_col('SELECT blog_id FROM '.$wpdb->blogs);
+                $blog_ids = $wpdb->get_col('SELECT blog_id FROM ' . $wpdb->blogs); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 $original_blog_id = get_current_blog_id();
                 if ($blog_ids) {
                     foreach ($blog_ids as $blog_id) {
@@ -255,23 +268,23 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
          * Works on update plugin.
          * 
          * @link https://developer.wordpress.org/reference/hooks/upgrader_process_complete/ Reference.
-         * @param \WP_Upgrader $upgrader
-         * @param array $hook_extra
+         * @param \WP_Upgrader $upgrader Upgrader class.
+         * @param array $hook_extra Hook extra
          */
         public function updatePlugin(\WP_Upgrader $upgrader, array $hook_extra)
         {
             if (is_array($hook_extra) && array_key_exists('action', $hook_extra) && array_key_exists('type', $hook_extra) && array_key_exists('plugins', $hook_extra)) {
-                if ($hook_extra['action'] == 'update' && $hook_extra['type'] == 'plugin' && is_array($hook_extra['plugins']) && !empty($hook_extra['plugins'])) {
+                if ('update' === $hook_extra['action'] && 'plugin' === $hook_extra['type'] && is_array($hook_extra['plugins']) && !empty($hook_extra['plugins'])) {
                     $this_plugin = plugin_basename(RUNDIZABLEWPFEATURES_FILE);
                     foreach ($hook_extra['plugins'] as $key => $plugin) {
-                        if ($this_plugin == $plugin) {
+                        if ($this_plugin === $plugin) {
                             $this_plugin_updated = true;
                             break;
                         }
                     }// endforeach;
                     unset($key, $plugin, $this_plugin);
 
-                    if (isset($this_plugin_updated) && $this_plugin_updated === true) {
+                    if (isset($this_plugin_updated) && true === $this_plugin_updated) {
                         // get wpdb global var.
                         global $wpdb;
                         $wpdb->show_errors();
@@ -282,7 +295,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
                         // add option to site or multisite -----------------------------
                         if (is_multisite()) {
                             // this site is multisite. activate on all site.
-                            $blog_ids = $wpdb->get_col('SELECT blog_id FROM '.$wpdb->blogs);
+                            $blog_ids = $wpdb->get_col('SELECT blog_id FROM ' . $wpdb->blogs); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                             $original_blog_id = get_current_blog_id();
                             if ($blog_ids) {
                                 foreach ($blog_ids as $blog_id) {
@@ -304,5 +317,5 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Activation')
         }// updatePlugin
 
 
-    }
+    }// Activation
 }

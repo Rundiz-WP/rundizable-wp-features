@@ -2,6 +2,7 @@
 /**
  * @since 0.2.7
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -21,6 +22,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePlugi
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -33,7 +37,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePlugi
         public function disableFileEdit()
         {
             if (!defined('DISALLOW_FILE_EDIT')) {
-                define('DISALLOW_FILE_EDIT', true);
+                define('DISALLOW_FILE_EDIT', true);// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
                 define('RUNDIZABLEWPFEATURES_CUSTOM_DISALLOW_FILE_EDIT', true);
             }
         }// disableFileEdit
@@ -45,7 +49,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePlugi
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_plugintheme_file_editor']) && $rundizable_wp_features_optname['disable_plugintheme_file_editor'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_plugintheme_file_editor']) && strval($rundizable_wp_features_optname['disable_plugintheme_file_editor']) === '1') {
                 add_action('admin_init', [$this, 'disableFileEdit']);
             }
         }// registerHooks

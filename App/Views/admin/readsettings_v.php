@@ -1,4 +1,6 @@
-<?php /*<div class="wrap">
+<?php // phpcs:disable
+
+/*<div class="wrap">
     <h1><?php _e('Example of how to access settings values in option db.', 'rundizable-wp-features'); ?></h1>
 
     <ol>

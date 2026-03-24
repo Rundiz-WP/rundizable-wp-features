@@ -2,6 +2,7 @@
 /**
  * @since 0.2.7
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -9,6 +10,9 @@ namespace RundizableWpFeatures\App\Controllers\Hooks\Admin\Users\Profile;
 
 
 if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users\\Profile\\DisableWebsite')) {
+    /**
+     * Disable website field class.
+     */
     class DisableWebsite implements \RundizableWpFeatures\App\Controllers\ControllerInterface
     {
 
@@ -16,6 +20,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -25,7 +32,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
         /**
          * Enqueue script or style to hide related settings.
          * 
-         * @param string $hook_suffix
+         * @param string $hook_suffix Hook suffix.
          */
         public function enqueScriptToHideRelatedSettings($hook_suffix)
         {
@@ -35,7 +42,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
                 'user-edit.php',
             ];
 
-            if (in_array($hook_suffix, $userPages)) {
+            if (in_array($hook_suffix, $userPages, true)) {
                 wp_enqueue_style(
                     'rundizable-wp-feature-hide-user-profile-website', 
                     plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/admin/users/profile/disable-website.css', 
@@ -62,7 +69,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_users_profile_website']) && 
-                $rundizable_wp_features_optname['disable_users_profile_website'] == '1'
+                strval($rundizable_wp_features_optname['disable_users_profile_website']) === '1'
             ) {
                 // hide settings
                 add_action('admin_enqueue_scripts', [$this, 'enqueScriptToHideRelatedSettings']);

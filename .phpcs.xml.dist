@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!-- This file is for running PHP code sniffer via the command `phpcs`. You may delete this if not using it. -->
+<ruleset name="WordPress Coding Standards based custom ruleset for your plugin">
+    <description>Generally-applicable sniffs for WordPress plugins.</description>
+
+    <!-- What to scan -->
+    <file>.</file>
+    <exclude-pattern>/\.backup/</exclude-pattern>
+    <exclude-pattern>/\.dev-notes/</exclude-pattern>
+    <exclude-pattern>/assets/</exclude-pattern>
+    <exclude-pattern>/vendor/</exclude-pattern>
+    <exclude-pattern>autoload\.php</exclude-pattern>
+
+    <!-- How to scan -->
+    <!-- Usage instructions: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Usage -->
+    <!-- Annotated ruleset: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml -->
+    <arg value="sp"/> <!-- Show sniff and progress -->
+    <arg name="basepath" value="./"/><!-- Strip the file paths down to the relevant bit -->
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+    <arg name="parallel" value="8"/><!-- Enables parallel processing when available for faster results. -->
+
+    <ini name="memory_limit" value="128M"/>
+
+    <!-- Rules: Check PHP version compatibility -->
+    <!-- https://github.com/PHPCompatibility/PHPCompatibility#sniffing-your-code-for-compatibility-with-specific-php-versions -->
+    <config name="testVersion" value="5.5-"/>
+    <!-- https://github.com/PHPCompatibility/PHPCompatibilityWP -->
+    <rule ref="PHPCompatibilityWP"/>
+
+    <!-- Rules: WordPress Coding Standards -->
+    <!-- https://github.com/WordPress/WordPress-Coding-Standards -->
+    <!-- https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties -->
+    <!-- https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties#various-sniffs-set-the-minimum-supported-wp-version -->
+    <config name="minimum_wp_version" value="4.6"/><!-- set minimum WordPress version using major.minor only -->
+    <rule ref="WordPress">
+        <exclude name="Generic.Classes.OpeningBraceSameLine.BraceOnNewLine"></exclude>
+        <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedIf"></exclude>
+        <exclude name="Generic.Commenting.DocComment.MissingShort"></exclude>
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning"></exclude>
+        <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine"></exclude>
+        <exclude name="Generic.PHP.DisallowShortOpenTag.EchoFound"></exclude>
+        <exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceAfterOpen"></exclude>
+        <exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceBeforeClose"></exclude>
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed"></exclude>
+        <exclude name="NormalizedArrays.Arrays.ArrayBraceSpacing.SpaceAfterArrayOpenerSingleLine"></exclude>
+        <exclude name="NormalizedArrays.Arrays.ArrayBraceSpacing.SpaceBeforeArrayCloserSingleLine"></exclude>
+        <exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine"></exclude>
+        <exclude name="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"></exclude>
+        <exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments"></exclude>
+        <exclude name="PEAR.Functions.FunctionCallSignature.SpaceAfterOpenBracket"></exclude>
+        <exclude name="PEAR.Functions.FunctionCallSignature.SpaceBeforeCloseBracket"></exclude>
+        <exclude name="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody"></exclude>
+        <exclude name="PSR2.Namespaces.NamespaceDeclaration.BlankLineAfter"></exclude>
+        <exclude name="Squiz.Commenting.BlockComment.NoCapital"></exclude>
+        <exclude name="Squiz.Commenting.BlockComment.NoEmptyLineBefore"></exclude>
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Incorrect"></exclude>
+        <exclude name="Squiz.Commenting.FileComment.SpacingAfterComment"></exclude>
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"></exclude>
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"></exclude>
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"></exclude>
+        <exclude name="Squiz.Commenting.InlineComment.NoSpaceBefore"></exclude>
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen"></exclude>
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose"></exclude>
+        <exclude name="Squiz.PHP.CommentedOutCode.Found"></exclude><!-- use when scan for commented out code. only enabled if need. -->
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterEnd"></exclude>
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterOpen"></exclude>
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeEnd"></exclude>
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeOpen"></exclude>
+        <exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EndLine"></exclude>
+        <exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"></exclude>
+        <exclude name="Universal.ControlStructures.DisallowLonelyIf.Found"></exclude>
+        <exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.require_onceFound"></exclude>
+        <exclude name="Universal.WhiteSpace.CommaSpacing.NoSpaceAfter"></exclude>
+        <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound"></exclude>
+        <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions.NoSpacesAroundArrayKeys"></exclude>
+        <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned"></exclude>
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"></exclude>
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"></exclude>
+        <exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid"></exclude>
+        <exclude name="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase"></exclude>
+        <exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase"></exclude>
+        <exclude name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase"></exclude>
+        <exclude name="WordPress.WhiteSpace.CastStructureSpacing.NoSpaceBeforeOpenParenthesis"></exclude>
+        <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceAfterOpenParenthesis"></exclude>
+        <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceBeforeCloseParenthesis"></exclude>
+        <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore"></exclude>
+        <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter"></exclude>
+    </rule>
+
+    <!-- Let's also check that everything is properly documented. -->
+    <rule ref="WordPress-Docs" />
+
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <!-- Value: replace the text domain used. -->
+            <property name="text_domain" type="array">
+                <element value="rundizable-wp-features" />
+            </property>
+        </properties>
+    </rule>
+
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array">
+                <element value="rundizable_wp_features"/>
+                <element value="RUNDIZABLEWPFEATURES"/>
+                <element value="RundizableWpFeatures"/>
+            </property>
+        </properties>
+    </rule>
+</ruleset>

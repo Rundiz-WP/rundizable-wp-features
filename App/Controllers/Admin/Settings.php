@@ -8,7 +8,11 @@
 
 namespace RundizableWpFeatures\App\Controllers\Admin;
 
+
 if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) {
+    /**
+     * Settings class.
+     */
     class Settings implements \RundizableWpFeatures\App\Controllers\ControllerInterface
     {
 
@@ -17,7 +21,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
 
 
         /**
-         * an example of how to access settings variable and its values.
+         * An example of how to access settings variable and its values.
          * 
          * @global array $rundizable_wp_features_optname
          */
@@ -35,7 +39,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
 
 
         /**
-         * setup settings menu to go to settings page.
+         * Setup settings menu to go to settings page.
          */
         public function pluginSettingsMenu()
         {
@@ -48,13 +52,13 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
 
 
         /**
-         * display plugin settings page.
+         * Display plugin settings page.
          */
         public function pluginSettingsPage()
         {
             // check permission.
             if (!current_user_can('manage_options')) {
-                wp_die(__('You do not have permission to access this page.'));
+                wp_die(esc_html__('You do not have permission to access this page.', 'rundizable-wp-features'));
             }
 
             // load config values to get settings config file.
@@ -63,8 +67,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
             if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
                 $settings_config_file = $config_values['rundiz_settings_config_file'];
             } else {
-                echo 'Settings configuration file was not set.';
-                die('Settings configuration file was not set.');
+                wp_die('Settings configuration file was not set.');
                 exit;
             }
             unset($config_values, $loader);
@@ -76,7 +79,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
 
             // if form submitted
             if (isset($_POST) && !empty($_POST)) {
-                if (!wp_verify_nonce((isset($_POST['_wpnonce']) ? $_POST['_wpnonce'] : ''))) {
+                if (!wp_verify_nonce((isset($_POST['_wpnonce']) ? sanitize_text_field(wp_unslash($_POST['_wpnonce'])) : ''))) {
                     wp_nonce_ays('-1');
                 }
 
@@ -87,12 +90,12 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
                 // then save data.
                 $result = $this->saveOptions($options_values);
 
-                if ($result === true) {
+                if (true === $result) {
                     $output['form_result_class'] = 'notice-success';
-                    $output['form_result_msg'] = __('Settings saved.');
+                    $output['form_result_msg'] = __('Settings saved.', 'rundizable-wp-features');
                 } else {
                     $output['form_result_class'] = 'notice-success';
-                    $output['form_result_msg'] =  __('Settings saved.');
+                    $output['form_result_msg'] = __('Settings saved.', 'rundizable-wp-features');
                 }
             }// endif $_POST
 
@@ -117,17 +120,17 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
 
 
         /**
-         * enqueue scripts and styles here.
+         * Enqueue scripts and styles here.
          */
         public function registerScripts()
         {
             // font awesome. choose css fonts instead of svg, see more at https://fontawesome.com/how-to-use/on-the-web/other-topics/performance
             // to name font awesome handle as `plugin-name-prefix-font-awesome5` is to prevent conflict with other plugins that maybe use older version but same handle that cause some newer icons in this plugin disappears.
-            wp_enqueue_style('rundizable-wp-features-font-awesome5', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/fontawesome/css/all.min.css', [], '5.5.0');
-            wp_enqueue_style('rundizable-wp-features-rd-settings-tabs-css', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/css/rd-settings-tabs.css', [], RUNDIZABLEWPFEATURES_VERSION);
-            wp_enqueue_script('rundizable-wp-features-rd-settings-tabs-js', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE).'assets/js/rd-settings-tabs.js', ['jquery'], RUNDIZABLEWPFEATURES_VERSION, true);
+            wp_enqueue_style('rundizable-wp-features-font-awesome5', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/fontawesome/css/all.min.css', [], '5.5.0');
+            wp_enqueue_style('rundizable-wp-features-rd-settings-tabs-css', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/rd-settings-tabs.css', [], RUNDIZABLEWPFEATURES_VERSION);
+            wp_enqueue_script('rundizable-wp-features-rd-settings-tabs-js', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/js/rd-settings-tabs.js', ['jquery'], RUNDIZABLEWPFEATURES_VERSION, true);
         }// registerScripts
 
 
-    }
+    }// Settings
 }

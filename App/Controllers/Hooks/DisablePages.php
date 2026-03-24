@@ -1,6 +1,7 @@
 <?php
 /**
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -8,6 +9,9 @@ namespace RundizableWpFeatures\App\Controllers\Hooks;
 
 
 if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages')) {
+    /**
+     * DisablePages class.
+     */
     class DisablePages implements \RundizableWpFeatures\App\Controllers\ControllerInterface
     {
 
@@ -15,6 +19,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -24,22 +31,22 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
         /**
          * Disable pages actions (admin). Redirect the user to admin dashboard.
          * 
-         * @param \WP_Screen $current_screen
+         * @param \WP_Screen $current_screen Current screen object.
          */
         public function disablePages(\WP_Screen $current_screen)
         {
             if (
                 is_object($current_screen) &&
                 property_exists($current_screen, 'post_type') &&
-                $current_screen->post_type === 'page' &&
+                'page' === $current_screen->post_type &&
                 (
                     (
                         property_exists($current_screen, 'id') &&
-                        $current_screen->id === 'edit-page'
+                        'edit-page' === $current_screen->id
                     ) ||
                     (
                         property_exists($current_screen, 'action') &&
-                        $current_screen->action === 'add'
+                        'add' === $current_screen->action
                     )
                 )
             ) {
@@ -114,7 +121,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_pages']) && $rundizable_wp_features_optname['disable_pages'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_pages']) && strval($rundizable_wp_features_optname['disable_pages']) === '1') {
                 // admin bar
                 add_action('wp_before_admin_bar_render', [$this, 'removeFromAdminBar']);
                 // disable its functional
@@ -129,7 +136,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
                 add_filter('rest_endpoints', [$this, 'disablePagesInRestApi']);
             }
 
-            if (isset($rundizable_wp_features_optname['disable_pages_front']) && $rundizable_wp_features_optname['disable_pages_front'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_pages_front']) && strval($rundizable_wp_features_optname['disable_pages_front']) === '1') {
                 add_action('template_redirect', [$this, 'disablePagesFront']);
             }
         }// registerHooks
@@ -172,7 +179,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
          * @since 0.2.7
          * @link https://github.com/WordPress/gutenberg/issues/33730#issuecomment-1847253809 Code copied from here.
          * @param bool|array $allowed_block_types Array of block type slugs, or boolean to enable/disable all. Default `true` (all registered block types supported).
-         * @param WP_Block_Editor_Context $block_editor_context The current block editor context.
+         * @param \WP_Block_Editor_Context $block_editor_context The current block editor context.
          * @return bool|array
          */
         public function unregisterPagesBlocks($allowed_block_types, \WP_Block_Editor_Context $block_editor_context)
@@ -181,7 +188,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
                 return $allowed_block_types;
             }
 
-            if ($block_editor_context->name !== 'core/edit-widgets') {
+            if ('core/edit-widgets' !== $block_editor_context->name) {
                 return $allowed_block_types;
             }
 
@@ -211,5 +218,5 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
         }// unregisterPagesWidgets
 
 
-    }
+    }// DisablePages
 }

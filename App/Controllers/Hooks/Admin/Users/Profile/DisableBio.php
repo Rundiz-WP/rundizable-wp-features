@@ -2,6 +2,7 @@
 /**
  * @since 0.2.7
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -21,6 +22,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableBio')
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -30,7 +34,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableBio')
         /**
          * Enqueue script or style to hide related settings.
          * 
-         * @param string $hook_suffix
+         * @param string $hook_suffix Hook suffix.
          */
         public function enqueScriptToHideRelatedSettings($hook_suffix)
         {
@@ -40,7 +44,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableBio')
                 'user-edit.php',
             ];
 
-            if (in_array($hook_suffix, $userPages)) {
+            if (in_array($hook_suffix, $userPages, true)) {
                 wp_enqueue_style(
                     'rundizable-wp-feature-hide-user-profile-biographical-info', 
                     plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/admin/users/profile/disable-biographical-info.css', 
@@ -58,7 +62,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableBio')
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_users_profile_biographical_info']) && 
-                $rundizable_wp_features_optname['disable_users_profile_biographical_info'] == '1'
+                strval($rundizable_wp_features_optname['disable_users_profile_biographical_info']) === '1'
             ) {
                 // hide settings
                 add_action('admin_enqueue_scripts', [$this, 'enqueScriptToHideRelatedSettings']);

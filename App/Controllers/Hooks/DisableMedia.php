@@ -1,6 +1,7 @@
 <?php
 /**
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -8,6 +9,9 @@ namespace RundizableWpFeatures\App\Controllers\Hooks;
 
 
 if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia')) {
+    /**
+     * DisableMedia class.
+     */
     class DisableMedia implements \RundizableWpFeatures\App\Controllers\ControllerInterface
     {
 
@@ -15,6 +19,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -24,7 +31,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
         /**
          * Disable media actions (admin). Redirect the user to admin dashboard.
          * 
-         * @param \WP_Screen $current_screen
+         * @param \WP_Screen $current_screen Current screen object.
          */
         public function disableMedia(\WP_Screen $current_screen)
         {
@@ -34,30 +41,32 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
                     (
                         // in media page
                         property_exists($current_screen, 'post_type') &&
-                        $current_screen->post_type === 'attachment' &&
+                        'attachment' === $current_screen->post_type &&
                         (
                             (
                                 property_exists($current_screen, 'id') &&
-                                $current_screen->id === 'upload'
+                                'upload' === $current_screen->id
                             ) ||
                             (
                                 property_exists($current_screen, 'action') &&
-                                $current_screen->action === 'add'
+                                'add' === $current_screen->action
                             )
                         )
                     ) ||
                     (
                         // in upload page
                         property_exists($current_screen, 'id') &&
-                        $current_screen->id === 'media' &&
+                        'media' === $current_screen->id &&
                         property_exists($current_screen, 'action') &&
-                        $current_screen->action === 'add'
+                        'add' === $current_screen->action
                     ) ||
                     (
                         // in ajax upload
                         property_exists($current_screen, 'id') &&
-                        $current_screen->id === 'async-upload' ||
-                        $current_screen->id === 'options-media'
+                        (
+                            'async-upload' === $current_screen->id ||
+                            'options-media' === $current_screen->id
+                        )
                     )
                 )
             ) {
@@ -110,7 +119,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_media']) && $rundizable_wp_features_optname['disable_media'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_media']) && strval($rundizable_wp_features_optname['disable_media']) === '1') {
                 // admin bar
                 add_action('wp_before_admin_bar_render', [$this, 'removeFromAdminBar']);
                 // disable its functional
@@ -168,5 +177,5 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableMedia
         }// unregisterMediaWidgets
 
 
-    }
+    }// DisableMedia
 }

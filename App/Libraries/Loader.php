@@ -9,6 +9,9 @@
 namespace RundizableWpFeatures\App\Libraries;
 
 if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
+    /**
+     * Loader class.
+     */
     class Loader
     {
 
@@ -52,21 +55,21 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
 
 
         /**
-         * load config file and return its values.
+         * Load config file and return its values.
          * 
-         * @param string $config_file_name
-         * @param boolean $require_once
+         * @param string $config_file_name Config file name without `.php`.
+         * @param bool $require_once Mark as require once or not.
          * @return mixed return config file content if success. return false if failed.
          */
         public function loadConfig($config_file_name = 'config', $require_once = false)
         {
-            $config_dir = dirname(__DIR__).'/config/';
+            $config_dir = dirname(__DIR__) . '/config/';
 
-            if ($config_dir != null && file_exists($config_dir) && is_file($config_dir.$config_file_name.'.php')) {
-                if ($require_once === true) {
-                    $config_values = require_once $config_dir.$config_file_name.'.php';
+            if ('' !== $config_dir && file_exists($config_dir) && is_file($config_dir . $config_file_name . '.php')) {
+                if (true === $require_once) {
+                    $config_values = require_once $config_dir . $config_file_name . '.php';
                 } else {
-                    $config_values = require $config_dir.$config_file_name.'.php';
+                    $config_values = require $config_dir . $config_file_name . '.php';
                 }
             }
 
@@ -79,26 +82,26 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
 
 
         /**
-         * load views.
+         * Load views.
          * 
-         * @param string $view_name view file name refer from app/Views folder.
-         * @param array $data for send data variable to view.
-         * @param boolean $require_once use include or include_once? if true, use include_once.
-         * @return boolean return true if success loading, or return false if failed to load.
+         * @param string $view_name Views file name refer from app/Views folder.
+         * @param array $data For send data variable to view.
+         * @param bool $require_once Use include or include_once? if true, use include_once.
+         * @return bool Return `true` if success loading, or return `false` if failed to load.
          */
         public function loadView($view_name, array $data = [], $require_once = false)
         {
-            $view_dir = dirname(__DIR__).'/Views/';
+            $view_dir = dirname(__DIR__) . '/Views/';
 
-            if ($view_name != null && file_exists($view_dir.$view_name.'.php') && is_file($view_dir.$view_name.'.php')) {
+            if ('' !== $view_name && file_exists($view_dir . $view_name . '.php') && is_file($view_dir . $view_name . '.php')) {
                 if (is_array($data)) {
-                    extract($data, EXTR_PREFIX_SAME, 'dupvar_');
+                    extract($data, EXTR_PREFIX_SAME, 'dupvar_');// phpcs:ignore WordPress.PHP.DontExtract.extract_extract
                 }
 
-                if ($require_once === true) {
-                    include_once $view_dir.$view_name.'.php';
+                if (true === $require_once) {
+                    include_once $view_dir . $view_name . '.php';
                 } else {
-                    include $view_dir.$view_name.'.php';
+                    include $view_dir . $view_name . '.php';
                 }
 
                 unset($view_dir);
@@ -110,5 +113,5 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
         }// loadView
 
 
-    }
+    }// Loader
 }

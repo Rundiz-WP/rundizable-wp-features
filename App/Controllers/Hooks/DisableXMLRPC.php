@@ -2,6 +2,7 @@
 /**
  * @since 0.2.7
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -21,6 +22,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableXMLRP
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -30,13 +34,13 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableXMLRP
         /**
          * Disable XML-RPC headers.
          * 
-         * @param array $headers
-         * @param \WP $wp
+         * @param array $headers Response headers.
+         * @param \WP $wp The `\WP` object.
          * @return array
          */
         public function disableXmlrpcHeaders($headers, \WP $wp)
         {
-            if(isset($headers['X-Pingback'])){
+            if (isset($headers['X-Pingback'])) {
                 unset($headers['X-Pingback']);
             }
             return $headers;
@@ -47,7 +51,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableXMLRP
          * Disable XML-RPC methods.
          * 
          * @link https://wordpress.stackexchange.com/a/300198/41315 Reference.
-         * @param array $methods
+         * @param array $methods HTTP Methods
          * @return array
          */
         public function disableXmlrpcMethods(array $methods)
@@ -63,7 +67,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableXMLRP
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_xmlrpc']) && $rundizable_wp_features_optname['disable_xmlrpc'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_xmlrpc']) && strval($rundizable_wp_features_optname['disable_xmlrpc']) === '1') {
                 add_filter('xmlrpc_enabled', '__return_false');
                 add_filter('xmlrpc_methods', [$this, 'disableXmlrpcMethods']);
                 add_filter('wp_headers', [$this, 'disableXmlrpcHeaders'], 10, 2);
@@ -86,8 +90,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableXMLRP
         /**
          * Remove pingback URL from blog info. This will only remove pingback URL in the link tag.
          * 
-         * @param string $output
-         * @param string $show
+         * @link https://developer.wordpress.org/reference/hooks/bloginfo_url/ Reference.
+         * @param string $output The URL returned by bloginfo() .
+         * @param string $show Type of information requested.
          * @return string
          */
         public function removePingbackURLFromBloginfo($output, $show)

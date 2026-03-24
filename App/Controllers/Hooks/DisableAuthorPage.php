@@ -2,6 +2,7 @@
 /**
  * @since 0.2.7
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -21,6 +22,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableAutho
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -46,7 +50,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableAutho
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_authorpage_front']) && $rundizable_wp_features_optname['disable_authorpage_front'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_authorpage_front']) && strval($rundizable_wp_features_optname['disable_authorpage_front']) === '1') {
                 add_action('template_redirect', [$this, 'disableAuthorPage']);
                 add_filter('author_link', [$this, 'removeAuthorLink'], 10, 3);
             }

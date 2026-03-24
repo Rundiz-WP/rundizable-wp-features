@@ -2,6 +2,7 @@
 /**
  * @since 0.2.7
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -21,6 +22,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -30,14 +34,16 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
         /**
          * Disable comment actions (admin). Redirect the user to admin dashboard.
          * 
-         * @param \WP_Screen $current_screen
+         * @param \WP_Screen $current_screen Current screen object.
          */
         public function disableComments(\WP_Screen $current_screen)
         {
             if (
                 property_exists($current_screen, 'id') &&
-                $current_screen->id === 'edit-comments' ||
-                $current_screen->id === 'comment'
+                (
+                    'edit-comments' === $current_screen->id ||
+                    'comment' === $current_screen->id
+                )
             ) {
                 wp_safe_redirect(admin_url());
                 exit();
@@ -54,7 +60,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
         public function disableCommentsFeed($is_comment_feed, $feed)
         {
             if (true === $is_comment_feed) {
-                wp_die(__('Feed is unavailable.', 'rundizable-wp-feature'), 404);
+                wp_die(esc_html__('Feed is unavailable.', 'rundizable-wp-features'), 404);
             }
         }// disableCommentsFeed
 
@@ -101,7 +107,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
         /**
          * Enqueue script or style to hide related settings.
          * 
-         * @param string $hook_suffix
+         * @param string $hook_suffix Hook suffix.
          */
         public function enqueScriptToHideRelatedSettings($hook_suffix)
         {
@@ -114,8 +120,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
         /**
          * Hide comments.
          * 
-         * @param array $comments
-         * @param int $post_id
+         * @param array $comments Comments array.
+         * @param int $post_id Post ID.
          * @return array
          */
         public function hideComments(array $comments, $post_id)
@@ -130,7 +136,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_comments']) && $rundizable_wp_features_optname['disable_comments'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_comments']) && strval($rundizable_wp_features_optname['disable_comments']) === '1') {
                 // disable its functional
                 add_action('current_screen', [$this, 'disableComments']);
                 add_action('admin_menu', [$this, 'removeCommentsMenu']);
@@ -169,8 +175,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
         /**
          * Set zero to comments number.
          * 
-         * @param int $comments_number
-         * @param int $post_id
+         * @param int $comments_number Comments number.
+         * @param int $post_id Post ID.
          * @return int
          */
         public function setZeroCommentsNumber($comments_number, $post_id)
@@ -184,7 +190,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
          * 
          * @link https://github.com/WordPress/gutenberg/issues/33730#issuecomment-1847253809 Code copied from here.
          * @param bool|array $allowed_block_types Array of block type slugs, or boolean to enable/disable all. Default `true` (all registered block types supported).
-         * @param WP_Block_Editor_Context $block_editor_context The current block editor context.
+         * @param \WP_Block_Editor_Context $block_editor_context The current block editor context.
          * @return bool|array
          */
         public function unregisterCommentsBlocks($allowed_block_types, \WP_Block_Editor_Context $block_editor_context)
@@ -193,7 +199,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
                 return $allowed_block_types;
             }
 
-            if ($block_editor_context->name !== 'core/edit-widgets') {
+            if ('core/edit-widgets' !== $block_editor_context->name) {
                 return $allowed_block_types;
             }
 

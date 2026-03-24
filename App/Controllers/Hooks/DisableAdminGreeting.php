@@ -2,6 +2,7 @@
 /**
  * @since 0.2.7
  * @license http://opensource.org/licenses/MIT MIT
+ * @package Rundizable-WP-Features
  */
 
 
@@ -22,6 +23,9 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableAdmin
         use \RundizableWpFeatures\App\AppTrait;
 
 
+        /**
+         * Class constructor.
+         */
         public function __construct()
         {
             $this->getOptions();
@@ -34,7 +38,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableAdmin
         public function registerHooks()
         {
             global $rundizable_wp_features_optname;
-            if (isset($rundizable_wp_features_optname['disable_admin_greeting']) && $rundizable_wp_features_optname['disable_admin_greeting'] == '1') {
+            if (isset($rundizable_wp_features_optname['disable_admin_greeting']) && strval($rundizable_wp_features_optname['disable_admin_greeting']) === '1') {
                 add_action('wp_before_admin_bar_render', [$this, 'removeHowdy']);
             }
         }// registerHooks
