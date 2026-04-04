@@ -74,7 +74,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
             if (in_array($hook_suffix, $userPages, true)) {
                 wp_enqueue_style(
                     'rundizable-wp-feature-hide-user-profile-admin-color-scheme', 
-                    plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/admin/users/profile/disable-admin-color-scheme.css', 
+                    plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/Admin/users/profile/disable-admin-color-scheme.css', 
                     [], 
                     RUNDIZABLEWPFEATURES_VERSION
                 );

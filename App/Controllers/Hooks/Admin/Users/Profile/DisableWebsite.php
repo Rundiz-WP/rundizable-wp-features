@@ -45,7 +45,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
             if (in_array($hook_suffix, $userPages, true)) {
                 wp_enqueue_style(
                     'rundizable-wp-feature-hide-user-profile-website', 
-                    plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/admin/users/profile/disable-website.css', 
+                    plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/Admin/users/profile/disable-website.css', 
                     [], 
                     RUNDIZABLEWPFEATURES_VERSION
                 );
@@ -53,7 +53,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
                 // So, this page is required JS to work.
                 wp_enqueue_script(
                     'rundizable-wp-features-hide-user-profile-website-js',
-                    plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/js/admin/users/profile/disable-website.js',
+                    plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/js/Admin/users/profile/disable-website.js',
                     [],
                     RUNDIZABLEWPFEATURES_VERSION,
                     true// use `true` for WP older than 6.3.0

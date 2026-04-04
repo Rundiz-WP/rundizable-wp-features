@@ -47,7 +47,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableBio')
             if (in_array($hook_suffix, $userPages, true)) {
                 wp_enqueue_style(
                     'rundizable-wp-feature-hide-user-profile-biographical-info', 
-                    plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/admin/users/profile/disable-biographical-info.css', 
+                    plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/Admin/users/profile/disable-biographical-info.css', 
                     [], 
                     RUNDIZABLEWPFEATURES_VERSION
                 );

@@ -112,7 +112,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
         public function enqueScriptToHideRelatedSettings($hook_suffix)
         {
             if ('options-discussion.php' === $hook_suffix) {
-                wp_enqueue_style('rundizable-wp-feature-hide-posts-settings', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/admin/disable-comments-hide-related-settings.css', [], RUNDIZABLEWPFEATURES_VERSION);
+                wp_enqueue_style('rundizable-wp-feature-hide-posts-settings', plugin_dir_url(RUNDIZABLEWPFEATURES_FILE) . 'assets/css/Admin/disable-comments-hide-related-settings.css', [], RUNDIZABLEWPFEATURES_VERSION);
             }
         }// enqueScriptToHideRelatedSettings
 
