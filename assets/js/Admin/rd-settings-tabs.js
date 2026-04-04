@@ -1,52 +1,91 @@
 /**
- * rundiz settings page (wp plugin).
- * tabs functional
+ * Rundiz settings page (WP plugin).
+ * Tabs functional
+ * 
+ * @package Rundizable-WP-Features
  */
 
 
-// below this part run on page loaded ------------------------------------------------------------------------------------
-(function($) {
-	if(typeof(Storage) !== "undefined") {
-		// get remembered actived tab from localstorage
-		remembered_actived_tab_content_id = localStorage.getItem('rd-settings-tabsactive');
-		if (remembered_actived_tab_content_id != null && remembered_actived_tab_content_id != '') {
-			// set current active tab to this remembered.
-			$('.rd-settings-tabs .tab-pane li').removeClass('active');
-			$('.rd-settings-tabs .tab-pane').find('a[href=\"'+remembered_actived_tab_content_id+'\"]').closest('li').addClass('active');
-		}
-		delete remembered_actived_tab_content_id;
-	}
+// on dom ready --------------------------------------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', (event) => {
+    const tabsContainer = document.querySelector('.rd-settings-tabs');
+    if (!tabsContainer) {
+        return;
+    }
 
-	// find currently active tab.
-	actived_tab = $('.rd-settings-tabs .tab-pane').find('.active');
-	if (actived_tab.length == 0) {
-		// not found currently active tab, set first tab as active.
-		$('.rd-settings-tabs .tab-pane li').first().addClass('active');
-		actived_tab = $('.rd-settings-tabs .tab-pane').find('.active');
-	}
+    const tabList = tabsContainer.querySelector('.tab-pane'); // the <ul> containing <li>s
+    const tabContentPanels = tabsContainer.querySelectorAll('.tab-content > div');
+    const localStorageKey = 'rd-yte-settings-tabs-active_' + (window.location.href).replace(/[:\/\\?&=]/g, '');
 
-	// get target tab content of active tab.
-	target_tab_content_id = actived_tab.find('a').attr('href');
-	// removed all active tab content and set active tab content that match id with tab pane.
-	$('.rd-settings-tabs .tab-content > div').removeClass('active');
-	$('.rd-settings-tabs .tab-content '+target_tab_content_id).addClass('active');
+    let rememberedActiveTabId = null;
 
-	// listening on click on the tabs.
-	$('.rd-settings-tabs .tab-pane > li > a').on('click', function(e) {
-		e.preventDefault();
-		target_tab_content_id = $(this).attr('href');
-		// remove all active tab pane and set to current click one.
-		$('.rd-settings-tabs .tab-pane li').removeClass('active');
-		$(this).closest('li').addClass('active');
-		// remove all active tab content and set to current click one.
-		$('.rd-settings-tabs .tab-content > div').removeClass('active');
-		$('.rd-settings-tabs .tab-content '+target_tab_content_id).addClass('active');
+    if (typeof(Storage) !== 'undefined') {
+        rememberedActiveTabId = localStorage.getItem(localStorageKey);
 
-		if(typeof(Storage) !== "undefined") {
-			// set current active tab to localstorage
-			localStorage.setItem('rd-settings-tabsactive', target_tab_content_id);
-		}
-	});
+        if (rememberedActiveTabId) {
+            // try to activate the remembered tab
+            const rememberedLink = tabList.querySelector(`a[href="${rememberedActiveTabId}"]`);
+            if (rememberedLink) {
+                // remove active from all tabs
+                tabList.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+                // add active to the parent <li> of the remembered link
+                rememberedLink.closest('li').classList.add('active');
+            }
+        }
+    }// endif; local storage supported check
 
-	delete actived_tab, target_tab_content_id;
-})(jQuery);
+    let activeTabLi = tabList.querySelector('li.active');
+    if (!activeTabLi) {
+        // if not found currently active tab, set first tab as active.
+        activeTabLi = tabList.querySelector('li');
+        if (activeTabLi) {
+            activeTabLi.classList.add('active');
+        }
+    }
+
+    // activate the corresponding tab content
+    if (activeTabLi) {
+        const activeLink = activeTabLi.querySelector('a');
+        const targetId = activeLink ? activeLink.getAttribute('href') : null;
+
+        if (targetId) {
+            tabContentPanels.forEach(panel => panel.classList.remove('active'));
+            const targetPanel = tabsContainer.querySelector('.tab-content ' + targetId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+        }
+    }// endif;
+
+    // listening on click on the tabs use event delegation.
+    tabList.addEventListener('click', function(tablistEvent) {
+        // Only respond to clicks on <a> elements inside <li>
+        const link = tablistEvent.target.closest('a');
+        if (!link || link.parentElement.parentElement !== tabList) {
+            return;
+        }
+
+        tablistEvent.preventDefault();
+
+        const targetId = link.getAttribute('href');
+        if (!targetId) {
+            return;
+        }
+
+        // update active tab (<li>)
+        tabList.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+        link.closest('li').classList.add('active');
+
+        // update active tab content
+        tabContentPanels.forEach(panel => panel.classList.remove('active'));
+        const targetPanel = tabsContainer.querySelector('.tab-content ' + targetId);
+        if (targetPanel) {
+            targetPanel.classList.add('active');
+        }
+
+        // save to localStorage only on user click
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem(localStorageKey, targetId);
+        }
+    });
+});
