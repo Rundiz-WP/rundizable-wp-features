@@ -1,7 +1,7 @@
 <?php
 /**
- * Main app class. extend this class if you want to use any method of this class.
- * 
+ * Main app class. Extend this class if you want to use any method of this class.
+ *
  * @package Rundizable-WP-Features
  */
 
@@ -11,16 +11,10 @@ namespace RundizableWpFeatures\App;
 
 if (!class_exists('\\RundizableWpFeatures\\App\\App')) {
     /**
-     * Main app class.
+     * Plugin application main entry class.
      */
     class App
     {
-
-
-        /**
-         * @var \RundizableWpFeatures\App\Libraries\Loader
-         */
-        public $Loader;
 
 
         /**
@@ -28,9 +22,15 @@ if (!class_exists('\\RundizableWpFeatures\\App\\App')) {
          */
         public function run()
         {
+            // Any method that must be called before auto register controllers must be manually write it down here, below this line.
+            $StylesAndScripts = new \RundizableWpFeatures\App\Libraries\StylesAndScripts();
+            $StylesAndScripts->manualRegisterHooks();
+            unset($StylesAndScripts);
+
             // Initialize the loader class.
-            $this->Loader = new \RundizableWpFeatures\App\Libraries\Loader();
-            $this->Loader->autoRegisterControllers();
+            $Loader = new \RundizableWpFeatures\App\Libraries\Loader();
+            $Loader->autoRegisterControllers();
+            unset($Loader);
         }// run
 
 

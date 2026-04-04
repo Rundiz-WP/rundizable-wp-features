@@ -1,19 +1,29 @@
 <?php
 /**
  * Loader class. This class will load anything for example: views, template, configuration file.
- * 
+ *
  * @package Rundizable-WP-Features
  */
 
 
 namespace RundizableWpFeatures\App\Libraries;
 
+
 if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
     /**
-     * Loader class.
+     * Loader class for load template, view file, config file, etc.
      */
     class Loader
     {
+
+
+        use \RundizableWpFeatures\App\AppTrait;
+
+
+        /**
+         * @var array The manual update classes that will be run. Detected by `haveManualUpdate()` method.
+         */
+        protected $manualUpdateClasses = [];
 
 
         /**
@@ -23,49 +33,143 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
         public function autoRegisterControllers()
         {
             $this_plugin_dir = dirname(RUNDIZABLEWPFEATURES_FILE);
-            $di = new \RecursiveDirectoryIterator($this_plugin_dir . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Controllers', \RecursiveDirectoryIterator::SKIP_DOTS);
-            $it = new \RecursiveIteratorIterator($di);
-            unset($di);
+            $file_list = $this->getClassFileList($this_plugin_dir . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Controllers');
 
-            $file_list = [];
-            foreach ($it as $file) {
-                $file_list[] = $file;
-            }// endforeach;
-            unset($file, $it);
-            natsort($file_list);
-
-            foreach ($file_list as $file) {
-                $this_file_classname = '\\RundizableWpFeatures' . str_replace([$this_plugin_dir, '.php', '/'], ['', '', '\\'], $file);
-                if (class_exists($this_file_classname)) {
-                    $TestClass = new \ReflectionClass($this_file_classname);
-                    if (!$TestClass->isAbstract()) {
-                        $ControllerClass = new $this_file_classname();
-                        if (method_exists($ControllerClass, 'registerHooks')) {
-                            $ControllerClass->registerHooks();
+            if (is_array($file_list)) {
+                foreach ($file_list as $file) {
+                    $this_file_classname = '\\RundizableWpFeatures' . str_replace([$this_plugin_dir, '.php', '/'], ['', '', '\\'], $file);
+                    if (class_exists($this_file_classname)) {
+                        $TestClass = new \ReflectionClass($this_file_classname);
+                        if (
+                            !$TestClass->isAbstract() && 
+                            !$TestClass->isTrait() && 
+                            $TestClass->implementsInterface('\\RundizableWpFeatures\\App\\Controllers\\ControllerInterface')
+                        ) {
+                            $ControllerClass = new $this_file_classname();
+                            if (method_exists($ControllerClass, 'registerHooks')) {
+                                $ControllerClass->registerHooks();
+                            }
+                            unset($ControllerClass);
                         }
-                        unset($ControllerClass);
+                        unset($TestClass);
                     }
-                    unset($TestClass);
-                }
-                unset($this_file_classname);
-            }// endforeach;
+                    unset($this_file_classname);
+                }// endforeach;
+                unset($file);
+            }
 
-            unset($file, $file_list, $this_plugin_dir);
+            unset($file_list, $this_plugin_dir);
         }// autoRegisterControllers
 
 
         /**
-         * Load config file and return its values.
+         * Get file list that may contain class in specific path.
+         *
+         * @param string $path The full path without trailing slash.
+         * @return array Return indexed array of file list.
+         */
+        protected function getClassFileList($path)
+        {
+            $Di = new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS);
+            $It = new \RecursiveIteratorIterator($Di);
+            unset($Di);
+
+            $file_list = [];
+            foreach ($It as $file) {
+                $file_list[] = $file;
+            }// endforeach;
+            unset($file, $It);
+            natsort($file_list);
+
+            return $file_list;
+        }// getClassFileList
+
+
+        /**
+         * Get manual update PHP classes.
          * 
-         * @param string $config_file_name Config file name without `.php`.
-         * @param bool $require_once Mark as require once or not.
-         * @return mixed return config file content if success. return false if failed.
+         * @return array Return indexed array of manual update PHP classes.
+         */
+        public function getManualUpdateClasses()
+        {
+            if (empty($this->manualUpdateClasses)) {
+                $this->haveManualUpdate();
+            }
+
+            return $this->manualUpdateClasses;
+        }// getManualUpdateClasses
+
+
+        /**
+         * Check that is this version of app have manual update code?
+         *
+         * @return bool Return `true` if there is manual update, `false` for otherwise.
+         */
+        public function haveManualUpdate()
+        {
+            $config_values = $this->getOptions();
+            if (is_array($config_values) && array_key_exists('rdsfw_manual_update_version', $config_values)) {
+                $current_manual_update_version = $config_values['rdsfw_manual_update_version'];
+            } else {
+                $current_manual_update_version = '';
+            }
+            unset($config_values);
+
+            $this_plugin_dir = dirname(RUNDIZABLEWPFEATURES_FILE);
+            $file_list = $this->getClassFileList($this_plugin_dir . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Update' . DIRECTORY_SEPARATOR . 'Manual');
+
+            if (is_array($file_list) && !empty($file_list)) {
+                foreach ($file_list as $file) {
+                    $this_file_classname = '\\RundizableWpFeatures' . str_replace([$this_plugin_dir, '.php', '/'], ['', '', '\\'], $file);
+                    if (class_exists($this_file_classname)) {
+                        $TestClass = new \ReflectionClass($this_file_classname);
+                        if (
+                            !$TestClass->isAbstract() && 
+                            !$TestClass->isTrait() && 
+                            !$TestClass->isInterface() &&
+                            $TestClass->implementsInterface('\\RundizableWpFeatures\\App\\Update\\Manual\\ManualUpdateInterface') &&
+                            $TestClass->hasProperty('manual_update_version') &&
+                            $TestClass->hasMethod('run')
+                        ) {
+                            // If contain all requirements.
+                            $UpdateClass = new $this_file_classname();
+                            if (
+                                '' === $current_manual_update_version || 
+                                version_compare($current_manual_update_version, $UpdateClass->manual_update_version, '<')
+                            ) {
+                                $this->manualUpdateClasses[] = $this_file_classname;
+                            }
+                            unset($UpdateClass);
+                        }// endif; contain all required property, method, interface.
+                        unset($TestClass);
+                    }// endif; `class_exists()`.
+                    unset($this_file_classname);
+                }// endforeach;
+                unset($file);
+            }
+
+            unset($current_manual_update_version, $file_list, $this_plugin_dir);
+
+            if (empty($this->manualUpdateClasses)) {
+                return false;
+            } else {
+                return true;
+            }
+        }// haveManualUpdate
+
+
+        /**
+         * Load config file and return its values.
+         *
+         * @param string $config_file_name The configuration file name only without extension.
+         * @param bool $require_once Mark as `true` to use `require_once`, otherwise use `require`.
+         * @return mixed Return config file content if success. Return `false` if failed.
          */
         public function loadConfig($config_file_name = 'config', $require_once = false)
         {
             $config_dir = dirname(__DIR__) . '/config/';
 
-            if ('' !== $config_dir && file_exists($config_dir) && is_file($config_dir . $config_file_name . '.php')) {
+            if (file_exists($config_dir) && is_file($config_dir . $config_file_name . '.php')) {
                 if (true === $require_once) {
                     $config_values = require_once $config_dir . $config_file_name . '.php';
                 } else {
@@ -83,33 +187,45 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
 
         /**
          * Load views.
-         * 
-         * @param string $view_name Views file name refer from app/Views folder.
+         *
+         * @param string $view_name View file name, refer from app/Views folder.
          * @param array $data For send data variable to view.
-         * @param bool $require_once Use include or include_once? if true, use include_once.
-         * @return bool Return `true` if success loading, or return `false` if failed to load.
+         * @param bool $require_once Set to `true` to use `include_once`, `false` to use `include`. Default is `false`.
+         * @return bool Return `true` if success loading.
+         * @throws \Exception Throws the error if views file was not found.
          */
         public function loadView($view_name, array $data = [], $require_once = false)
         {
             $view_dir = dirname(__DIR__) . '/Views/';
+            $templateFile = $view_dir . $view_name . '.php';
+            unset($view_dir);
 
-            if ('' !== $view_name && file_exists($view_dir . $view_name . '.php') && is_file($view_dir . $view_name . '.php')) {
+            if ('' !== $view_name && file_exists($templateFile) && is_file($templateFile)) {
+                // if views file was found.
                 if (is_array($data)) {
                     extract($data, EXTR_PREFIX_SAME, 'dupvar_');// phpcs:ignore WordPress.PHP.DontExtract.extract_extract
                 }
 
                 if (true === $require_once) {
-                    include_once $view_dir . $view_name . '.php';
+                    include_once $templateFile;
                 } else {
-                    include $view_dir . $view_name . '.php';
+                    include $templateFile;
                 }
 
-                unset($view_dir);
+                unset($templateFile);
                 return true;
+            } else {
+                // if views file was not found.
+                // Throw the exception to notice the developers. Without translation.
+                throw new \Exception(
+                    esc_html(
+                        sprintf(
+                            'The views file was not found (%s).', 
+                            str_replace(['\\', '/'], '/', $templateFile)
+                        )
+                    )
+                );
             }
-
-            unset($view_dir);
-            return false;
         }// loadView
 
 
