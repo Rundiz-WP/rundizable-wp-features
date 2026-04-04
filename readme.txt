@@ -2,7 +2,7 @@
 Contributors: okvee
 Tags: disable features, pages, media, front-end
 Tested up to: 7.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Requires at least: 4.6.0
@@ -38,6 +38,12 @@ Yes, it is.
 3. Settings page, users tab.
 
 == Changelog ==
+= 1.0.3 =
+2026-04-05
+
+* Add the upgrader functional to work when plugin updated in the future.
+* Minor bug fix.
+
 = 1.0.2 =
 2026-03-24
 
