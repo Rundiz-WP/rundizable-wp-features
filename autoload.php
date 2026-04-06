@@ -2,7 +2,7 @@
 /**
  * Auto loader file.
  * 
- * @package plugin-template-package
+ * @package Rundizable-WP-Features
  */
 
 
