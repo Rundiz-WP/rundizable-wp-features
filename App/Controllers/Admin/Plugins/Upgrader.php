@@ -169,7 +169,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
                                 sprintf(
                                     // translators: %1$s Open link, %2$s Close link.
                                     esc_html__('The Rundizable WP Features is just upgraded and need to be manually update. Please continue to the %1$splugin update page%2$s.', 'rundizable-wp-features'),
-                                    '<a href="' . esc_attr(network_admin_url('index.php?page=rundizable-wp-features-manual-update')) . '">', // this link will be auto convert to admin_url if not in multisite installed.
+                                    '<a href="' . esc_url(network_admin_url('index.php?page=rundizable-wp-features-manual-update')) . '">', // this link will be auto convert to admin_url if not in multisite installed.
                                     '</a>'
                                 ) .
                             '</p>
