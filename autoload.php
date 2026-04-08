@@ -6,6 +6,11 @@
  */
 
 
+if (!defined('ABSPATH')) {
+    exit();
+}
+
+
 /**
  * An example of a project-specific implementation.
  * 

@@ -10,6 +10,11 @@
 namespace RundizableWpFeatures\App\Controllers\Admin\Plugins;
 
 
+if (!defined('ABSPATH')) {
+    exit();
+}
+
+
 if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Activation')) {
     /**
      * Plugin activation and new site activation hooks class.
@@ -32,7 +37,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Act
          */
         public function activate($network_wide)
         {
-            // So something that will happens on activate plugin.
+            // Do something that will happens on activate plugin.
             // @todo [rd-settings-fw] In your project, you may need to verify PHP version and/or WordPress version before did activate.
             $wordpress_required_version = '4.6.0';
             $phpversion_required = '5.5';
@@ -103,8 +108,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Act
                 switch_to_blog($original_blog_id);
                 unset($blog_id, $blog_ids, $original_blog_id);
             } else {
-                // this site is single site. activate on single site.
-                        $this->activateAddUpdateOption();
+                // This site is single site. activate on single site.
+                $this->activateAddUpdateOption();
             }
         }// activate
 

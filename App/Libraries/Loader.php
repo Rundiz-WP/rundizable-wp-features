@@ -9,6 +9,11 @@
 namespace RundizableWpFeatures\App\Libraries;
 
 
+if (!defined('ABSPATH')) {
+    exit();
+}
+
+
 if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
     /**
      * Loader class for load template, view file, config file, etc.
