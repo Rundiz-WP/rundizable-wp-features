@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rundizable WP Features 0.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-features\n"
-"POT-Creation-Date: 2026-04-05T14:41:54+07:00\n"
-"PO-Revision-Date: 2026-04-05 14:50+0700\n"
+"POT-Creation-Date: 2026-04-08T22:55:32+07:00\n"
+"PO-Revision-Date: 2026-04-08 22:55+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -256,7 +256,7 @@ msgid "Donate"
 msgstr "บริจาค"
 
 #. translators: %1$s current PHP version.
-#: App/Controllers/Admin/Plugins/Activation.php:56
+#: App/Controllers/Admin/Plugins/Activation.php:61
 #, php-format
 msgid ""
 "You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version "
@@ -265,22 +265,22 @@ msgstr ""
 "คุณกำลังใช้ PHP %1$s ซึ่งไม่ตรงตามข้อกำหนดขั้นต่ำ. โปรดพิจารณาอัปเกรดเวอร์ชัน PHP หรือติดต่อผู้พัฒนาปลั๊กอินเพื่อขอความช่วยเหลือ."
 
 #. translators: %1$s minimum PHP version required.
-#: App/Controllers/Admin/Plugins/Activation.php:64
+#: App/Controllers/Admin/Plugins/Activation.php:69
 #, php-format
 msgid "Minimum PHP requirement: %1$s."
 msgstr "ความต้องการขั้นต่ำของ PHP: %1$s."
 
-#: App/Controllers/Admin/Plugins/Activation.php:68
+#: App/Controllers/Admin/Plugins/Activation.php:73
 msgid "Minimum requirement of PHP version does not meet."
 msgstr "รุ่น PHP ไม่ตรงความต้องการขั้นต่ำ."
 
 #. translators: %1$s Current WordPress version, %2$s Required WordPress version.
-#: App/Controllers/Admin/Plugins/Activation.php:77
+#: App/Controllers/Admin/Plugins/Activation.php:82
 #, php-format
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
 msgstr "รุ่นของเวิร์ดเพราไม่ตรงความต้องการขั้นต่ำ. (%1$s < %2$s)."
 
-#: App/Controllers/Admin/Plugins/Activation.php:82
+#: App/Controllers/Admin/Plugins/Activation.php:87
 msgid "Minimum requirement of WordPress version does not meet."
 msgstr "รุ่น WordPress ไม่ตรงความต้องการขั้นต่ำ."
 
