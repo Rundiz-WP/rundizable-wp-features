@@ -40,7 +40,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
             // check if user had setting and its value is not match default then set to default.
             $userId = get_current_user_id();
             $colorOptionName = 'admin_color';
-            $defaultColor = 'fresh';
+            if (version_compare(get_bloginfo('version'), '7.0', '>=') || version_compare(get_bloginfo('version'), '7.0.0', '>=')) {
+                $defaultColor = 'modern';
+            } else {
+                $defaultColor = 'fresh';
+            }
             $adminColorOption = get_user_option($colorOptionName, $userId);
             $adminColorMeta = get_user_meta($userId, $colorOptionName, true);
 

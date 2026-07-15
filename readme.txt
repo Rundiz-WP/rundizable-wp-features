@@ -2,7 +2,7 @@
 Contributors: okvee
 Tags: disable features, pages, media, front-end
 Tested up to: 7.0
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Requires at least: 4.6.0
@@ -38,6 +38,11 @@ Yes, it is.
 3. Settings page, users tab.
 
 == Changelog ==
+= 1.0.6 =
+2026-07-15
+
+* Fix disable user color scheme picker and reset to **old** default color (fresh).
+
 = 1.0.5 =
 2026-04-08
 
