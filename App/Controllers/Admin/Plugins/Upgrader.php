@@ -27,6 +27,24 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
 
 
         /**
+         * @var string Upgrader AJAX action name. This class constant visibility can be private.
+         */
+        const AJAX_ACTION = 'rundizable_wp_features_manualUpdate';
+
+
+        /**
+         * @var string Upgrader AJAX nonce name. This class constant visibility can be private.
+         */
+        const AJAX_NONCE = 'rundizable_wp_features_nonce';
+
+
+        /**
+         * @var string Upgrader menu slug. This class constant visibility must be public.
+         */
+        const MENU_SLUG = 'rundizable-wp-features-manual-update';
+
+
+        /**
          * @var string The current admin page.
          */
         private $hookSuffix = '';
@@ -50,7 +68,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
             // phpcs:ignore WordPress.Security
             if (isset($_SERVER['REQUEST_METHOD']) && strtolower($_SERVER['REQUEST_METHOD']) === 'post' && isset($_POST) && !empty($_POST)) {
                 // if method POST and there is POST data.
-                if (check_ajax_referer('rundizable_wp_features_nonce', 'security', false) === false) {
+                if (check_ajax_referer(static::AJAX_NONCE, 'security', false) === false) {
                     status_header(403);
                     wp_die(
                         esc_html__('Please reload this page and try again.', 'rundizable-wp-features'), 
@@ -153,6 +171,12 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
          */
         public function detectPluginUpdate()
         {
+            if (!is_admin()) {
+                // if not admin pages.
+                // no need to work here.
+                return;
+            }
+
             if (get_transient('rundizable_wp_features_updated') && current_user_can('update_plugins')) {
                 // if there is updated transient
                 $Loader = new \RundizableWpFeatures\App\Libraries\Loader();
@@ -163,13 +187,13 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
                     // -------------------------------------------------------------------------------------
                     // display link to manual update page.
                     // phpcs:ignore WordPress.Security.NonceVerification
-                    if (!isset($_REQUEST['page']) || (isset($_REQUEST['page']) && 'rundizable-wp-features-manual-update' !== $_REQUEST['page'])) {
+                    if (!isset($_REQUEST['page']) || (isset($_REQUEST['page']) && static::MENU_SLUG !== $_REQUEST['page'])) {
                         $manualUpdateNotice = '<div class="notice notice-warning is-dismissible">
                             <p>' .
                                 sprintf(
                                     // translators: %1$s Open link, %2$s Close link.
                                     esc_html__('The Rundizable WP Features is just upgraded and need to be manually update. Please continue to the %1$splugin update page%2$s.', 'rundizable-wp-features'),
-                                    '<a href="' . esc_url(network_admin_url('index.php?page=rundizable-wp-features-manual-update')) . '">', // this link will be auto convert to admin_url if not in multisite installed.
+                                    '<a href="' . esc_url(network_admin_url('index.php?page=' . rawurlencode(static::MENU_SLUG))) . '">', // this link will be auto convert to admin_url if not in multisite installed.
                                     '</a>'
                                 ) .
                             '</p>
@@ -193,7 +217,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
                         add_action('admin_menu', [$this, 'displayManualUpdateMenu']);
                     }
 
-                    add_action('wp_ajax_rundizable_wp_features_manualUpdate', [$this, 'ajaxManualUpdate']);
+                    add_action('wp_ajax_' . static::AJAX_ACTION, [$this, 'ajaxManualUpdate']);
                     // end display link to manual update page.
                     // -------------------------------------------------------------------------------------
                 } else {
@@ -211,7 +235,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
          */
         public function displayManualUpdateMenu()
         {
-            $hook_suffix = add_dashboard_page(__('Rundizable WP Features update', 'rundizable-wp-features'), __('Rundizable WP Features update', 'rundizable-wp-features'), 'update_plugins', 'rundizable-wp-features-manual-update', [$this, 'displayManualUpdatePage']);
+            $hook_suffix = add_dashboard_page(__('Rundizable WP Features update', 'rundizable-wp-features'), __('Rundizable WP Features update', 'rundizable-wp-features'), 'update_plugins', static::MENU_SLUG, [$this, 'displayManualUpdatePage']);
             if (is_string($hook_suffix)) {
                 $this->hookSuffix = $hook_suffix;
                 add_action('load-' . $hook_suffix, [$this, 'callEnqueueHook']);
@@ -230,12 +254,10 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
             }
 
             $output = [];
+            $output['manualUpdateClasses'] = $this->getLoader()->getManualUpdateClasses();
 
-            $Loader = new \RundizableWpFeatures\App\Libraries\Loader();
-            $output['manualUpdateClasses'] = $Loader->getManualUpdateClasses();
-
-            $Loader->loadView('admin/Plugins/Upgrader_v', $output);
-            unset($Loader, $output);
+            $this->getLoader()->loadView('admin/Plugins/Upgrader_v', $output);
+            unset($output);
         }// displayManualUpdatePage
 
 
@@ -270,10 +292,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
                 'rundizable-wp-features-handle-rd-settings-manual-update',
                 'RundizableWpFeaturesRdSettingsManualUpdate',
                 [
+                    'ajaxAction' => static::AJAX_ACTION,
                     'alreadyRunUpdateKey' => '',
                     'alreadyRunUpdateTotal' => 0,
                     'completed' => 'false',
-                    'nonce' => wp_create_nonce('rundizable_wp_features_nonce'),
+                    'nonce' => wp_create_nonce(static::AJAX_NONCE),
                     'txtCompleted' => __('Completed', 'rundizable-wp-features'),
                     'txtDismissNotice' => __('Dismiss', 'rundizable-wp-features'),
                     'txtNext' => __('Next', 'rundizable-wp-features'),

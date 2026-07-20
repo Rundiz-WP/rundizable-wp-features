@@ -18,6 +18,12 @@ if (!trait_exists('\\RundizableWpFeatures\\App\\AppTrait')) {
 
 
         /**
+         * @var \RundizableWpFeatures\App\Libraries\Loader The loader class if it has been initiated. Make sure that this property must be set before use.
+         */
+        protected $Loader = null;
+
+
+        /**
          * Main option name.
          * 
          * @var string Set main option name of this plugin. the name should be english, number, underscore, 
@@ -27,20 +33,27 @@ if (!trait_exists('\\RundizableWpFeatures\\App\\AppTrait')) {
          */
         public $main_option_name = 'rundizable_wp_features_optname';
 
+
         /**
-         * All available options.
+         * Get `Loader` object from `Loader` property.
          * 
-         * These options will be accessible via main option name variable. 
-         * For example: options name `'the_name'` can call from `$rundizable_wp_features_optname['the_name'];`.
-         * If you want to access this property, please call to `setupAllOptions()` method first.
-         * 
-         * @var array Set all options available for this plugin. it must be 2D array (`key => default value, key2 => default value, ...`)
+         * This method is in main AppTrait.
+         *
+         * @return \RundizableWpFeatures\App\Libraries\Loader Return the `Loader` object.
          */
-        public $all_options = [];
+        protected function getLoader()
+        {
+            if (!$this->Loader instanceof \RundizableWpFeatures\App\Libraries\Loader) {
+                $this->Loader = new \RundizableWpFeatures\App\Libraries\Loader();
+            }
+            return $this->Loader;
+        }// getLoader
 
 
         /**
-         * Get all options of this plugin.
+         * Get all options of this plugin from DB.
+         * 
+         * This method is in main AppTrait.
          * 
          * @return array Return associative array value of all options where the key is option name.
          */
@@ -53,64 +66,93 @@ if (!trait_exists('\\RundizableWpFeatures\\App\\AppTrait')) {
             $get_option = get_option($option_name);
             if (false !== $get_option) {
                 // if option has value.
-                ${$option_name} = maybe_unserialize($get_option);// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-                unset($get_option);
-                return (array) ${$option_name};
+                // `get_option()` already unserializes internally - no need to re-run `maybe_unserialize()`.
+                if (is_string($get_option)) {
+                    // if older version of this plugin may still use manual serialize/unserialize.
+                    // @todo[rundiz] delete this `if` block on version 2.0+
+                    $get_option = maybe_unserialize($get_option);
+                    if (!is_array($get_option)) {
+                        $get_option = [];
+                    }
+                }
+
+                // process data before save with `save_callback` option. -----------------------------
+                $config_values = $this->getLoader()->loadConfig();
+                $settings_config_file = '';
+                if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
+                    // if there is config value about config file.
+                    $settings_config_file = $config_values['rundiz_settings_config_file'];
+                }
+                unset($config_values);
+
+                $RundizSettings = new \RundizableWpFeatures\App\Libraries\RundizSettings();
+                $RundizSettings->settings_config_file = $settings_config_file;
+                $get_option = $RundizSettings->processDisplayCallback($get_option);
+                unset($RundizSettings, $settings_config_file);
+                // end process data before save with `save_callback` option. -------------------------
+
+                ${$option_name} = (array) $get_option;// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
             }
 
             unset($get_option);
-            return [];
+            return ${$option_name};// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
         }// getOptions
 
 
         /**
          * Save the settings from settings page, using Rundiz settings.
          * 
+         * This method is in main AppTrait.
+         * 
          * @param array $data The associative array of submitted data in key => value
          * @return bool Return `true` if saved successfully. return `false` if not updated.
          */
         public function saveOptions(array $data)
         {
-            $get_option = get_option($this->main_option_name);
-            $sub_options = maybe_serialize(stripslashes_deep($data));
-            if (false !== $get_option) {
-                return update_option($this->main_option_name, $sub_options);
-            } else {
-                return add_option($this->main_option_name, $sub_options);
+            $data = stripslashes_deep($data);
+
+            // process data before save with `save_callback` option. -----------------------------
+            $config_values = $this->getLoader()->loadConfig();
+            $settings_config_file = '';
+            if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
+                // if there is config value about config file.
+                $settings_config_file = $config_values['rundiz_settings_config_file'];
             }
+            unset($config_values);
+
+            $RundizSettings = new \RundizableWpFeatures\App\Libraries\RundizSettings();
+            $RundizSettings->settings_config_file = $settings_config_file;
+            $data = $RundizSettings->processSaveCallback($data);
+            unset($RundizSettings, $settings_config_file);
+            // end process data before save with `save_callback` option. -------------------------
+
+            // add manual update version into config value.
+            if (!array_key_exists('rdsfw_manual_update_version', $data)) {
+                $currentConfigValues = $this->getOptions();
+                if (is_array($currentConfigValues) && array_key_exists('rdsfw_manual_update_version', $currentConfigValues)) {
+                    $manual_update_version = $currentConfigValues['rdsfw_manual_update_version'];
+                } else {
+                    $manual_update_version = '';
+                }
+                unset($currentConfigValues);
+                $data = array_merge($data, ['rdsfw_manual_update_version' => $manual_update_version]);
+            }
+
+            return update_option($this->main_option_name, $data, false);
         }// saveOptions
 
 
         /**
-         * Setup all options from settings config file.
+         * Set `Loader` object to `Loader` property.
          * 
-         * This will be set all config settings into `all_options` property.
-         * You have to call this method if you want to call to `all_options` property.
-         * 
-         * This method will not load saved settings data from DB. The value in settings fields are all default value.
+         * This method is in main AppTrait.
+         *
+         * @param \RundizableWpFeatures\App\Libraries\Loader $Loader The `Loader` object.
          */
-        public function setupAllOptions()
+        public function setLoader(\RundizableWpFeatures\App\Libraries\Loader $Loader)
         {
-            // load config values to get settings config file.
-            $loader = new \RundizableWpFeatures\App\Libraries\Loader();
-            $config_values = $loader->loadConfig();
-            if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
-                // if there is config value about config file.
-                $settings_config_file = $config_values['rundiz_settings_config_file'];
-            } else {
-                // if there is no config value about config file.
-                wp_die(
-                    esc_html__('Settings configuration file was not set.', 'rundizable-wp-features')
-                );
-                exit(1);
-            }
-            unset($config_values, $loader);
-
-            $RundizSettings = new \RundizableWpFeatures\App\Libraries\RundizSettings();
-            $RundizSettings->settings_config_file = $settings_config_file;
-            $this->all_options = $RundizSettings->getSettingsFieldsId();
-            unset($RundizSettings, $settings_config_file);
-        }// setupAllOptions
+            $this->Loader = $Loader;
+        }// setLoader
 
 
     }// AppTrait

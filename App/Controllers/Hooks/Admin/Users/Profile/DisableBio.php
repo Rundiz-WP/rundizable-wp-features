@@ -15,20 +15,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableBio')
      * 
      * @since 0.2.7
      */
-    class DisableBio implements \RundizableWpFeatures\App\Controllers\ControllerInterface
+    class DisableBio extends \RundizableWpFeatures\App\Controllers\Hooks\BasedHooks
     {
-
-
-        use \RundizableWpFeatures\App\AppTrait;
-
-
-        /**
-         * Class constructor.
-         */
-        public function __construct()
-        {
-            $this->getOptions();
-        }// __construct
 
 
         /**
@@ -56,9 +44,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableBio')
 
 
         /**
-         * {@inheritDoc}
+         * Register hooks per this class only.
+         * 
+         * @since 1.0.7 Renamed from `registerHooks()`.
          */
-        public function registerHooks()
+        public function perClassRegisterHooks()
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_users_profile_biographical_info']) && 
@@ -67,7 +57,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableBio')
                 // hide settings
                 add_action('admin_enqueue_scripts', [$this, 'enqueScriptToHideRelatedSettings']);
             }
-        }// registerHooks
+        }// perClassRegisterHooks
 
 
     }// DisableBio

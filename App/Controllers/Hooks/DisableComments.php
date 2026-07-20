@@ -15,20 +15,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
      * 
      * @since 0.2.7
      */
-    class DisableComments implements \RundizableWpFeatures\App\Controllers\ControllerInterface
+    class DisableComments extends \RundizableWpFeatures\App\Controllers\Hooks\BasedHooks
     {
-
-
-        use \RundizableWpFeatures\App\AppTrait;
-
-
-        /**
-         * Class constructor.
-         */
-        public function __construct()
-        {
-            $this->getOptions();
-        }// __construct
 
 
         /**
@@ -131,9 +119,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
 
 
         /**
-         * {@inheritDoc}
+         * Register hooks per this class only.
+         * 
+         * @since 1.0.7 Renamed from `registerHooks()`.
          */
-        public function registerHooks()
+        public function perClassRegisterHooks()
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_comments']) && strval($rundizable_wp_features_optname['disable_comments']) === '1') {
@@ -160,7 +150,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableComme
                 add_action('do_feed_rss', [$this, 'disableCommentsFeed'], 9, 2);
                 add_action('do_feed_rss2', [$this, 'disableCommentsFeed'], 9, 2);
             }
-        }// registerHooks
+        }// perClassRegisterHooks
 
 
         /**

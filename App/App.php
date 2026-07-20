@@ -9,12 +9,20 @@
 namespace RundizableWpFeatures\App;
 
 
+if (!defined('ABSPATH')) {
+    exit();
+}
+
+
 if (!class_exists('\\RundizableWpFeatures\\App\\App')) {
     /**
      * Plugin application main entry class.
      */
     class App
     {
+
+
+        use AppTrait;
 
 
         /**
@@ -28,9 +36,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\App')) {
             unset($StylesAndScripts);
 
             // Initialize the loader class.
-            $Loader = new \RundizableWpFeatures\App\Libraries\Loader();
-            $Loader->autoRegisterControllers();
-            unset($Loader);
+            $this->Loader = new \RundizableWpFeatures\App\Libraries\Loader();
+            $this->Loader->autoRegisterControllers();
         }// run
 
 

@@ -54,7 +54,7 @@ function rundizable_wp_features_manualUpdateAjax()
     // prepare to make AJAX call. ========================================================
     const formData = new URLSearchParams();
     formData.append('security', RundizableWpFeaturesRdSettingsManualUpdate.nonce);
-    formData.append('action', 'rundizable_wp_features_manualUpdate');
+    formData.append('action', RundizableWpFeaturesRdSettingsManualUpdate.ajaxAction);
     formData.append('updateKey', runUpdateKey);
 
     fetch(ajaxurl, {

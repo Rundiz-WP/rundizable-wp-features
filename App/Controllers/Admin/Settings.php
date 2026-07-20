@@ -2,13 +2,18 @@
 /**
  * Add settings sub menu and page into the Settings menu.
  *
- * Last update: 2026-03-27
+ * Original source last update: 2026-04-11
  * 
  * @package Rundizable-WP-Features
  */
 
 
 namespace RundizableWpFeatures\App\Controllers\Admin;
+
+
+if (!defined('ABSPATH')) {
+    exit();
+}
 
 
 if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) {
@@ -20,6 +25,12 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
 
 
         use \RundizableWpFeatures\App\AppTrait;
+
+
+        /**
+         * @var string Settings menu slug. This class constant visibility must be public.
+         */
+        const MENU_SLUG = 'rundizable-wp-features-settings';
 
 
         /**
@@ -51,11 +62,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
             $this->getOptions();
             global $rundizable_wp_features_optname;
 
+            $output = [];
             $output['rundizable_wp_features_optname'] = $rundizable_wp_features_optname;
 
-            $Loader = new \RundizableWpFeatures\App\Libraries\Loader();
-            $Loader->loadView('admin/readsettings_v', $output);
-            unset($Loader, $output);
+            $this->getLoader()->loadView('admin/readsettings_v', $output);
+            unset($output);
         }// pluginReadSettingsPage
 
 
@@ -64,7 +75,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
          */
         public function pluginSettingsMenu()
         {
-            $hook_suffix = add_options_page(__('Rundizable WP Features', 'rundizable-wp-features'), __('Rundizable WP Features', 'rundizable-wp-features'), 'manage_options', 'rundizable-wp-features-settings', [$this, 'pluginSettingsPage']);
+            $hook_suffix = add_options_page(__('Rundizable WP Features', 'rundizable-wp-features'), __('Rundizable WP Features', 'rundizable-wp-features'), 'manage_options', static::MENU_SLUG, [$this, 'pluginSettingsPage']);
             if (is_string($hook_suffix)) {
                 $this->hookSuffix = $hook_suffix;
                 add_action('load-' . $hook_suffix, [$this, 'callEnqueueHook']);
@@ -91,7 +102,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
                         sprintf(
                             // translators: %1$s Open link, %2$s Close link.
                             esc_html__('The manual update is required, please %1$supdate first%2$s.', 'rundizable-wp-features'),
-                            '<a href="' . esc_url(network_admin_url('index.php?page=rundizable-wp-features-manual-update')) . '">', 
+                            '<a href="' . esc_url(network_admin_url('index.php?page=' . rawurlencode(Plugins\Upgrader::MENU_SLUG))) . '">', 
                             '</a>'
                         )
                     );
@@ -103,8 +114,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
             }
 
             // load config values to get settings config file.
-            $Loader = new \RundizableWpFeatures\App\Libraries\Loader();
-            $config_values = $Loader->loadConfig();
+            $config_values = $this->getLoader()->loadConfig();
             if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
                 $settings_config_file = $config_values['rundiz_settings_config_file'];
             } else {
@@ -145,8 +155,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
             $output['settings_page'] = $RundizSettings->getSettingsPage($options_values);
             unset($RundizSettings, $options_values);
 
-            $Loader->loadView('admin/settings_v', $output);
-            unset($Loader, $output);
+            $this->getLoader()->loadView('admin/settings_v', $output);
+            unset($output);
         }// pluginSettingsPage
 
 

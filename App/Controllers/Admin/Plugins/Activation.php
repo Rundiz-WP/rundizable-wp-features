@@ -25,6 +25,20 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Act
 
         use \RundizableWpFeatures\App\AppTrait;
 
+        /**
+         * All available options.
+         * 
+         * These options will be accessible via main option name variable.  
+         * For example: options name `'the_name'` can call from `$rundizable_wp_features_optname['the_name'];`.  
+         * (`$rundizable_wp_features_optname` will be set via the property's value in `AppTrait->main_option_name`.)  
+         * If you want to access this property, please call to `setupAllOptions()` method first.
+         * 
+         * @since 2015-09-05 First was set in the `AppTrait`.
+         * @since 2026-07-20 Moved from `AppTrait`.
+         * @var array Set all options available for this plugin. it must be 2D array (`key => default value, key2 => default value, ...`)
+         */
+        public $all_options = [];
+
 
         /**
          * Activate the plugin by admin on WP plugin page.
@@ -124,12 +138,31 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Act
 
             if (false === $current_options) {
                 // if this is newly activate. it is never activated before, add the options.
-                $this->setupAllOptions();
-                $this->saveOptions($this->all_options);
+                $this->saveOptions($this->getAllOptions());
             }// endif;
 
             unset($current_options);
         }// activateAddUpdateOption
+
+
+        /**
+         * Get value of `all_options` property. The value of this property is from settings config file, not from DB.
+         * 
+         * Also setup if it was not set before.
+         * 
+         * This method visibility is `protected` to let tests class extend and use it.
+         * 
+         * @since 2026-07-20
+         * @return array Return array value of `all_options` property.
+         */
+        protected function getAllOptions()
+        {
+            if (!is_array($this->all_options) || empty($this->all_options)) {
+                $this->setupAllOptions();
+            }
+
+            return $this->all_options;
+        }// getAllOptions
 
 
         /**
@@ -139,9 +172,50 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Act
         {
             // register activate hook
             register_activation_hook(RUNDIZABLEWPFEATURES_FILE, [$this, 'activate']);
-
-            // hook on create new site (removed).
         }// registerHooks
+
+
+        /**
+         * Setup all options from settings config file.
+         * 
+         * This will be set all config settings into `all_options` property.
+         * You have to call this method if you want to call to `all_options` property.
+         * 
+         * This method will not load saved settings data from DB. The value in settings fields are all default value.
+         * 
+         * This method was called from `getAllOptions()`.
+         * 
+         * @since 2015-09-05 First was set in the `AppTrait`.
+         * @since 2026-07-20 Moved from `AppTrait`.
+         */
+        private function setupAllOptions()
+        {
+            // load config values to get settings config file.
+            $config_values = $this->getLoader()->loadConfig();
+            if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
+                // if there is config value about config file.
+                $settings_config_file = $config_values['rundiz_settings_config_file'];
+            } else {
+                // if there is no config value about config file.
+                wp_die(
+                    esc_html__('Settings configuration file was not set.', 'rundizable-wp-features')
+                );
+                exit(1);
+            }
+            unset($config_values);
+
+            $RundizSettings = new \RundizableWpFeatures\App\Libraries\RundizSettings();
+            $RundizSettings->settings_config_file = $settings_config_file;
+            $this->all_options = $RundizSettings->getSettingsFieldsId();
+            unset($RundizSettings, $settings_config_file);
+
+            // add db version into config value.
+            if (is_array($this->all_options)) {
+                if (!array_key_exists('rdsfw_manual_update_version', $this->all_options)) {
+                    $this->all_options = array_merge($this->all_options, ['rdsfw_manual_update_version' => '']);
+                }
+            }
+        }// setupAllOptions
 
 
     }// Activation

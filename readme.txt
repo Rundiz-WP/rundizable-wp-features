@@ -2,11 +2,11 @@
 Contributors: okvee
 Tags: disable features, pages, media, front-end
 Tested up to: 7.0
+Requires at least: 4.6.0
+Requires PHP: 5.5
 Stable tag: 1.0.6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
-Requires at least: 4.6.0
-Requires PHP: 5.5
 
 Disable WordPress features such as posts, comments, pages, media, all front-end or partial.
 

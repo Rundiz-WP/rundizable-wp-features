@@ -13,20 +13,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
     /**
      * Disable Admin Color Scheme in user profile page.
      */
-    class DisableAdminColorScheme implements \RundizableWpFeatures\App\Controllers\ControllerInterface
+    class DisableAdminColorScheme extends \RundizableWpFeatures\App\Controllers\Hooks\BasedHooks
     {
-
-
-        use \RundizableWpFeatures\App\AppTrait;
-
-
-        /**
-         * Class constructor.
-         */
-        public function __construct()
-        {
-            $this->getOptions();
-        }// __construct
 
 
         /**
@@ -87,9 +75,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
 
 
         /**
-         * {@inheritDoc}
+         * Register hooks per this class only.
+         * 
+         * @since 1.0.7 Renamed from `registerHooks()`.
          */
-        public function registerHooks()
+        public function perClassRegisterHooks()
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_users_profile_admin_color_scheme']) && 
@@ -99,7 +89,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\Admin\\Users
                 add_action('admin_enqueue_scripts', [$this, 'enqueScriptToHideRelatedSettings']);
                 add_action('admin_head', [$this, 'disableAdminColorSchemeAction']);
             }
-        }// registerHooks
+        }// perClassRegisterHooks
 
 
     }// DisableAdminColorScheme

@@ -1,6 +1,6 @@
 <?php // phpcs:disable
-
-/*<div class="wrap">
+?>
+<div class="wrap">
     <h1><?php _e('Example of how to access settings values in option db.', 'rundizable-wp-features'); ?></h1>
 
     <ol>
@@ -14,4 +14,4 @@
             echo htmlspecialchars(print_r($rundizable_wp_features_optname, true), ENT_QUOTES, get_option('blog_charset')); 
         }
     ?></pre>
-</div>*/
+</div>

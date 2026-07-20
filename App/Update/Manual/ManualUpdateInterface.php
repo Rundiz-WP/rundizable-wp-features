@@ -10,6 +10,9 @@ namespace RundizableWpFeatures\App\Update\Manual;
 
 
 if (!interface_exists('\\RundizableWpFeatures\\App\\Update\\Manual\\ManualUpdateInterface')) {
+    /**
+     * Manual update interface.
+     */
     interface ManualUpdateInterface
     {
 

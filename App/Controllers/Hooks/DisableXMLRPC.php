@@ -15,20 +15,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableXMLRP
      * 
      * @since 0.2.7
      */
-    class DisableXMLRPC implements \RundizableWpFeatures\App\Controllers\ControllerInterface
+    class DisableXMLRPC extends \RundizableWpFeatures\App\Controllers\Hooks\BasedHooks
     {
-
-
-        use \RundizableWpFeatures\App\AppTrait;
-
-
-        /**
-         * Class constructor.
-         */
-        public function __construct()
-        {
-            $this->getOptions();
-        }// __construct
 
 
         /**
@@ -62,9 +50,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableXMLRP
 
 
         /**
-         * {@inheritDoc}
+         * Register hooks per this class only.
+         * 
+         * @since 1.0.7 Renamed from `registerHooks()`.
          */
-        public function registerHooks()
+        public function perClassRegisterHooks()
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_xmlrpc']) && strval($rundizable_wp_features_optname['disable_xmlrpc']) === '1') {
@@ -75,7 +65,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableXMLRP
                 add_filter('pings_open', '__return_false', 10, 2);
                 add_action('wp', [$this, 'removeLinkEditURI']);
             }
-        }// registerHooks
+        }// perClassRegisterHooks
 
 
         /**

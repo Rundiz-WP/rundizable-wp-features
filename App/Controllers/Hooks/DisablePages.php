@@ -12,20 +12,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
     /**
      * DisablePages class.
      */
-    class DisablePages implements \RundizableWpFeatures\App\Controllers\ControllerInterface
+    class DisablePages extends \RundizableWpFeatures\App\Controllers\Hooks\BasedHooks
     {
-
-
-        use \RundizableWpFeatures\App\AppTrait;
-
-
-        /**
-         * Class constructor.
-         */
-        public function __construct()
-        {
-            $this->getOptions();
-        }// __construct
 
 
         /**
@@ -116,9 +104,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
 
 
         /**
-         * {@inheritDoc}
+         * Register hooks per this class only.
+         * 
+         * @since 1.0.7 Renamed from `registerHooks()`.
          */
-        public function registerHooks()
+        public function perClassRegisterHooks()
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_pages']) && strval($rundizable_wp_features_optname['disable_pages']) === '1') {
@@ -139,7 +129,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePages
             if (isset($rundizable_wp_features_optname['disable_pages_front']) && strval($rundizable_wp_features_optname['disable_pages_front']) === '1') {
                 add_action('template_redirect', [$this, 'disablePagesFront']);
             }
-        }// registerHooks
+        }// perClassRegisterHooks
 
 
         /**

@@ -1,3 +1,11 @@
-/.backup
-/.dist
-/node_modules
+/.backup/
+/.dist/
+/node_modules/
+
+# Eclipse ignore files.
+/.settings/
+/.buildpath
+/.project
+
+# Visual Studio Code file.
+/.vscode/

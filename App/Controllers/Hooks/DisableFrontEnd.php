@@ -12,20 +12,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
     /**
      * Disable front end class.
      */
-    class DisableFrontEnd implements \RundizableWpFeatures\App\Controllers\ControllerInterface
+    class DisableFrontEnd extends \RundizableWpFeatures\App\Controllers\Hooks\BasedHooks
     {
-
-
-        use \RundizableWpFeatures\App\AppTrait;
-
-
-        /**
-         * Class constructor.
-         */
-        public function __construct()
-        {
-            $this->getOptions();
-        }// __construct
 
 
         /**
@@ -49,9 +37,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
 
 
         /**
-         * {@inheritDoc}
+         * Register hooks per this class only.
+         * 
+         * @since 1.0.7 Renamed from `registerHooks()`.
          */
-        public function registerHooks()
+        public function perClassRegisterHooks()
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_frontend']) && strval($rundizable_wp_features_optname['disable_frontend']) === '0') {
@@ -61,7 +51,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableFront
             add_action('template_redirect', [$this, 'redirectFrontEnd']);
             add_action('admin_menu', [$this, 'removeAppearanceMenu']);
             add_action('admin_menu', [$this, 'removeFrontRelatedMenus']);
-        }// registerHooks
+        }// perClassRegisterHooks
 
 
         /**

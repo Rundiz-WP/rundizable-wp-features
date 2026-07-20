@@ -15,20 +15,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableAutho
      * 
      * @since 0.2.7
      */
-    class DisableAuthorPage implements \RundizableWpFeatures\App\Controllers\ControllerInterface
+    class DisableAuthorPage extends \RundizableWpFeatures\App\Controllers\Hooks\BasedHooks
     {
-
-
-        use \RundizableWpFeatures\App\AppTrait;
-
-
-        /**
-         * Class constructor.
-         */
-        public function __construct()
-        {
-            $this->getOptions();
-        }// __construct
 
 
         /**
@@ -45,16 +33,18 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisableAutho
 
 
         /**
-         * {@inheritDoc}
+         * Register hooks per this class only.
+         * 
+         * @since 1.0.7 Renamed from `registerHooks()`.
          */
-        public function registerHooks()
+        public function perClassRegisterHooks()
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_authorpage_front']) && strval($rundizable_wp_features_optname['disable_authorpage_front']) === '1') {
                 add_action('template_redirect', [$this, 'disableAuthorPage']);
                 add_filter('author_link', [$this, 'removeAuthorLink'], 10, 3);
             }
-        }// registerHooks
+        }// perClassRegisterHooks
 
 
         /**

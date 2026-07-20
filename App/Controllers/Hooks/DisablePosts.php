@@ -15,20 +15,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
      * 
      * @since 0.2.7
      */
-    class DisablePosts implements \RundizableWpFeatures\App\Controllers\ControllerInterface
+    class DisablePosts extends \RundizableWpFeatures\App\Controllers\Hooks\BasedHooks
     {
-
-
-        use \RundizableWpFeatures\App\AppTrait;
-
-
-        /**
-         * Class constructor.
-         */
-        public function __construct()
-        {
-            $this->getOptions();
-        }// __construct
 
 
         /**
@@ -165,9 +153,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
 
 
         /**
-         * {@inheritDoc}
+         * Register hooks per this class only.
+         * 
+         * @since 1.0.7 Renamed from `registerHooks()`.
          */
-        public function registerHooks()
+        public function perClassRegisterHooks()
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_posts']) && strval($rundizable_wp_features_optname['disable_posts']) === '1') {
@@ -204,7 +194,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePosts
                 add_action('do_feed_rss', [$this, 'disablePostsFeed'], 9, 2);
                 add_action('do_feed_rss2', [$this, 'disablePostsFeed'], 9, 2);
             }
-        }// registerHooks
+        }// perClassRegisterHooks
 
 
         /**

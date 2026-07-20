@@ -15,20 +15,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePlugi
      * 
      * @since 0.2.7
      */
-    class DisablePluginThemeFileEdit implements \RundizableWpFeatures\App\Controllers\ControllerInterface
+    class DisablePluginThemeFileEdit extends \RundizableWpFeatures\App\Controllers\Hooks\BasedHooks
     {
-
-
-        use \RundizableWpFeatures\App\AppTrait;
-
-
-        /**
-         * Class constructor.
-         */
-        public function __construct()
-        {
-            $this->getOptions();
-        }// __construct
 
 
         /**
@@ -44,15 +32,17 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Hooks\\DisablePlugi
 
 
         /**
-         * {@inheritDoc}
+         * Register hooks per this class only.
+         * 
+         * @since 1.0.7 Renamed from `registerHooks()`.
          */
-        public function registerHooks()
+        public function perClassRegisterHooks()
         {
             global $rundizable_wp_features_optname;
             if (isset($rundizable_wp_features_optname['disable_plugintheme_file_editor']) && strval($rundizable_wp_features_optname['disable_plugintheme_file_editor']) === '1') {
                 add_action('admin_init', [$this, 'disableFileEdit']);
             }
-        }// registerHooks
+        }// perClassRegisterHooks
 
 
     }// DisablePluginThemeFileEdit
