@@ -4,7 +4,7 @@ Tags: disable features, pages, media, front-end
 Tested up to: 7.0
 Requires at least: 4.6.0
 Requires PHP: 5.5
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -38,6 +38,12 @@ Yes, it is.
 3. Settings page, users tab.
 
 == Changelog ==
+= 1.0.7 =
+2026-07-20
+
+* Update disable admin greeting to support many languages.
+* Minor update.
+
 = 1.0.6 =
 2026-07-15
 
