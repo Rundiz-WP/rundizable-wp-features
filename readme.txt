@@ -4,7 +4,7 @@ Tags: disable features, pages, media, front-end
 Tested up to: 7.0
 Requires at least: 4.6.0
 Requires PHP: 5.5
-Stable tag: 1.0.7
+Stable tag: 1.0.8dev-20260723
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -38,6 +38,11 @@ Yes, it is.
 3. Settings page, users tab.
 
 == Changelog ==
+= 1.0.8 =
+xxxx-xx-xx
+
+* Minor improve the performance.
+
 = 1.0.7 =
 2026-07-20
 
