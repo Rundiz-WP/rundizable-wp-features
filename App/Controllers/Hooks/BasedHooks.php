@@ -2,6 +2,7 @@
 /**
  * Based hooks class.
  * 
+ * @package Rundizable-WP-Features
  * @since 1.0.7
  * @license http://opensource.org/licenses/MIT MIT
  */
