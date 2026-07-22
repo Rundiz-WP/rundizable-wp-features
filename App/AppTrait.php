@@ -133,17 +133,17 @@ if (!trait_exists('\\RundizableWpFeatures\\App\\AppTrait')) {
             unset($RundizSettings, $settings_config_file);
             // end process data before save with `save_callback` option. -------------------------
 
+            $currentConfigValues = $this->getOptions(['process_display_cb' => false]);
             // add manual update version into config value.
             if (!array_key_exists('rdsfw_manual_update_version', $data)) {
-                $currentConfigValues = $this->getOptions();
                 if (is_array($currentConfigValues) && array_key_exists('rdsfw_manual_update_version', $currentConfigValues)) {
                     $manual_update_version = $currentConfigValues['rdsfw_manual_update_version'];
                 } else {
                     $manual_update_version = '';
                 }
-                unset($currentConfigValues);
                 $data = array_merge($data, ['rdsfw_manual_update_version' => $manual_update_version]);
             }
+            unset($currentConfigValues);
 
             return update_option($this->main_option_name, $data, false);
         }// saveOptions

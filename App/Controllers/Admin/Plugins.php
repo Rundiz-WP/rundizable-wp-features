@@ -39,11 +39,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins')) {
         public function actionLinks(array $actions, $plugin_file)
         {
             static $plugin;
-            
+
             if (!isset($plugin)) {
                 $plugin = plugin_basename(RUNDIZABLEWPFEATURES_FILE);
             }
-            
+
             if ($plugin === $plugin_file) {
                 $link = [];
                 $link['settings'] = '<a href="' . esc_url(get_admin_url(null, 'options-general.php?page=' . rawurlencode(Settings::MENU_SLUG))) . '">' . __('Settings', 'rundizable-wp-features') . '</a>';
@@ -51,7 +51,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins')) {
                 unset($link);
                 //$actions['after_actions'] = '<a href="#" onclick="return false;">' . __('After Actions', 'rundizable-wp-features') . '</a>';
             }
-            
+
             return $actions;
         }// actionLinks
 
@@ -79,11 +79,11 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins')) {
         public function rowMeta(array $links, $file)
         {
             static $plugin;
-            
+
             if (!isset($plugin)) {
                 $plugin = plugin_basename(RUNDIZABLEWPFEATURES_FILE);
             }
-            
+
             if ($plugin === $file) {
                 $after_link = [];
 
@@ -92,7 +92,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins')) {
                 $links = array_merge($links, $after_link);
                 unset($after_link);
             }
-            
+
             return $links;
         }// rowMeta
 

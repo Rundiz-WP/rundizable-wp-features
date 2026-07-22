@@ -1,7 +1,7 @@
 <?php
 /**
  * Add settings sub menu and page into the Settings menu.
- *
+ * 
  * Original source last update: 2026-04-11
  * 
  * @package Rundizable-WP-Features
@@ -54,7 +54,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
 
         /**
          * An example of how to access settings variable and its values.
-         *
+         * 
          * @global array $rundizable_wp_features_optname
          */
         public function pluginReadSettingsPage()
@@ -65,7 +65,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
             $output = [];
             $output['rundizable_wp_features_optname'] = $rundizable_wp_features_optname;
 
-            $this->getLoader()->loadView('admin/readsettings_v', $output);
+            $this->getLoader()->loadView('Admin/readsettings_v', $output);
             unset($output);
         }// pluginReadSettingsPage
 
@@ -155,7 +155,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Settings')) 
             $output['settings_page'] = $RundizSettings->getSettingsPage($options_values);
             unset($RundizSettings, $options_values);
 
-            $this->getLoader()->loadView('admin/settings_v', $output);
+            $this->getLoader()->loadView('Admin/settings_v', $output);
             unset($output);
         }// pluginSettingsPage
 

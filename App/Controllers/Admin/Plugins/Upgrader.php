@@ -1,7 +1,7 @@
 <?php
 /**
  * Upgrade or update the plugin action.
- *
+ * 
  * @package Rundizable-WP-Features
  * @since 1.0.3 Moved from part of App/Controllers/Admin/Activation.php
  */
@@ -79,10 +79,8 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
 
                 $updateKey = filter_input(INPUT_POST, 'updateKey', FILTER_SANITIZE_NUMBER_INT);
 
-                $Loader = new \RundizableWpFeatures\App\Libraries\Loader();
-                $manualUpdateClasses = $Loader->getManualUpdateClasses();
+                $manualUpdateClasses = $this->getLoader()->getManualUpdateClasses();
                 $maxManualUpdateVersion = 0;
-                unset($Loader);
 
                 if (is_array($manualUpdateClasses) && array_key_exists($updateKey, $manualUpdateClasses) && class_exists($manualUpdateClasses[$updateKey])) {
                     $UpdateClass = new $manualUpdateClasses[$updateKey]();
@@ -163,10 +161,10 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
 
         /**
          * Detect this plugin updated and display link or maybe redirect to manual update page.
-         *
+         * 
          * This method will be run as new version of code.<br>
          * To understand more about new version of code, please read more on `updateProcessComplete()` method.
-         *
+         * 
          * @link https://codex.wordpress.org/Plugin_API/Action_Reference/admin_notices Reference.
          */
         public function detectPluginUpdate()
@@ -179,9 +177,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
 
             if (get_transient('rundizable_wp_features_updated') && current_user_can('update_plugins')) {
                 // if there is updated transient
-                $Loader = new \RundizableWpFeatures\App\Libraries\Loader();
-
-                if ($Loader->haveManualUpdate() === true) {
+                if ($this->getLoader()->haveManualUpdate() === true) {
                     // if found that there are manual update in this new version of code.
                     // display link or redirect to manual update page. (display link is preferred to prevent bad user experience.)
                     // -------------------------------------------------------------------------------------
@@ -224,8 +220,6 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
                     // if don't have any manual update.
                     delete_transient('rundizable_wp_features_updated');
                 }// endif;
-
-                unset($Loader);
             }// endif;
         }// detectPluginUpdate
 
@@ -256,14 +250,14 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
             $output = [];
             $output['manualUpdateClasses'] = $this->getLoader()->getManualUpdateClasses();
 
-            $this->getLoader()->loadView('admin/Plugins/Upgrader_v', $output);
+            $this->getLoader()->loadView('Admin/Plugins/Upgrader_v', $output);
             unset($output);
         }// displayManualUpdatePage
 
 
         /**
          * {@inheritDoc}
-         *
+         * 
          * @todo [rd-settings-fw] in your project, if you don't use manual update process then please comment all code in this method can improve performance.
          */
         public function registerHooks()
@@ -277,7 +271,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
 
         /**
          * Enqueue CSS & JS.
-         *
+         * 
          * This method was called from displayManualUpdateMenu which is active only when plugin is just updated.
          * 
          * @param string $hook_suffix The current admin page.
@@ -303,11 +297,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
                 ]
             );
 
-            wp_enqueue_script('rundizable-wp-features-font-awesome5');
-            
-            $Loader = new \RundizableWpFeatures\App\Libraries\Loader();
-            $manualUpdateClasses = $Loader->getManualUpdateClasses();
-            unset($Loader);
+            $manualUpdateClasses = $this->getLoader()->getManualUpdateClasses();
             wp_add_inline_script('rundizable-wp-features-handle-rd-settings-manual-update', 'var manualUpdateClasses = ' . (!empty($manualUpdateClasses) ? wp_json_encode($manualUpdateClasses) : '') . ';');
             unset($manualUpdateClasses);
 
@@ -332,13 +322,13 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Upg
 
         /**
          * After update plugin completed.
-         *
+         * 
          * This method will be called while running the current version of this plugin, not the new one that just updated.
          * For example: You are running 1.0 and just updated to 2.0. The 2.0 version will not working here yet but 1.0 is working.
          * So, any code here will not work as the new version. Please be aware!
-         *
+         * 
          * This method will add the transient to be able to detect updated and run the manual update in `detectPluginUpdate()` method.
-         *
+         * 
          * @link https://developer.wordpress.org/reference/hooks/upgrader_process_complete/ Reference.
          * @link https://developer.wordpress.org/reference/classes/wp_upgrader/ Reference.
          * @param \WP_Upgrader $upgrader The `\WP_Upgrader` class.

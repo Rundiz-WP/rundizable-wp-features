@@ -1,7 +1,7 @@
 <?php
 /**
  * Loader class. This class will load anything for example: views, template, configuration file.
- *
+ * 
  * @package Rundizable-WP-Features
  */
 
@@ -70,7 +70,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
 
         /**
          * Get file list that may contain class in specific path.
-         *
+         * 
          * @param string $path The full path without trailing slash.
          * @return array Return indexed array of file list.
          */
@@ -108,7 +108,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
 
         /**
          * Check that is this version of app have manual update code?
-         *
+         * 
          * @return bool Return `true` if there is manual update, `false` for otherwise.
          */
         public function haveManualUpdate()
@@ -205,7 +205,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Libraries\\Loader')) {
 
         /**
          * Load views.
-         *
+         * 
          * @param string $view_name View file name, refer from app/Views folder.
          * @param array $data For send data variable to view.
          * @param bool $require_once Set to `true` to use `include_once`, `false` to use `include`. Default is `false`.

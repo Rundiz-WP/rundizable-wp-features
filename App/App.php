@@ -1,7 +1,7 @@
 <?php
 /**
  * Main app class. Extend this class if you want to use any method of this class.
- *
+ * 
  * @package Rundizable-WP-Features
  */
 

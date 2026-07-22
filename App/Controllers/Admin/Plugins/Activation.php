@@ -1,7 +1,7 @@
 <?php
 /**
  * Activate the plugin action.
- *
+ * 
  * @package Rundizable-WP-Features
  * @since 1.0.3 Moved from App/Controllers/Admin/Activation.php
  */
@@ -25,6 +25,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Act
 
         use \RundizableWpFeatures\App\AppTrait;
 
+
         /**
          * All available options.
          * 
@@ -42,7 +43,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Act
 
         /**
          * Activate the plugin by admin on WP plugin page.
-         *
+         * 
          * @link https://developer.wordpress.org/reference/functions/register_activation_hook/ The function `register_activation_hook()` reference.
          * @link https://developer.wordpress.org/reference/hooks/activate_plugin/ The reference about what will be pass to callback of function `register_activation_hook()`.
          * @global \wpdb $wpdb WordPress DB class.
@@ -178,7 +179,7 @@ if (!class_exists('\\RundizableWpFeatures\\App\\Controllers\\Admin\\Plugins\\Act
         /**
          * Setup all options from settings config file.
          * 
-         * This will be set all config settings into `all_options` property.
+         * This will be set all config settings into `all_options` property.  
          * You have to call this method if you want to call to `all_options` property.
          * 
          * This method will not load saved settings data from DB. The value in settings fields are all default value.
