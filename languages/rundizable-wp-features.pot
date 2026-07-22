@@ -2,21 +2,21 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundizable WP Features 1.0.5\n"
+"Project-Id-Version: Rundizable WP Features 1.0.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-features\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-08T22:55:32+07:00\n"
+"POT-Creation-Date: 2026-07-23T06:21:15+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rundizable-wp-features\n"
 
 #. Plugin Name of the plugin
 #: rundizable-wp-features.php
-#: App/Controllers/Admin/Settings.php:67
+#: App/Controllers/Admin/Settings.php:78
 msgid "Rundizable WP Features"
 msgstr ""
 
@@ -38,11 +38,6 @@ msgstr ""
 #. Author URI of the plugin
 #: rundizable-wp-features.php
 msgid "https://rundiz.com"
-msgstr ""
-
-#: App/AppTrait.php:103
-#: App/Controllers/Admin/Settings.php:111
-msgid "Settings configuration file was not set."
 msgstr ""
 
 #: App/config/settings_rdawpf.php:13
@@ -244,118 +239,123 @@ msgid "Donate"
 msgstr ""
 
 #. translators: %1$s current PHP version.
-#: App/Controllers/Admin/Plugins/Activation.php:61
+#: App/Controllers/Admin/Plugins/Activation.php:76
 #, php-format
 msgid "You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for this help."
 msgstr ""
 
 #. translators: %1$s minimum PHP version required.
-#: App/Controllers/Admin/Plugins/Activation.php:69
+#: App/Controllers/Admin/Plugins/Activation.php:84
 #, php-format
 msgid "Minimum PHP requirement: %1$s."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Activation.php:73
+#: App/Controllers/Admin/Plugins/Activation.php:88
 msgid "Minimum requirement of PHP version does not meet."
 msgstr ""
 
 #. translators: %1$s Current WordPress version, %2$s Required WordPress version.
-#: App/Controllers/Admin/Plugins/Activation.php:82
+#: App/Controllers/Admin/Plugins/Activation.php:97
 #, php-format
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Activation.php:87
+#: App/Controllers/Admin/Plugins/Activation.php:102
 msgid "Minimum requirement of WordPress version does not meet."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:42
-#: App/Controllers/Admin/Plugins/Upgrader.php:229
-#: App/Controllers/Admin/Settings.php:85
+#: App/Controllers/Admin/Plugins/Activation.php:202
+#: App/Controllers/Admin/Settings.php:121
+msgid "Settings configuration file was not set."
+msgstr ""
+
+#: App/Controllers/Admin/Plugins/Upgrader.php:60
+#: App/Controllers/Admin/Plugins/Upgrader.php:247
+#: App/Controllers/Admin/Settings.php:96
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:56
+#: App/Controllers/Admin/Plugins/Upgrader.php:74
 msgid "Please reload this page and try again."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:84
+#: App/Controllers/Admin/Plugins/Upgrader.php:100
 msgid "An error has been occur, cannot continue manual update. Please contact plugin author."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:101
+#: App/Controllers/Admin/Plugins/Upgrader.php:117
 msgid "Success, please click next to continue update."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:104
+#: App/Controllers/Admin/Plugins/Upgrader.php:120
 msgid "All manual update completed successfully. This page will be no longer available until there is next manual update."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:123
+#: App/Controllers/Admin/Plugins/Upgrader.php:139
 msgid "Unable to run update, there is no update classes to run."
 msgstr ""
 
 #. translators: %1$s Open link, %2$s Close link.
-#: App/Controllers/Admin/Plugins/Upgrader.php:171
+#: App/Controllers/Admin/Plugins/Upgrader.php:191
 #, php-format
 msgid "The Rundizable WP Features is just upgraded and need to be manually update. Please continue to the %1$splugin update page%2$s."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:214
+#: App/Controllers/Admin/Plugins/Upgrader.php:232
 msgid "Rundizable WP Features update"
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:277
+#: App/Controllers/Admin/Plugins/Upgrader.php:294
 msgid "Completed"
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:278
+#: App/Controllers/Admin/Plugins/Upgrader.php:295
 msgid "Dismiss"
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:279
+#: App/Controllers/Admin/Plugins/Upgrader.php:296
 msgid "Next"
 msgstr ""
 
 #. translators: %1$s Open link, %2$s Close link.
-#: App/Controllers/Admin/Settings.php:93
+#: App/Controllers/Admin/Settings.php:104
 #, php-format
 msgid "The manual update is required, please %1$supdate first%2$s."
 msgstr ""
 
-#: App/Controllers/Admin/Settings.php:100
+#: App/Controllers/Admin/Settings.php:111
 msgid "The manual update is required, please tell administrator to update first."
 msgstr ""
 
-#: App/Controllers/Admin/Settings.php:142
+#: App/Controllers/Admin/Settings.php:152
 msgid "Settings saved."
 msgstr ""
 
-#: App/Controllers/Hooks/DisableComments.php:63
-#: App/Controllers/Hooks/DisablePosts.php:83
+#: App/Controllers/Hooks/DisableComments.php:51
+#: App/Controllers/Hooks/DisablePosts.php:71
 msgid "Feed is unavailable."
 msgstr ""
 
-#: App/Views/admin/Plugins/Upgrader_v.php:15
+#: App/Views/Admin/Plugins/Upgrader_v.php:16
 msgid "Manual update"
 msgstr ""
 
 #. translators: %d Number of total actions.
-#: App/Views/admin/Plugins/Upgrader_v.php:23
+#: App/Views/Admin/Plugins/Upgrader_v.php:24
 #, php-format
 msgid "There are total %d actions for this manual update, please continue step by step."
 msgstr ""
 
 #. translators: %1$s The number of already run action, %2$d The number of total actions.
-#: App/Views/admin/Plugins/Upgrader_v.php:28
+#: App/Views/Admin/Plugins/Upgrader_v.php:29
 #, php-format
 msgid "You are running %1$s of %2$d."
 msgstr ""
 
-#: App/Views/admin/Plugins/Upgrader_v.php:32
+#: App/Views/Admin/Plugins/Upgrader_v.php:33
 msgid "Start"
 msgstr ""
 
-#: App/Views/admin/settings_v.php:15
+#: App/Views/Admin/settings_v.php:15
 msgid "Rundizable WP Features settings"
 msgstr ""

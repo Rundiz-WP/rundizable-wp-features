@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rundizable WP Features 0.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-features\n"
-"POT-Creation-Date: 2026-04-08T22:55:32+07:00\n"
-"PO-Revision-Date: 2026-04-08 22:55+0700\n"
+"POT-Creation-Date: 2026-07-23T06:21:15+07:00\n"
+"PO-Revision-Date: 2026-07-23 06:21+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #. Plugin Name of the plugin
-#: rundizable-wp-features.php App/Controllers/Admin/Settings.php:67
+#: rundizable-wp-features.php App/Controllers/Admin/Settings.php:78
 msgid "Rundizable WP Features"
 msgstr ""
 
@@ -42,10 +42,6 @@ msgstr ""
 #: rundizable-wp-features.php
 msgid "https://rundiz.com"
 msgstr ""
-
-#: App/AppTrait.php:103 App/Controllers/Admin/Settings.php:111
-msgid "Settings configuration file was not set."
-msgstr "ไฟล์การกำหนดค่าการตั้งค่าไม่ได้ถูกระบุไว้."
 
 #: App/config/settings_rdawpf.php:13
 msgid "Enable"
@@ -256,7 +252,7 @@ msgid "Donate"
 msgstr "บริจาค"
 
 #. translators: %1$s current PHP version.
-#: App/Controllers/Admin/Plugins/Activation.php:61
+#: App/Controllers/Admin/Plugins/Activation.php:76
 #, php-format
 msgid ""
 "You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version "
@@ -265,55 +261,59 @@ msgstr ""
 "คุณกำลังใช้ PHP %1$s ซึ่งไม่ตรงตามข้อกำหนดขั้นต่ำ. โปรดพิจารณาอัปเกรดเวอร์ชัน PHP หรือติดต่อผู้พัฒนาปลั๊กอินเพื่อขอความช่วยเหลือ."
 
 #. translators: %1$s minimum PHP version required.
-#: App/Controllers/Admin/Plugins/Activation.php:69
+#: App/Controllers/Admin/Plugins/Activation.php:84
 #, php-format
 msgid "Minimum PHP requirement: %1$s."
 msgstr "ความต้องการขั้นต่ำของ PHP: %1$s."
 
-#: App/Controllers/Admin/Plugins/Activation.php:73
+#: App/Controllers/Admin/Plugins/Activation.php:88
 msgid "Minimum requirement of PHP version does not meet."
 msgstr "รุ่น PHP ไม่ตรงความต้องการขั้นต่ำ."
 
 #. translators: %1$s Current WordPress version, %2$s Required WordPress version.
-#: App/Controllers/Admin/Plugins/Activation.php:82
+#: App/Controllers/Admin/Plugins/Activation.php:97
 #, php-format
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
 msgstr "รุ่นของเวิร์ดเพราไม่ตรงความต้องการขั้นต่ำ. (%1$s < %2$s)."
 
-#: App/Controllers/Admin/Plugins/Activation.php:87
+#: App/Controllers/Admin/Plugins/Activation.php:102
 msgid "Minimum requirement of WordPress version does not meet."
 msgstr "รุ่น WordPress ไม่ตรงความต้องการขั้นต่ำ."
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:42 App/Controllers/Admin/Plugins/Upgrader.php:229
-#: App/Controllers/Admin/Settings.php:85
+#: App/Controllers/Admin/Plugins/Activation.php:202 App/Controllers/Admin/Settings.php:121
+msgid "Settings configuration file was not set."
+msgstr "ไฟล์การกำหนดค่าการตั้งค่าไม่ได้ถูกระบุไว้."
+
+#: App/Controllers/Admin/Plugins/Upgrader.php:60 App/Controllers/Admin/Plugins/Upgrader.php:247
+#: App/Controllers/Admin/Settings.php:96
 msgid "You do not have permission to access this page."
 msgstr "คุณไม่มีสิทธิ์เข้าถึงหน้านี้."
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:56
+#: App/Controllers/Admin/Plugins/Upgrader.php:74
 msgid "Please reload this page and try again."
 msgstr "โปรดรีเฟรชหน้านี้แล้วลองใหม่อีกครั้ง."
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:84
+#: App/Controllers/Admin/Plugins/Upgrader.php:100
 msgid "An error has been occur, cannot continue manual update. Please contact plugin author."
 msgstr "เกิดข้อผิดพลาดขึ้น, ไม่สามารถดำเนินการอัปเดตด้วยตนเองต่อได้. โปรดติดต่อผู้พัฒนาปลั๊กอิน."
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:101
+#: App/Controllers/Admin/Plugins/Upgrader.php:117
 msgid "Success, please click next to continue update."
 msgstr "สำเร็จแล้ว, โปรดคลิกถัดไปเพื่อดำเนินการอัปเดตต่อ."
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:104
+#: App/Controllers/Admin/Plugins/Upgrader.php:120
 msgid ""
 "All manual update completed successfully. This page will be no longer available until there is next "
 "manual update."
 msgstr ""
 "การอัปเดตด้วยตนเองทั้งหมดเสร็จสมบูรณ์แล้ว. หน้าเว็บนี้จะไม่สามารถใช้งานได้อีกต่อไปจนกว่าจะมีการอัปเดตด้วยตนเองครั้งต่อไป."
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:123
+#: App/Controllers/Admin/Plugins/Upgrader.php:139
 msgid "Unable to run update, there is no update classes to run."
 msgstr "ไม่สามารถดำเนินการอัปเดตได้, เนื่องจากไม่มีคลาสสำหรับการอัปเดตให้เรียกใช้."
 
 #. translators: %1$s Open link, %2$s Close link.
-#: App/Controllers/Admin/Plugins/Upgrader.php:171
+#: App/Controllers/Admin/Plugins/Upgrader.php:191
 #, php-format
 msgid ""
 "The Rundizable WP Features is just upgraded and need to be manually update. Please continue to the "
@@ -322,66 +322,60 @@ msgstr ""
 "ปลั๊กอิน Rundizable WP Features เพิ่งได้รับการอัปเกรดและจำเป็นต้องอัปเดตด้วยตนเอง. โปรดดำเนินการต่อที่ "
 "%1$sหน้าอัปเดตปลั๊กอิน%2$s."
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:214
+#: App/Controllers/Admin/Plugins/Upgrader.php:232
 msgid "Rundizable WP Features update"
 msgstr "อัปเดท Rundizable WP Features"
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:277
+#: App/Controllers/Admin/Plugins/Upgrader.php:294
 msgid "Completed"
 msgstr "สำเร็จแล้ว"
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:278
+#: App/Controllers/Admin/Plugins/Upgrader.php:295
 msgid "Dismiss"
 msgstr "รับทราบ"
 
-#: App/Controllers/Admin/Plugins/Upgrader.php:279
+#: App/Controllers/Admin/Plugins/Upgrader.php:296
 msgid "Next"
 msgstr "ถัดไป"
 
 #. translators: %1$s Open link, %2$s Close link.
-#: App/Controllers/Admin/Settings.php:93
+#: App/Controllers/Admin/Settings.php:104
 #, php-format
 msgid "The manual update is required, please %1$supdate first%2$s."
 msgstr "จำเป็นต้องอัปเดตด้วยตนเอง, โปรด %1$supdate ก่อน%2$s."
 
-#: App/Controllers/Admin/Settings.php:100
+#: App/Controllers/Admin/Settings.php:111
 msgid "The manual update is required, please tell administrator to update first."
 msgstr "จำเป็นต้องอัปเดตด้วยตนเอง, โปรดแจ้งให้ผู้ดูแลระบบทำการอัปเดตก่อน."
 
-#: App/Controllers/Admin/Settings.php:142
+#: App/Controllers/Admin/Settings.php:152
 msgid "Settings saved."
 msgstr "บันทึกการตั้งค่าแล้ว."
 
-#: App/Controllers/Hooks/DisableComments.php:63 App/Controllers/Hooks/DisablePosts.php:83
+#: App/Controllers/Hooks/DisableComments.php:51 App/Controllers/Hooks/DisablePosts.php:71
 msgid "Feed is unavailable."
 msgstr "ไม่สามารถใช้งานฟีดได้."
 
-#: App/Views/admin/Plugins/Upgrader_v.php:15
+#: App/Views/Admin/Plugins/Upgrader_v.php:16
 msgid "Manual update"
 msgstr "การอัปเดตด้วยตนเอง"
 
 #. translators: %d Number of total actions.
-#: App/Views/admin/Plugins/Upgrader_v.php:23
+#: App/Views/Admin/Plugins/Upgrader_v.php:24
 #, php-format
 msgid "There are total %d actions for this manual update, please continue step by step."
 msgstr "การอัปเดตด้วยตนเองครั้งนี้มีทั้งหมด %d ขั้นตอน, โปรดดำเนินการต่อทีละขั้นตอน."
 
 #. translators: %1$s The number of already run action, %2$d The number of total actions.
-#: App/Views/admin/Plugins/Upgrader_v.php:28
+#: App/Views/Admin/Plugins/Upgrader_v.php:29
 #, php-format
 msgid "You are running %1$s of %2$d."
 msgstr "คุณทำงาน %1$s จาก %2$d"
 
-#: App/Views/admin/Plugins/Upgrader_v.php:32
+#: App/Views/Admin/Plugins/Upgrader_v.php:33
 msgid "Start"
 msgstr "เริ่ม"
 
-#: App/Views/admin/settings_v.php:15
+#: App/Views/Admin/settings_v.php:15
 msgid "Rundizable WP Features settings"
 msgstr "ตั้งค่า Rundizable WP Features"
-
-#~ msgid "Upload"
-#~ msgstr "อัปโหลด"
-
-#~ msgid "Remove"
-#~ msgstr "เอาออก"
