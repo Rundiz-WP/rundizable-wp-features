@@ -1,10 +1,10 @@
 === Rundizable WP Features ===
 Contributors: okvee
 Tags: disable features, pages, media, front-end
-Tested up to: 7.0
+Tested up to: 7.1
 Requires at least: 4.6.0
 Requires PHP: 5.5
-Stable tag: 1.0.8dev-20260723
+Stable tag: 1.0.8
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -39,9 +39,10 @@ Yes, it is.
 
 == Changelog ==
 = 1.0.8 =
-xxxx-xx-xx
+2026-08-16
 
 * Minor improve the performance.
+* Fix translation bugs in RundizSettings.php.
 
 = 1.0.7 =
 2026-07-20
