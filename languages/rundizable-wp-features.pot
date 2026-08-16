@@ -2,14 +2,14 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundizable WP Features 1.0.7\n"
+"Project-Id-Version: Rundizable WP Features 1.0.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-features\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-23T06:21:15+07:00\n"
+"POT-Creation-Date: 2026-08-16T17:23:00+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: rundizable-wp-features\n"
@@ -230,11 +230,11 @@ msgstr ""
 msgid "Biographical Info"
 msgstr ""
 
-#: App/Controllers/Admin/Plugins.php:49
+#: App/Controllers/Admin/Plugins.php:52
 msgid "Settings"
 msgstr ""
 
-#: App/Controllers/Admin/Plugins.php:90
+#: App/Controllers/Admin/Plugins.php:96
 msgid "Donate"
 msgstr ""
 
@@ -266,6 +266,7 @@ msgstr ""
 
 #: App/Controllers/Admin/Plugins/Activation.php:202
 #: App/Controllers/Admin/Settings.php:121
+#: App/Libraries/RundizSettings.php:61
 msgid "Settings configuration file was not set."
 msgstr ""
 
@@ -334,6 +335,14 @@ msgstr ""
 #: App/Controllers/Hooks/DisableComments.php:51
 #: App/Controllers/Hooks/DisablePosts.php:71
 msgid "Feed is unavailable."
+msgstr ""
+
+#: App/Libraries/RundizSettings.php:987
+msgid "Upload"
+msgstr ""
+
+#: App/Libraries/RundizSettings.php:988
+msgid "Remove"
 msgstr ""
 
 #: App/Views/Admin/Plugins/Upgrader_v.php:16

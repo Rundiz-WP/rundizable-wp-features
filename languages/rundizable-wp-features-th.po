@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rundizable WP Features 0.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rundizable-wp-features\n"
-"POT-Creation-Date: 2026-07-23T06:21:15+07:00\n"
-"PO-Revision-Date: 2026-07-23 06:21+0700\n"
+"POT-Creation-Date: 2026-08-16T17:23:00+07:00\n"
+"PO-Revision-Date: 2026-08-16 17:23+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: \n"
 "Language: th_TH\n"
@@ -233,7 +233,7 @@ msgstr "โทนสีสำหรับผู้ดูแลระบบ"
 #: App/config/settings_rdawpf.php:190 App/config/settings_rdawpf.php:203
 #: App/config/settings_rdawpf.php:216
 msgid "Profile"
-msgstr ""
+msgstr "โปรไฟล์"
 
 #: App/config/settings_rdawpf.php:202 App/config/settings_rdawpf.php:207
 msgid "Website"
@@ -243,11 +243,11 @@ msgstr "เว็บไซต์"
 msgid "Biographical Info"
 msgstr "ข้อมูลชีวประวัติ"
 
-#: App/Controllers/Admin/Plugins.php:49
+#: App/Controllers/Admin/Plugins.php:52
 msgid "Settings"
 msgstr "การตั้งค่า"
 
-#: App/Controllers/Admin/Plugins.php:90
+#: App/Controllers/Admin/Plugins.php:96
 msgid "Donate"
 msgstr "บริจาค"
 
@@ -281,6 +281,7 @@ msgid "Minimum requirement of WordPress version does not meet."
 msgstr "รุ่น WordPress ไม่ตรงความต้องการขั้นต่ำ."
 
 #: App/Controllers/Admin/Plugins/Activation.php:202 App/Controllers/Admin/Settings.php:121
+#: App/Libraries/RundizSettings.php:61
 msgid "Settings configuration file was not set."
 msgstr "ไฟล์การกำหนดค่าการตั้งค่าไม่ได้ถูกระบุไว้."
 
@@ -355,6 +356,14 @@ msgstr "บันทึกการตั้งค่าแล้ว."
 #: App/Controllers/Hooks/DisableComments.php:51 App/Controllers/Hooks/DisablePosts.php:71
 msgid "Feed is unavailable."
 msgstr "ไม่สามารถใช้งานฟีดได้."
+
+#: App/Libraries/RundizSettings.php:987
+msgid "Upload"
+msgstr "อัปโหลด"
+
+#: App/Libraries/RundizSettings.php:988
+msgid "Remove"
+msgstr "นำออก"
 
 #: App/Views/Admin/Plugins/Upgrader_v.php:16
 msgid "Manual update"
